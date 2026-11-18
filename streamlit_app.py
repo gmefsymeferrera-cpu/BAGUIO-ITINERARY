@@ -157,9 +157,12 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- INTERACTIVE FULL-COLOR REAL MAP SECTION ---
-st.subheader("🗺️ Day 1 Color Street Map")
-st.markdown("Real full-color map displaying all 8 destination stops across Baguio City:")
+# --- INTERACTIVE 3D TERRAIN MAP SECTION ---
+st.subheader("⛰️ Day 1 3D Terrain Map")
+st.markdown(
+    "Real topographic outdoor map showing Baguio's mountain ridges and your 8"
+    " stops:"
+)
 
 map_data = pd.DataFrame(
     {
@@ -198,17 +201,21 @@ map_data = pd.DataFrame(
 
 st.pydeck_chart(
     pdk.Deck(
-        map_style="mapbox://styles/mapbox/streets-v12",
+        map_style="mapbox://styles/mapbox/outdoors-v12",
         initial_view_state=pdk.ViewState(
-            latitude=16.4120, longitude=120.5970, zoom=14.5, pitch=30
+            latitude=16.4120,
+            longitude=120.5970,
+            zoom=14,
+            pitch=45,  # 3D tilt view to show elevation/terrain
+            bearing=15,
         ),
         layers=[
             pdk.Layer(
                 "ScatterplotLayer",
                 data=map_data,
                 get_position="[lon, lat]",
-                get_color="[217, 119, 6, 230]",
-                get_radius=50,
+                get_color="[217, 119, 6, 240]",
+                get_radius=60,
                 pickable=True,
                 auto_highlight=True,
             ),
@@ -218,12 +225,12 @@ st.pydeck_chart(
                 get_position="[lon, lat]",
                 get_text="name",
                 get_size=15,
-                get_color="[20, 40, 30, 255]",
+                get_color="[30, 50, 40, 255]",
                 get_alignment_baseline="'bottom'",
             ),
         ],
         tooltip={
-            "html": "<b>Location:</b> {name}",
+            "html": "<b>Stop:</b> {name}",
             "style": {
                 "background": "rgba(15, 61, 46, 0.95)",
                 "color": "white",
@@ -234,7 +241,11 @@ st.pydeck_chart(
     )
 )
 
-st.caption("🗺️ *Full-color street map rendered via Mapbox Streets.*")
+st.caption(
+    "⛰️ *3D Topographic Terrain map rendered via Mapbox Outdoors. Notice the"
+    .strip()
+    + " mountain contours and elevation slant!*"
+)
 
 st.divider()
 
