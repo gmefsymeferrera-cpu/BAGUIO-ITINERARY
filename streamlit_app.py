@@ -630,7 +630,7 @@ elif selected_tab == "📸 Photo Gallery":
         st.session_state.uploaded_photos = []
 
     uploaded_files = st.file_uploader(
-        "Mag-upload ng mga larawan para sa Collage:", 
+        "Attached Here 😘:", 
         type=["png", "jpg", "jpeg"], 
         accept_multiple_files=True
     )
@@ -665,7 +665,7 @@ elif selected_tab == "📸 Photo Gallery":
             st.session_state.uploaded_photos = []
             st.rerun()
     else:
-        st.info("Wala pang na-upload na larawan para sa collage. Mag-upload sa itaas para makita ang epekto!")
+        st.info("No Photos, Upload More!")
 
 # ==========================================
 # 6. MAP & EMERGENCY CONTACTS SECTION
