@@ -148,9 +148,100 @@ banner_html = f"""
 """
 components.html(banner_html, height=banner_height + 60)
 
-# --- MOVED WEATHER WIDGET & LIVE COUNTDOWN TO THE TOP ---
-st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
+# --- REDESIGNED STYLISH WEATHER WIDGET ---
+weather_widget_html = f"""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+    .weather-card {{
+        background: linear-gradient(135deg, rgba(80, 122, 100, 0.08) 0%, rgba(184, 134, 11, 0.08) 100%);
+        border: 2px solid {border_color};
+        border-radius: 20px;
+        padding: 16px 20px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 15px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+        font-family: 'Montserrat', sans-serif;
+    }}
+    .weather-left {{
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }}
+    .weather-icon {{
+        font-size: 2.5rem;
+        background: #ffffff;
+        border: 1.5px solid {border_color};
+        border-radius: 16px;
+        padding: 8px 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }}
+    .weather-title {{
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: {accent_color};
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 2px;
+    }}
+    .weather-main {{
+        font-size: 1.35rem;
+        font-weight: 700;
+        color: {text_color};
+    }}
+    .weather-right {{
+        display: flex;
+        gap: 15px;
+    }}
+    .weather-badge {{
+        background-color: #ffffff;
+        border: 1.5px solid {border_color};
+        border-radius: 12px;
+        padding: 8px 12px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    }}
+    .badge-label {{
+        font-size: 0.65rem;
+        font-weight: 600;
+        color: {text_color};
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }}
+    .badge-val {{
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: {gold_accent};
+        margin-top: 2px;
+    }}
+</style>
 
+<div class="weather-card">
+    <div class="weather-left">
+        <div class="weather-icon">🌫️</div>
+        <div>
+            <div class="weather-title">Baguio City Live Weather</div>
+            <div class="weather-main">18°C &nbsp;•&nbsp; <span style="font-size: 1rem; font-weight: 600; color: {accent_color};">Misty Pine & Cool</span></div>
+        </div>
+    </div>
+    <div class="weather-right">
+        <div class="weather-badge">
+            <div class="badge-label">Humidity</div>
+            <div class="badge-val">88%</div>
+        </div>
+        <div class="weather-badge">
+            <div class="badge-label">Wind</div>
+            <div class="badge-val">12 km/h</div>
+        </div>
+    </div>
+</div>
+"""
+components.html(weather_widget_html, height=105)
+
+# --- LIVE COUNTDOWN ---
 countdown_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
