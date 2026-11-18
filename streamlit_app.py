@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 # Page setup
 st.set_page_config(
     page_title="Baguio Itinerary | December 20-22",
-    page_icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGiP1628PhmIT6TxUhnqw4H7C6qPEAXw1rtOCW_Vr-SVQ0KwvLUA519xdH&s=10",
+    page_icon="🍓",
     layout="centered",
 )
 
@@ -27,25 +27,21 @@ gold_accent = "#b8860b"
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
-
     .stApp {{
         {bg_css_rule}
         color: {text_color} !important;
         font-family: 'Montserrat', sans-serif !important;
     }}
-    
     h2, h3, h4, h5, h6 {{
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 700;
         letter-spacing: 0.3px;
         color: {text_color} !important;
     }}
-
     p, span, label, div, markdown, .stMarkdown, [data-testid="stMarkdownContainer"] p {{
         font-family: 'Montserrat', sans-serif !important;
         color: {text_color} !important;
     }}
-
     [data-testid="stVerticalBlockBorderWrapper"] {{
         background-color: {card_bg};
         border: 1.5px solid {border_color} !important;
@@ -58,12 +54,10 @@ custom_css = f"""
         transform: translateY(-2px);
         box-shadow: 0 12px 30px rgba(0,0,0,0.1);
     }}
-
     @keyframes slideDown {{
         0% {{ opacity: 0; transform: translateY(-12px); }}
         100% {{ opacity: 1; transform: translateY(0); }}
     }}
-
     .curtain-container {{
         animation: slideDown 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }}
@@ -157,13 +151,10 @@ banner_html = f"""
 </div>
 """
 components.html(banner_html, height=banner_height + 20)
-
 # Weather Widget
 st.markdown(
-    "🌲 **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool"
-    " Breeze** (Perfect highland weather)"
+    "🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool"
 )
-
 st.divider()
 
 # --- ITINERARY DATA ---
@@ -175,7 +166,7 @@ itinerary_days = [
             {
                 "time": "5:55 AM - 6:15 AM",
                 "title": "1. Arrival - Baguio City Terminal",
-                "desc": "Touch Down! Welcome to the Summer Capital.",
+                "desc": "Touch Down! Welcome to Baguio.",
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
                 "transit": "🚶‍♂️ Walk ~5 mins (400m) to Benguet Prime Hotel",
             },
@@ -183,7 +174,7 @@ itinerary_days = [
                 "time": "6:15 AM – 6:30 AM",
                 "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
                 "desc": (
-                    "Secure your belongings at the front desk on F. Calderon St."
+                    "Secure our belongings at the front desk on F. Calderon St."
                     " to explore hands-free."
                 ),
                 "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232",
@@ -193,8 +184,7 @@ itinerary_days = [
                 "time": "6:30 AM – 8:30 AM",
                 "title": "3. Breakfast at Good Taste Restaurant",
                 "desc": (
-                    "Indulge in a hearty local breakfast served by their"
-                    " signature robotic staff."
+                    "Enjoy local breakfast served by their signature robotic staff."
                 ),
                 "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
                 "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
@@ -225,7 +215,7 @@ itinerary_days = [
                 "time": "1:30 PM – 2:00 PM",
                 "title": "6. Hotel Check-In & Rest",
                 "desc": (
-                    "Return to Benguet Prime Hotel to claim your room and refresh"
+                    "Return to Benguet Prime Hotel to claim our room and refresh"
                     " for the evening."
                 ),
                 "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
@@ -269,7 +259,7 @@ itinerary_days = [
                 "time": "7:30 AM – 8:30 AM",
                 "title": "1. Breakfast at Café by the Ruins",
                 "desc": (
-                    "Enjoy artisan hot chocolate-eh and traditional Cordillera"
+                    "Enjoy artisan hot chocoate-eh and traditional Cordillera"
                     " breakfast specialties."
                 ),
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
@@ -477,6 +467,24 @@ st.info(
 
 st.divider()
 
+# --- MAP SECTION ---
+st.subheader("🗺️ Neighborhood Reference Map")
+st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
+
+map_html = """
+<iframe 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
+    width="100%" 
+    height="420" 
+    style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);" 
+    allowfullscreen="" 
+    loading="lazy">
+</iframe>
+"""
+components.html(map_html, height=430)
+
+st.divider()
+
 # --- INTERACTIVE PACKING CHECKLIST ---
 st.subheader("🎒 Curated Packing Checklist")
 st.markdown("Check off essentials for your highland escape:")
@@ -510,24 +518,6 @@ st.caption(f"✨ Packed Essentials: **{completed_items} / {total_items}** ready"
 
 if completed_items == total_items:
   st.success("🌟 All set! You are fully prepared for your luxury Baguio retreat.")
-
-st.divider()
-
-# --- MAP SECTION ---
-st.subheader("🗺️ Neighborhood Reference Map")
-st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
-
-map_html = """
-<iframe 
-    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
-    width="100%" 
-    height="420" 
-    style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);" 
-    allowfullscreen="" 
-    loading="lazy">
-</iframe>
-"""
-components.html(map_html, height=430)
 
 st.divider()
 st.markdown(
