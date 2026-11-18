@@ -27,6 +27,18 @@ header_img_url = st.sidebar.text_input(
     value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQKMMW-LwHbNVZcyMwdl1P-nOVPuzhfWEVTyF8HwyjIkNugqqTJ7MsTfE&s=10",
 )
 
+banner_height = st.sidebar.slider(
+    "Title Banner Height (px)", min_value=180, max_value=450, value=260, step=10
+)
+
+banner_vertical_pos = st.sidebar.slider(
+    "Vertical Framing (%) — Move Lion's Head Up/Down",
+    min_value=0,
+    max_value=100,
+    value=35,
+    step=5,
+)
+
 banner_tint = st.sidebar.slider(
     "Title Banner Dark Overlay (%)", min_value=20, max_value=80, value=45, step=5
 )
@@ -66,7 +78,7 @@ if header_img_url:
       f" rgba(64, 96, 82, {round(banner_alpha * 0.75, 2)}) 45%, rgba(44, 62,"
       f" 53, {min(round(banner_alpha + 0.25, 2), 0.9)}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
-      " left center;"
+      f" left {banner_vertical_pos}%;"
   )
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
@@ -111,7 +123,7 @@ custom_css = """
         align-items: flex-end;
         justify-content: center;
         text-align: right;
-        min-height: 220px;
+        min-height: REPLACE_HEIGHTpx;
         margin-bottom: 25px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
@@ -177,6 +189,7 @@ custom_css = (
     .replace("REPLACE_CARD", card_bg)
     .replace("REPLACE_BORDER", border_color)
     .replace("REPLACE_HEADER_BG", header_bg_rule)
+    .replace("REPLACE_HEIGHT", str(banner_height))
 )
 
 st.markdown(custom_css, unsafe_allow_html=True)
