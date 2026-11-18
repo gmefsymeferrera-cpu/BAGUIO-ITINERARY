@@ -38,11 +38,11 @@ banner_vertical_pos = st.sidebar.slider(
 )
 
 banner_tint = st.sidebar.slider(
-    "Banner Dark Luxury Gradient (%)", min_value=10, max_value=60, value=25, step=5
+    "Banner Dark Luxury Gradient (%)", min_value=5, max_value=40, value=15, step=5
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Luxury Color Tokens
+# Ligwanag at Kulay Tokens (Super Liwanag sa Light Mode)
 if mode_switch == "Dark Mode":
   bg_css_rule = "background-color: #121815;"
   text_color = "#e2e8e4"
@@ -51,52 +51,52 @@ if mode_switch == "Dark Mode":
   accent_color = "#5a7a69"
   gold_accent = "#ffd700"
 else:
-  bg_css_rule = "background-color: #f4f6f4;"
-  text_color = "#2c3830"
+  bg_css_rule = "background-color: #f8faf9;"
+  text_color = "#1f2923"
   card_bg = "#ffffff"
-  border_color = "#e2e8e4"
-  accent_color = "#829c8e"
-  gold_accent = "#d4af37"
+  border_color = "#d6e0d8"
+  accent_color = "#507a64"
+  gold_accent = "#b8860b"
 
   if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
-    bg_css_rule = "background-color: #f7f5f0;"
-    text_color = "#3d3832"
+    bg_css_rule = "background-color: #fcfbf9;"
+    text_color = "#2b2621"
     card_bg = "#ffffff"
-    border_color = "#eae4db"
-    accent_color = "#a38b6d"
-    gold_accent = "#d4af37"
+    border_color = "#e6dfd5"
+    accent_color = "#8c7355"
+    gold_accent = "#a67c52"
   elif page_theme == "Midnight Pine & Emerald":
-    bg_css_rule = "background-color: #edf2ef;"
-    text_color = "#1e3026"
+    bg_css_rule = "background-color: #f0f5f2;"
+    text_color = "#14241b"
     card_bg = "#ffffff"
-    border_color = "#d1dfd6"
-    accent_color = "#3d6b52"
-    gold_accent = "#ffd700"
+    border_color = "#c2d6cb"
+    accent_color = "#2d523d"
+    gold_accent = "#b8860b"
   elif page_theme == "Soft Rose & Champagne":
-    bg_css_rule = "background-color: #f8f4f5;"
-    text_color = "#4a383b"
+    bg_css_rule = "background-color: #fbf7f8;"
+    text_color = "#38282b"
     card_bg = "#ffffff"
-    border_color = "#f0e1e4"
-    accent_color = "#b5838d"
-    gold_accent = "#ffd700"
+    border_color = "#ead5da"
+    accent_color = "#996670"
+    gold_accent = "#b8860b"
   elif page_theme == "Minimalist Pearl White":
     bg_css_rule = "background-color: #ffffff;"
-    text_color = "#2a2a2a"
-    card_bg = "#fafafa"
-    border_color = "#eaeaea"
-    accent_color = "#666666"
-    gold_accent = "#d4af37"
+    text_color = "#1a1a1a"
+    card_bg = "#fdfdfd"
+    border_color = "#e0e0e0"
+    accent_color = "#555555"
+    gold_accent = "#888888"
 
 if header_img_url:
   header_bg_rule = (
-      f"background-image: linear-gradient(135deg, rgba(15, 35, 25, {banner_alpha}) 0%, rgba(30, 20, 10, {banner_alpha + 0.15}) 100%),"
+      f"background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
       f" center {banner_vertical_pos}%;"
   )
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS with Lively Typography (Pacifico & Montserrat Fonts)
+# Custom CSS na Maliwanag at Klaro
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -121,15 +121,15 @@ custom_css = f"""
 
     [data-testid="stVerticalBlockBorderWrapper"] {{
         background-color: {card_bg};
-        border: 1px solid {border_color} !important;
+        border: 1.5px solid {border_color} !important;
         border-radius: 20px;
-        padding: 16px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        padding: 18px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }}
     [data-testid="stVerticalBlockBorderWrapper"]:hover {{
         transform: translateY(-2px);
-        box-shadow: 0 14px 35px rgba(0,0,0,0.06);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.1);
     }}
 
     @keyframes slideDown {{
@@ -145,7 +145,7 @@ custom_css = f"""
         width: 100%;
         border-radius: 16px !important;
         padding: 18px 14px !important;
-        border: 1.5px solid {border_color} !important;
+        border: 2px solid {border_color} !important;
         transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         background-color: {card_bg} !important;
     }}
@@ -159,7 +159,7 @@ custom_css = f"""
     }}
     div.stButton > button:hover {{
         border-color: {accent_color} !important;
-        box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+        box-shadow: 0 6px 20px rgba(0,0,0,0.08);
         transform: translateY(-2px);
     }}
     div.stButton > button[kind="primary"] {{
@@ -169,7 +169,7 @@ custom_css = f"""
     }}
     div.stButton > button[kind="primary"] p {{
         color: #ffffff !important;
-        text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }}
 
     .header-box {{
@@ -184,8 +184,8 @@ custom_css = f"""
         text-align: center;
         min-height: {banner_height}px;
         margin-bottom: 30px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-        border: 2px solid rgba(255, 215, 0, 0.3);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
     }}
     .header-content {{
         width: 100%;
@@ -194,13 +194,12 @@ custom_css = f"""
         align-items: center;
     }}
     
-    /* LIVELY & FUN PACIFICO FONT TITLE */
     .header-box h1 {{
         font-family: 'Pacifico', cursive !important;
-        color: #ffea79 !important;
+        color: #fff6d6 !important;
         font-size: 5.5rem !important;
         font-weight: 400 !important;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 35px rgba(255, 215, 0, 0.6);
+        text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 40px rgba(212, 175, 55, 0.7);
         margin: 0px 0px 5px 0px;
         line-height: 1.1;
         letter-spacing: 2px;
@@ -226,7 +225,7 @@ custom_css = f"""
     }}
     .badge {{
         display: inline-block;
-        background: rgba(255, 255, 255, 0.28);
+        background: rgba(0, 0, 0, 0.45);
         backdrop-filter: blur(12px);
         border: 1.5px solid rgba(255, 255, 255, 0.6);
         padding: 8px 18px;
@@ -234,7 +233,7 @@ custom_css = f"""
         font-size: 0.95rem;
         font-weight: 600;
         color: #ffffff;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }}
     @media (max-width: 640px) {{
         .header-box h1 {{
@@ -252,7 +251,7 @@ custom_css = f"""
         letter-spacing: 1px;
     }}
     .transit-badge {{
-        background-color: rgba(255, 215, 0, 0.12);
+        background-color: rgba(184, 134, 11, 0.1);
         color: {gold_accent};
         padding: 6px 14px;
         border-radius: 10px;
@@ -285,7 +284,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Feature 1: Live Baguio Weather Widget & Print Button Row
+# Weather Widget & Print Button Row
 col_w1, col_w2 = st.columns([2, 1])
 with col_w1:
   st.markdown(
@@ -293,11 +292,10 @@ with col_w1:
       " Breeze** (Perfect highland weather)"
   )
 with col_w2:
-  # Feature 2: Print/Export to PDF Button
   st.markdown(
       """
         <div style="text-align: right;">
-            <button onclick="window.print()" style="background-color: #d4af37; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+            <button onclick="window.print()" style="background-color: #b8860b; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer;">
                 🖨️ Print / Save PDF
             </button>
         </div>
@@ -589,50 +587,6 @@ else:
       " reveal.</div>",
       unsafe_allow_html=True,
   )
-
-st.divider()
-
-# --- INTERACTIVE DESTINATIONS CHECKLIST (ISA-ISA) ---
-st.subheader("🎯 Destination Activity Check-list")
-st.markdown("Mark off every specific tourist spot and stop as you visit them:")
-
-all_destinations = [
-    "Day 1: Arrival - Baguio City Terminal",
-    "Day 1: Luggage Drop-Off at Benguet Prime Hotel",
-    "Day 1: Breakfast at Good Taste Restaurant",
-    "Day 1: Burnham Park",
-    "Day 1: Ili-Likha Artists Village",
-    "Day 1: Hotel Check-In & Rest",
-    "Day 1: SM City Baguio & Dinner",
-    "Day 1: Baguio Night Market (Harrison Road)",
-    "Day 2: Breakfast at Café by the Ruins",
-    "Day 2: Baguio Botanical Garden",
-    "Day 2: Wright Park & The Mansion",
-    "Day 2: Mines View Park & Good Shepherd Convent",
-    "Day 2: Camp John Hay (Bell House & Eco-Trail)",
-    "Day 3: La Trinidad Strawberry Farm & StoBoSa",
-    "Day 3: Tam-awan Village",
-    "Day 3: Hotel Check-Out & Baguio Public Market",
-    "Day 3: Farewell Lunch on Session Road & Departure",
-]
-
-dest_states = []
-for i, dest in enumerate(all_destinations):
-  chk = st.checkbox(dest, key=f"dest_chk_{i}")
-  dest_states.append(chk)
-
-completed_dest = sum(dest_states)
-total_dest = len(all_destinations)
-dest_progress = completed_dest / total_dest
-
-st.progress(dest_progress)
-st.caption(
-    f"✨ Visited Destinations: **{completed_dest} / {total_dest}** completed"
-)
-
-if completed_dest == total_dest:
-  st.balloons()
-  st.success("🎉 Congratulations! You have fully explored all destinations in Baguio!")
 
 st.divider()
 
