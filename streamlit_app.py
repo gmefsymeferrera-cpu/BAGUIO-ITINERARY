@@ -3,7 +3,7 @@ import streamlit.components.v1 as components
 
 # Page setup
 st.set_page_config(
-    page_title="Baguio Itinerary | Luxury Edition",
+    page_title="Baguio Itinerary | December 20-22",
     page_icon="🌲",
     layout="centered",
 )
