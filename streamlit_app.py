@@ -49,27 +49,32 @@ bg_css_rule = "background-color: #f0f4f1;"
 text_color = "#2c3e35"
 card_bg = "#ffffff"
 border_color = "#d6e2d9"
+accent_color = "#527767"
 
 if page_theme == "Pastel Cream (Warm Neutral)":
   bg_css_rule = "background-color: #fbf9f5;"
   text_color = "#3d3832"
   card_bg = "#ffffff"
   border_color = "#eae4db"
+  accent_color = "#8c6d46"
 elif page_theme == "Pastel Sky (Soft Blue)":
   bg_css_rule = "background-color: #f0f4f8;"
   text_color = "#2b3a4a"
   card_bg = "#ffffff"
   border_color = "#d3e0ed"
+  accent_color = "#4a6fa5"
 elif page_theme == "Morning Fog (Soft Gray)":
   bg_css_rule = "background-color: #f5f6f8;"
   text_color = "#333d47"
   card_bg = "#ffffff"
   border_color = "#e2e6eb"
+  accent_color = "#5a6772"
 elif page_theme == "Crisp White":
   bg_css_rule = "background-color: #ffffff;"
   text_color = "#2d3748"
   card_bg = "#fcfdfd"
   border_color = "#edf2f7"
+  accent_color = "#4a5568"
 
 # Header box background rule: keeps left side clear for Lion's Head, tints right side for text readability
 if header_img_url:
@@ -83,7 +88,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS injecting pastel theme rules + right-aligned hero header
+# Custom CSS injecting pastel theme rules + horizontal Day 1 | Day 2 | Day 3 dropdown buttons
 custom_css = """
     <style>
     .stApp {
@@ -100,17 +105,32 @@ custom_css = """
         padding: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
-    /* Style the Day 1, Day 2, Day 3 dropdown headers */
-    [data-testid="stExpander"] {
-        background-color: REPLACE_CARD;
-        border: 1.5px solid REPLACE_BORDER !important;
-        border-radius: 14px !important;
-        margin-bottom: 12px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    }
-    [data-testid="stExpander"] summary p {
-        font-size: 1.15rem !important;
+    /* Horizontal Day 1 ▾ | Day 2 ▾ | Day 3 ▾ bar styling */
+    div.stButton > button {
+        width: 100%;
+        border-radius: 12px !important;
         font-weight: 700 !important;
+        font-size: 1.05rem !important;
+        padding: 12px 10px !important;
+        border: 1.5px solid REPLACE_BORDER !important;
+        transition: all 0.2s ease;
+    }
+    div.stButton > button[kind="secondary"] {
+        background-color: REPLACE_CARD !important;
+        color: REPLACE_TEXT !important;
+    }
+    div.stButton > button[kind="secondary"]:hover {
+        border-color: REPLACE_ACCENT !important;
+        transform: translateY(-1px);
+    }
+    div.stButton > button[kind="primary"] {
+        background-color: REPLACE_ACCENT !important;
+        color: #ffffff !important;
+        border-color: REPLACE_ACCENT !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+    div.stButton > button[kind="primary"] p {
+        color: #ffffff !important;
     }
     /* Right-aligned Header Box to expose Lion's Head on the left */
     .header-box {
@@ -188,6 +208,7 @@ custom_css = (
     .replace("REPLACE_TEXT", text_color)
     .replace("REPLACE_CARD", card_bg)
     .replace("REPLACE_BORDER", border_color)
+    .replace("REPLACE_ACCENT", accent_color)
     .replace("REPLACE_HEADER_BG", header_bg_rule)
     .replace("REPLACE_HEIGHT", str(banner_height))
 )
@@ -200,7 +221,7 @@ st.markdown(
     <div class="header-box">
         <div class="header-content">
             <h1>Baguio Itinerary</h1>
-            <p> 3 Days & 2 Nights </p>
+            <p>3 Days & 2 Nights</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
                 <span class="badge">🏨 Benguet Prime Hotel</span>
@@ -215,8 +236,8 @@ st.markdown(
 # --- MULTI-DAY ITINERARY DATA ---
 itinerary_days = [
     {
+        "tab_label": "Day 1",
         "header": "DAY 1 — Downtown Core, Art & Night Market",
-        "expanded": True,
         "stops": [
             {
                 "time": "5:55 AM - 6:15 AM",
@@ -310,8 +331,8 @@ itinerary_days = [
         ],
     },
     {
+        "tab_label": "Day 2",
         "header": "DAY 2 — Pine Forests, Parks & Mountain Views",
-        "expanded": False,
         "stops": [
             {
                 "time": "7:30 AM – 8:30 AM",
@@ -382,8 +403,8 @@ itinerary_days = [
         ],
     },
     {
+        "tab_label": "Day 3",
         "header": "DAY 3 — Strawberry Farms, Culture & Pasalubong",
-        "expanded": False,
         "stops": [
             {
                 "time": "7:30 AM – 10:00 AM",
@@ -434,28 +455,47 @@ itinerary_days = [
     },
 ]
 
-st.subheader("⏰ 3-Day Schedule & Walking Guide")
-st.caption("Click any day bar below to expand or collapse its destinations:")
+# Initialize selected day in session state
+if "selected_day_idx" not in st.session_state:
+  st.session_state.selected_day_idx = 0
 
-# --- VISIBLE STACKED DROPDOWN ACCORDIONS (DAY 1, DAY 2, DAY 3) ---
-for day in itinerary_days:
-  with st.expander(day["header"], expanded=day["expanded"]):
-    for stop in day["stops"]:
-      with st.container(border=True):
-        col1, col2 = st.columns([1, 2])
-        with col1:
-          st.image(stop["img"], use_container_width=True)
-        with col2:
-          st.markdown(
-              f'<span class="time-tag">{stop["time"]}</span>',
-              unsafe_allow_html=True,
-          )
-          st.markdown(f"### {stop['title']}")
-          st.write(stop["desc"])
-          st.markdown(
-              f'<div class="transit-badge">{stop["transit"]}</div>',
-              unsafe_allow_html=True,
-          )
+st.subheader("⏰ 3-Day Schedule & Walking Guide")
+
+# --- HORIZONTAL BAR: Day 1 ▾ | Day 2 ▾ | Day 3 ▾ ---
+day_cols = st.columns(3, gap="small")
+for idx, day in enumerate(itinerary_days):
+  is_selected = st.session_state.selected_day_idx == idx
+  arrow = "▴" if is_selected else "▾"
+  btn_type = "primary" if is_selected else "secondary"
+  with day_cols[idx]:
+    if st.button(
+        f"{day['tab_label']} {arrow}",
+        key=f"day_nav_{idx}",
+        type=btn_type,
+        use_container_width=True,
+    ):
+      st.session_state.selected_day_idx = idx
+      st.rerun()
+
+# Render currently selected day's itinerary cards
+active_day = itinerary_days[st.session_state.selected_day_idx]
+st.markdown(f"#### {active_day['header']}")
+
+for stop in active_day["stops"]:
+  with st.container(border=True):
+    col1, col2 = st.columns([1, 2])
+    with col1:
+      st.image(stop["img"], use_container_width=True)
+    with col2:
+      st.markdown(
+          f'<span class="time-tag">{stop["time"]}</span>', unsafe_allow_html=True
+      )
+      st.markdown(f"### {stop['title']}")
+      st.write(stop["desc"])
+      st.markdown(
+          f'<div class="transit-badge">{stop["transit"]}</div>',
+          unsafe_allow_html=True,
+      )
 
 st.divider()
 
