@@ -1,4 +1,5 @@
 import pandas as pd
+import pydeck as pdk
 import streamlit as st
 
 # Page setup
@@ -145,9 +146,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- INTERACTIVE MAP SECTION ---
-st.subheader("🗺️ Day 1 Destination Map")
-st.markdown("Pins showing your route across Baguio City:")
+# --- INTERACTIVE SATELLITE MAP SECTION ---
+st.subheader("🛰️ Day 1 Satellite Route Map")
+st.markdown("Satellite view showing your 8 stops across Baguio City:")
 
 map_data = pd.DataFrame(
     {
@@ -171,11 +172,62 @@ map_data = pd.DataFrame(
             120.5979,
             120.5962,
         ],
+        "name": [
+            "1. Bus Terminal",
+            "2. Benguet Prime Hotel",
+            "3. Good Taste Restaurant",
+            "4. Burnham Park",
+            "5. Ili-Likha Artists Village",
+            "6. Hotel Check-In",
+            "7. SM City Baguio",
+            "8. Baguio Night Market",
+        ],
     }
 )
 
-st.map(map_data, latitude=16.4120, longitude=120.5970, zoom=14, use_container_width=True)
-st.caption("📍 *Pins cover Terminal, Hotel, Good Taste, Burnham Park, Ili-Likha, SM City, and Night Market.*")
+# Render PyDeck Satellite Map (Mapbox Satellite Style)
+st.pydeck_chart(
+    pdk.Deck(
+        map_style="mapbox://styles/mapbox/satellite-v9",
+        initial_view_state=pdk.ViewState(
+            latitude=16.4120, longitude=120.5970, zoom=14.5, pitch=45
+        ),
+        layers=[
+            pdk.Layer(
+                "ScatterplotLayer",
+                data=map_data,
+                get_position="[lon, lat]",
+                get_color="[217, 119, 6, 200]",
+                get_radius=40,
+                pickable=True,
+                auto_highlight=True,
+            ),
+            pdk.Layer(
+                "TextLayer",
+                data=map_data,
+                get_position="[lon, lat]",
+                get_text="name",
+                get_size=14,
+                get_color="[255, 255, 255, 255]",
+                get_alignment_baseline="'bottom'",
+            ),
+        ],
+        tooltip={
+            "html": "<b>Stop:</b> {name}",
+            "style": {
+                "background": "rgba(15, 61, 46, 0.9)",
+                "color": "white",
+                "padding": "8px",
+                "border-radius": "6px",
+            },
+        },
+    )
+)
+
+st.caption(
+    "🛰️ *Satellite imagery rendered via Mapbox. Hover over pins to see location"
+    " names!*"
+)
 
 st.divider()
 
