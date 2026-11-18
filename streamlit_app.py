@@ -88,7 +88,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS injecting pastel theme rules + horizontal Day 1 | Day 2 | Day 3 dropdown buttons
+# Custom CSS injecting pastel theme rules + horizontal Day 1 | Day 2 | Day 3 toggle buttons
 custom_css = """
     <style>
     .stApp {
@@ -455,18 +455,24 @@ itinerary_days = [
     },
 ]
 
-# Initialize selected day in session state
+# Initialize session state for selected day and visibility toggle
 if "selected_day_idx" not in st.session_state:
   st.session_state.selected_day_idx = 0
+if "is_expanded" not in st.session_state:
+  st.session_state.is_expanded = True
 
 st.subheader("⏰ 3-Day Schedule & Walking Guide")
 
-# --- HORIZONTAL BAR: Day 1 ▾ | Day 2 ▾ | Day 3 ▾ ---
+# --- HORIZONTAL TOGGLE BAR: Day 1 | Day 2 | Day 3 ---
 day_cols = st.columns(3, gap="small")
 for idx, day in enumerate(itinerary_days):
   is_selected = st.session_state.selected_day_idx == idx
-  arrow = "▴" if is_selected else "▾"
-  btn_type = "primary" if is_selected else "secondary"
+  # Show upward arrow if active and expanded, downward otherwise
+  arrow = "▴" if (is_selected and st.session_state.is_expanded) else "▾"
+  btn_type = (
+      "primary" if (is_selected and st.session_state.is_expanded) else "secondary"
+  )
+
   with day_cols[idx]:
     if st.button(
         f"{day['tab_label']} {arrow}",
@@ -474,28 +480,41 @@ for idx, day in enumerate(itinerary_days):
         type=btn_type,
         use_container_width=True,
     ):
-      st.session_state.selected_day_idx = idx
+      if is_selected:
+        # Toggle visibility if clicking the already active day
+        st.session_state.is_expanded = not st.session_state.is_expanded
+      else:
+        # Switch to new day and ensure it's expanded
+        st.session_state.selected_day_idx = idx
+        st.session_state.is_expanded = True
       st.rerun()
 
-# Render currently selected day's itinerary cards
-active_day = itinerary_days[st.session_state.selected_day_idx]
-st.markdown(f"#### {active_day['header']}")
+# Render cards only if expanded
+if st.session_state.is_expanded:
+  active_day = itinerary_days[st.session_state.selected_day_idx]
+  st.markdown(f"#### {active_day['header']}")
 
-for stop in active_day["stops"]:
-  with st.container(border=True):
-    col1, col2 = st.columns([1, 2])
-    with col1:
-      st.image(stop["img"], use_container_width=True)
-    with col2:
-      st.markdown(
-          f'<span class="time-tag">{stop["time"]}</span>', unsafe_allow_html=True
-      )
-      st.markdown(f"### {stop['title']}")
-      st.write(stop["desc"])
-      st.markdown(
-          f'<div class="transit-badge">{stop["transit"]}</div>',
-          unsafe_allow_html=True,
-      )
+  for stop in active_day["stops"]:
+    with st.container(border=True):
+      col1, col2 = st.columns([1, 2])
+      with col1:
+        st.image(stop["img"], use_container_width=True)
+      with col2:
+        st.markdown(
+            f'<span class="time-tag">{stop["time"]}</span>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(f"### {stop['title']}")
+        st.write(stop["desc"])
+        st.markdown(
+            f'<div class="transit-badge">{stop["transit"]}</div>',
+            unsafe_allow_html=True,
+        )
+else:
+  st.info(
+      "📌 Itinerary view is collapsed. Click any Day button above to expand"
+      " its schedule."
+  )
 
 st.divider()
 
