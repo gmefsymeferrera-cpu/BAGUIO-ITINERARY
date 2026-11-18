@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit.components.v1 as components
 
 # Page setup
 st.set_page_config(
@@ -127,6 +126,13 @@ custom_css = """
         margin: 10px 0px;
         border-left: 3px solid #b87a3d;
     }
+    .route-summary {
+        background: rgba(255, 255, 255, 0.8);
+        border-left: 4px solid #749c86;
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+    }
     </style>
 """
 
@@ -150,36 +156,22 @@ st.markdown(
             <span class="badge">🚌 Arrival: 5:55 AM</span>
             <span class="badge">🏨 Benguet Prime Hotel</span>
             <span class="badge">🔑 Check-in: 2:00 PM</span>
-            <span class="badge">🛍️ SM City Baguio</span>
         </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-# --- REAL GOOGLE MAP EMBED (MATCHING YOUR SCREENSHOT) ---
-st.subheader("🗺️ Baguio City Center Route Map")
+# --- ROUTE SUMMARY CHIPS (Replaces Map) ---
 st.markdown(
-    "Interactive real-world map centered on **Benguet Prime Hotel, Burnham"
-    " Park, and SM City Baguio**:"
-)
-
-# Using map center coordinates and zoom level 16 to match your exact screenshot bounds
-google_map_html = """
-<iframe 
-    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=16&output=embed" 
-    width="100%" 
-    height="450" 
-    style="border:0; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" 
-    allowfullscreen="" 
-    loading="lazy">
-</iframe>
-"""
-components.html(google_map_html, height=460)
-
-st.caption(
-    "🗺️ *Real Google Maps street view showing downtown Baguio landmarks, roads,"
-    " and parks.*"
+    """
+    <div class="route-summary">
+        <h3>📍 8 Pinned Destinations Overview</h3>
+        <p>Your optimized walking loop for Day 1:</p>
+        <b>1.</b> City Terminal &rarr; <b>2.</b> Benguet Prime Hotel &rarr; <b>3.</b> Good Taste &rarr; <b>4.</b> Burnham Park &rarr; <b>5.</b> Ili-Likha &rarr; <b>6.</b> Hotel Check-In &rarr; <b>7.</b> SM City Baguio &rarr; <b>8.</b> Night Market
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
 
 st.divider()
