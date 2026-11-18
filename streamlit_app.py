@@ -117,6 +117,17 @@ custom_css = """
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
+    .transit-badge {
+        background-color: rgba(184, 122, 61, 0.12);
+        color: #b87a3d;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        display: inline-block;
+        margin: 10px 0px;
+        border-left: 3px solid #b87a3d;
+    }
     </style>
 """
 
@@ -146,9 +157,9 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- INTERACTIVE SATELLITE MAP SECTION ---
-st.subheader("🛰️ Day 1 Satellite Route Map")
-st.markdown("Satellite view showing your 8 stops across Baguio City:")
+# --- INTERACTIVE FULL-COLOR REAL MAP SECTION ---
+st.subheader("🗺️ Day 1 Color Street Map")
+st.markdown("Real full-color map displaying all 8 destination stops across Baguio City:")
 
 map_data = pd.DataFrame(
     {
@@ -185,20 +196,19 @@ map_data = pd.DataFrame(
     }
 )
 
-# Render PyDeck Satellite Map (Mapbox Satellite Style)
 st.pydeck_chart(
     pdk.Deck(
-        map_style="mapbox://styles/mapbox/satellite-v9",
+        map_style="mapbox://styles/mapbox/streets-v12",
         initial_view_state=pdk.ViewState(
-            latitude=16.4120, longitude=120.5970, zoom=14.5, pitch=45
+            latitude=16.4120, longitude=120.5970, zoom=14.5, pitch=30
         ),
         layers=[
             pdk.Layer(
                 "ScatterplotLayer",
                 data=map_data,
                 get_position="[lon, lat]",
-                get_color="[217, 119, 6, 200]",
-                get_radius=40,
+                get_color="[217, 119, 6, 230]",
+                get_radius=50,
                 pickable=True,
                 auto_highlight=True,
             ),
@@ -207,15 +217,15 @@ st.pydeck_chart(
                 data=map_data,
                 get_position="[lon, lat]",
                 get_text="name",
-                get_size=14,
-                get_color="[255, 255, 255, 255]",
+                get_size=15,
+                get_color="[20, 40, 30, 255]",
                 get_alignment_baseline="'bottom'",
             ),
         ],
         tooltip={
-            "html": "<b>Stop:</b> {name}",
+            "html": "<b>Location:</b> {name}",
             "style": {
-                "background": "rgba(15, 61, 46, 0.9)",
+                "background": "rgba(15, 61, 46, 0.95)",
                 "color": "white",
                 "padding": "8px",
                 "border-radius": "6px",
@@ -224,66 +234,71 @@ st.pydeck_chart(
     )
 )
 
-st.caption(
-    "🛰️ *Satellite imagery rendered via Mapbox. Hover over pins to see location"
-    " names!*"
-)
+st.caption("🗺️ *Full-color street map rendered via Mapbox Streets.*")
 
 st.divider()
 
-# Itinerary Data
+# Itinerary Data with Walking Estimates
 stops = [
     {
         "time": "5:55 AM - 6:15 AM",
         "title": "1. Arrival - Baguio City Terminal",
         "desc": "Touch Down! Welcome to Baguio.",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
+        "transit": "🚶‍♂️ Walk ~5 mins (400m) to Benguet Prime Hotel",
     },
     {
         "time": "6:15 AM – 6:30 AM",
         "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
         "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave your bags at the front desk so you can explore hands-free.",
         "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232",
+        "transit": "🚶‍♂️ Walk ~4 mins (300m) to Carantes St.",
     },
     {
         "time": "6:30 AM – 8:30 AM",
         "title": "3. Breakfast at Good Taste Restaurant",
         "desc": "Fuel up with a hearty breakfast and experience getting your food served by their robot crew.",
         "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
+        "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
     },
     {
         "time": "8:30 AM – 9:30 AM",
         "title": "4. Burnham Park",
         "desc": "Enjoy the crisp morning air around Burnham Lagoon before the daytime crowds arrive.",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
+        "transit": "🚶‍♂️ Walk ~8 mins (600m uphill via Session Rd/Assumption Rd)",
     },
     {
         "time": "10:00 AM – 1:00 PM",
         "title": "5. Ili-Likha Artists Village",
         "desc": "Explore this hidden food and art park filled with woodwork, sculptures, stained glass art, and cozy cafes.",
         "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
+        "transit": "🚶‍♂️ Walk ~6 mins (500m) back down to Calderon St.",
     },
     {
         "time": "1:30 PM – 2:00 PM",
         "title": "6. Hotel Check-In & Rest",
         "desc": "Return to Benguet Prime Hotel to claim your luggage, check into your room, and rest up.",
         "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
+        "transit": "🚶‍♂️ / 🚕 Walk ~12 mins uphill (900m) or 4-min taxi to SM City",
     },
     {
         "time": "6:00 PM – 8:30 PM",
         "title": "7. SM City Baguio & Dinner",
         "desc": "Enjoy the cool evening breeze and panoramic city views from the open-air terraces of SM Baguio.",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
+        "transit": "🚶‍♂️ Walk ~8 mins downhill (700m) back to Harrison Road",
     },
     {
         "time": "9:00 PM – 10:00 PM",
         "title": "8. Baguio Night Market (Harrison Road)",
         "desc": "Browse through ukay-ukay thrift stalls and sample hot street food just a short walk from the hotel.",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
+        "transit": "🏨 Short walk back to Benguet Prime Hotel to rest for Day 2!",
     },
 ]
 
-st.subheader("⏰ Day 1 Schedule")
+st.subheader("⏰ Day 1 Schedule & Walking Guide")
 
 for stop in stops:
   with st.container(border=True):
@@ -296,6 +311,10 @@ for stop in stops:
       )
       st.markdown(f"### {stop['title']}")
       st.write(stop["desc"])
+      st.markdown(
+          f'<div class="transit-badge">{stop["transit"]}</div>',
+          unsafe_allow_html=True,
+      )
 
 st.divider()
 
