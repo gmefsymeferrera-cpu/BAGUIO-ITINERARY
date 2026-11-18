@@ -337,7 +337,7 @@ st.divider()
 
 # --- NAVIGATION TABS (MAIN SECTIONS) ---
 selected_tab = st.selectbox(
-    "Choice:",
+    "Choose:",
     [
         "📅 3-Day Itinerary", 
         "💰 Expense Calculator", 
