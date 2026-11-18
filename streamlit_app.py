@@ -600,7 +600,7 @@ elif selected_tab == "🎒 Packing Checklist":
 # ==========================================
 elif selected_tab == "📝 Travel Journal & Notes":
     st.subheader("📝 Interactive Travel Journal & Notes")
-    st.markdown("Isulat dito ang iyong mga alaala, mga biniling pasalubong, resibo, o mga susunod na pupuntahan habang naglalakbay:")
+    st.markdown("Write Down Our Thoughts:")
 
     if "travel_journal" not in st.session_state:
         st.session_state.travel_journal = "Day 1 Notes:\n- Natikman namin ang strawberry taho sa Burnham Park.\n- Masarap ang kape sa Ili-Likha!\n\nMga Resibo / Gastos:\n- Taxi going to hotel: ₱150"
@@ -609,11 +609,11 @@ elif selected_tab == "📝 Travel Journal & Notes":
     
     if st.button("I-save ang Notes"):
         st.session_state.travel_journal = journal_text
-        st.success("✅ Matagumpay na nai-save ang iyong journal notes!")
+        st.success("✅ Journal Notes Already Saved!")
 
     st.markdown("---")
     st.download_button(
-        label="📥 I-download ang Journal bilang Text File (.txt)",
+        label="📥 Download Journal into Text File (.txt)",
         data=st.session_state.travel_journal,
         file_name="baguio_trip_journal.txt",
         mime="text/plain"
@@ -624,7 +624,7 @@ elif selected_tab == "📝 Travel Journal & Notes":
 # ==========================================
 elif selected_tab == "📸 Photo Collage Gallery":
     st.subheader("📸 Baguio Memories Photo Collage")
-    st.markdown("Mag-upload ng mga litrato para awtomatikong mabuo ang iyong **Photo Collage Album**:")
+    st.markdown("Just Upload Our Memories 💕**:")
 
     if "uploaded_photos" not in st.session_state:
         st.session_state.uploaded_photos = []
