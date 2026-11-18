@@ -27,12 +27,13 @@ header_img_url = st.sidebar.text_input(
     value="https://cdn.corner.inc/place-photo/Ab43m-t7jaJzsCTchqAeA-yawcbwHPOITbjj2Mz0uiBiR90VfW5yaFfzVDYvGQXXxEVOnMoFrtBpqoixwUg2SY0oOYFdfhtdJkvgfrjzcHfKTnED0afxFsLEpdne9X-XuyoN3gFpmnf6TUcBl9vogDTjmJZkkZdGCFVSPnF7LunVVaroHAD5KELaHf6Q5QKBXyZxXo0fLGOLKRXrF8khWj7XqD1V_oKA0HdrWomHZqL_mwn39ZXNwSuVFiRBrhqnMNmg9Koxkhn92irpi_h-ETlQ919Srksyc1Q9nfZYpsA2rKf6WQIBZpbQo7FS9pS7fe_BwmRu3iqDi0vb3WuLn3KunmHU51pkcscEDpyZC-51EoSpmcTpZ_BsiuDnTSo72HbSA_FiB0MNu7CrkHguJO0J1UyOGY0irSBNqeVdNvams-ciYzpFZdBPlegCKE_tl1bf.jpeg",
 )
 
+# Ginawang compact ang default height para sumakto sa red rectangle box mo
 banner_height = st.sidebar.slider(
-    "Banner Elegance Height (px)", min_value=140, max_value=140, value=380, step=10
+    "Banner Compact Height (px)", min_value=150, max_value=350, value=210, step=10
 )
 
 banner_vertical_pos = st.sidebar.slider(
-    "Banner Framing (%)", min_value=0, max_value=50, value=35, step=5
+    "Banner Framing (%)", min_value=0, max_value=100, value=35, step=5
 )
 
 banner_tint = st.sidebar.slider(
@@ -190,36 +191,36 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# 100% PURE HTML BANNER NA MAY GUARANTEED WHITE TEXT
+# Compact Banner na naka-angkop sa eksaktong sukat ng pulang kahon
 banner_html = f"""
 <div style="
     background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%), url('{header_img_url}');
     background-size: cover;
     background-position: center {banner_vertical_pos}%;
-    padding: 55px 30px;
-    border-radius: 28px;
+    padding: 20px 20px;
+    border-radius: 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
     min-height: {banner_height}px;
-    margin-bottom: 30px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    margin-bottom: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     border: 2px solid rgba(255, 255, 255, 0.4);
 ">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
-        <p style="color: #FFFFFF !important; font-size: 1.25rem !important; font-weight: 600; letter-spacing: 3px; margin-top: 5px; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
-        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
-            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.6); padding: 8px 18px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">🚌 Arrival: 5:55 AM</span>
-            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.6); padding: 8px 18px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">🏨 Benguet Prime Hotel</span>
-            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.6); padding: 8px 18px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">📅 3 Days / 2 Nights</span>
+        <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 4.2rem !important; font-weight: 400 !important; text-shadow: 0 4px 20px rgba(0,0,0,0.9), 0 0 30px rgba(255, 255, 255, 0.4); margin: 0px 0px 2px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
+        <p style="color: #FFFFFF !important; font-size: 1rem !important; font-weight: 600; letter-spacing: 2px; margin-top: 2px; margin-bottom: 10px; text-shadow: 0 2px 6px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 5px;">
+            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">🚌 Arrival: 5:55 AM</span>
+            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">🏨 Benguet Prime Hotel</span>
+            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 3px 10px rgba(0,0,0,0.2);">📅 3 Days / 2 Nights</span>
         </div>
     </div>
 </div>
 """
-components.html(banner_html, height=banner_height + 40)
+components.html(banner_html, height=banner_height + 20)
 
 # Weather Widget
 st.markdown(
