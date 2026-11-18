@@ -32,7 +32,7 @@ banner_height = st.sidebar.slider(
 )
 
 banner_vertical_pos = st.sidebar.slider(
-    "Banner Framing (%)", min_value=0, max_value=100, value=35, step=5
+    "Banner Framing (%)", min_value=0, max_value=50, value=35, step=5
 )
 
 banner_tint = st.sidebar.slider(
