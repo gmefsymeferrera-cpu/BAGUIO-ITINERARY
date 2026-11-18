@@ -174,7 +174,7 @@ stops = [
         "time": "8:30 AM – 9:30 AM",
         "title": "4. Burnham Park",
         "desc": "Enjoy the crisp morning air around Burnham Lagoon before the daytime crowds arrive.",
-        "img": "https://wanderingsoulscamper.com/2015/03/21/baguio-city-burnham-park/"
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10"
     },
     {
         "time": "10:00 AM – 1:00 PM",
