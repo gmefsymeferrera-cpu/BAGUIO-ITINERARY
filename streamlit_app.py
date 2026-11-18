@@ -336,7 +336,7 @@ if selected_tab == "📅 3-Day Itinerary":
     if "is_expanded" not in st.session_state:
         st.session_state.is_expanded = True
 
-    st.markdown("### ⏰ Select Day")
+    st.markdown("### ☀️ Select Day")
     day_cols = st.columns(3, gap="small")
     for idx, day in enumerate(itinerary_days):
         is_selected = st.session_state.selected_day_idx == idx
