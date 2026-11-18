@@ -28,7 +28,7 @@ header_img_url = st.sidebar.text_input(
 )
 
 banner_height = st.sidebar.slider(
-    "Banner Elegance Height (px)", min_value=200, max_value=500, value=300, step=10
+    "Banner Elegance Height (px)", min_value=200, max_value=600, value=380, step=10
 )
 
 banner_vertical_pos = st.sidebar.slider(
@@ -77,7 +77,6 @@ elif page_theme == "Minimalist Pearl White":
   accent_color = "#666666"
   gold_accent = "#999999"
 
-# Header box background rule: centered gradient overlay with user image
 if header_img_url:
   header_bg_rule = (
       f"background-image: linear-gradient(135deg, rgba(30, 40, 35, {banner_alpha}) 0%, rgba(20, 25, 22, {banner_alpha + 0.2}) 100%),"
@@ -87,7 +86,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS with CENTERED BIG ARTISTIC CALLIGRAPHY TITLE
+# Custom CSS with MUCH LARGER CENTERED CALLIGRAPHY TITLE
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
@@ -98,7 +97,6 @@ custom_css = f"""
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }}
     
-    /* Elegant Serif Headings */
     h2, h3, .stApp h2, .stApp h3 {{
         font-family: 'Playfair Display', serif !important;
         letter-spacing: 0.3px;
@@ -109,7 +107,6 @@ custom_css = f"""
         font-family: 'Plus Jakarta Sans', sans-serif !important;
     }}
 
-    /* Glassmorphic Cards */
     [data-testid="stVerticalBlockBorderWrapper"] {{
         background-color: {card_bg};
         border: 1px solid {border_color} !important;
@@ -123,23 +120,15 @@ custom_css = f"""
         box-shadow: 0 14px 35px rgba(0,0,0,0.06);
     }}
 
-    /* Curtain Slide-Down Animation for Active Day */
     @keyframes slideDown {{
-        0% {{
-            opacity: 0;
-            transform: translateY(-12px);
-        }}
-        100% {{
-            opacity: 1;
-            transform: translateY(0);
-        }}
+        0% {{ opacity: 0; transform: translateY(-12px); }}
+        100% {{ opacity: 1; transform: translateY(0); }}
     }}
 
     .curtain-container {{
         animation: slideDown 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }}
 
-    /* Luxurious Horizontal DAY Toggle Buttons */
     div.stButton > button {{
         width: 100%;
         border-radius: 16px !important;
@@ -171,10 +160,9 @@ custom_css = f"""
         text-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }}
 
-    /* Center-aligned Luxury Header Box */
     .header-box {{
         {header_bg_rule}
-        padding: 45px 35px;
+        padding: 50px 30px;
         border-radius: 24px;
         color: white !important;
         display: flex;
@@ -184,56 +172,59 @@ custom_css = f"""
         text-align: center;
         min-height: {banner_height}px;
         margin-bottom: 30px;
-        box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
     }}
     .header-content {{
-        max-width: 90%;
+        width: 100%;
         display: flex;
         flex-direction: column;
         align-items: center;
     }}
     
-    /* NAKA-CENTER NA MALAKI AT ARTISTIC CALLIGRAPHY TITLE */
+    /* Pinalakihan at ginawang super-laking calligraphy art */
     .header-box h1 {{
         font-family: 'Great Vibes', cursive !important;
         color: {gold_accent} !important;
-        font-size: 5.2rem !important;
+        font-size: 7.5rem !important;
         font-weight: 400 !important;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 35px rgba(194, 155, 97, 0.5);
-        margin-bottom: 0px;
-        line-height: 1.0;
-        letter-spacing: 2px;
+        text-shadow: 0 5px 25px rgba(0,0,0,0.9), 0 0 50px rgba(194, 155, 97, 0.6);
+        margin: 0px 0px -10px 0px;
+        line-height: 0.95;
+        letter-spacing: 3px;
     }}
     
-    .header-box p, .header-box span {{
+    .header-box p {{
+        font-size: 1.3rem !important;
+        font-weight: 600;
+        letter-spacing: 2px;
+        margin-top: 10px;
+        margin-bottom: 15px;
         color: rgba(255, 255, 255, 0.95) !important;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-        font-size: 1.05rem;
+        text-shadow: 0 2px 8px rgba(0,0,0,0.6);
     }}
+
     .badge-row {{
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 8px;
-        margin-top: 14px;
+        gap: 10px;
+        margin-top: 10px;
     }}
     .badge {{
         display: inline-block;
-        background: rgba(255, 255, 255, 0.18);
-        backdrop-filter: blur(8px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        padding: 6px 14px;
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        padding: 8px 16px;
         border-radius: 30px;
-        font-size: 0.85rem;
+        font-size: 0.95rem;
         font-weight: 500;
         color: #ffffff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }}
     @media (max-width: 640px) {{
-        .header-content {{
-            max-width: 95%;
-        }}
         .header-box h1 {{
-            font-size: 3.5rem !important;
+            font-size: 5rem !important;
         }}
         div.stButton > button p {{
             font-size: 1.1rem !important;
@@ -262,7 +253,7 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section (Centered)
+# Header Section
 st.markdown(
     """
     <div class="header-box">
