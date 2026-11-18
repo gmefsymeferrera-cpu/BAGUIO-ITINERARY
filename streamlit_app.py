@@ -295,7 +295,7 @@ countdown_html = f"""
 </style>
 
 <div class="countdown-card">
-    <div class="countdown-title">⏳ Countdown Until This Baguio Trip! 🍓🌲</div>
+    <div class="countdown-title">⏳ Countdown Until This December 20, 2026! 🍓🌲</div>
     <div class="countdown-grid" id="countdown">
         <div class="countdown-box"><div class="countdown-num" id="days">--</div><div class="countdown-label">Day</div></div>
         <div class="countdown-box"><div class="countdown-num" id="hours">--</div><div class="countdown-label">Hour</div></div>
