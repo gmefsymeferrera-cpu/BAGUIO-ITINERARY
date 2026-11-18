@@ -144,7 +144,7 @@ stops = [
     {
         "time": "6:15 AM – 6:30 AM",
         "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
-        "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave your bags at the front desk so you can explore hands-free.",
+        "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave our bags at the front desk so we can explore hands-free.",
         "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232"
     },
     {
