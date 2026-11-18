@@ -43,7 +43,7 @@ custom_css = f"""
         font-family: 'Montserrat', sans-serif !important;
         color: {text_color} !important;
     }}
-    .stop-card, .contact-card, .countdown-card {{
+    .stop-card, .contact-card {{
         background-color: {card_bg};
         border: 1.5px solid {border_color} !important;
         border-radius: 20px;
@@ -148,25 +148,49 @@ banner_html = f"""
 """
 components.html(banner_html, height=banner_height + 30)
 
-# --- COUNTDOWN TIMER LOGIC ---
-target_date = datetime(2026, 12, 20, 5, 55, 0)
-now = datetime.now()
-time_left = target_date - now
-days_left = time_left.days
-hours_left = time_left.seconds // 3600
-minutes_left = (time_left.seconds % 3600) // 60
-
-if days_left >= 0:
-    st.markdown(f"""
-    <div class="countdown-card">
-        <h3 style="margin: 0 0 5px 0; color: {accent_color};">⏳ Countdown hanggang sa Baguio Trip!</h3>
-        <p style="font-size: 1.2rem; font-weight: 700; margin: 0; color: {gold_accent};">
-            {days_left} Araw • {hours_left} Oras • {minutes_left} Minuto na lang! 🎒🌲
-        </p>
+# --- LIVE COUNTDOWN TIMER W/ SECONDS (HTML + JS) ---
+countdown_html = f"""
+<div style="
+    background-color: {card_bg};
+    border: 1.5px solid {border_color};
+    border-radius: 20px;
+    padding: 18px;
+    margin-bottom: 16px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+">
+    <h3 style="margin: 0 0 8px 0; color: {accent_color}; font-size: 1.1rem; font-weight: 700;">⏳ Live Countdown hanggang sa Baguio Trip!</h3>
+    <div id="countdown" style="font-size: 1.15rem; font-weight: 700; color: {gold_accent}; letter-spacing: 0.5px;">
+        Naglo-load ang timer...
     </div>
-    """, unsafe_allow_html=True)
-else:
-    st.success("🎉 Nandito na tayo o nakalipas na ang petsa ng ating Baguio trip! Enjoy!")
+</div>
+
+<script>
+// Itakda ang target date (December 20, 2026, 05:55:00)
+const countDownDate = new Date("Dec 20, 2026 05:55:00").getTime();
+
+const x = setInterval(function() {
+    const now = new Date().getTime();
+    const distance = countDownDate - now;
+
+    if (distance < 0) {
+        clearInterval(x);
+        document.getElementById("countdown").innerHTML = "🎉 Nandito na tayo o nakalipas na ang petsa ng ating Baguio trip! Enjoy!";
+        return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    document.getElementById("countdown").innerHTML = 
+        days + " Araw • " + hours + " Oras • " + minutes + " Minuto • " + seconds + " Segundo na lang! 🎒🌲";
+}, 1000);
+</script>
+"""
+components.html(countdown_html, height=110)
 
 # Weather Widget
 st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
