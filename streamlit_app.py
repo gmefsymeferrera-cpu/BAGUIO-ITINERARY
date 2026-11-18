@@ -52,7 +52,7 @@ custom_css = f"""
         box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         text-align: center;
     }}
-    /* --- NEW MODERN COUNTDOWN CARD STYLE --- */
+    /* --- MODERN COUNTDOWN CARD STYLE WITH SECONDS --- */
     .countdown-card {{
         background: linear-gradient(135deg, rgba(80, 122, 100, 0.08) 0%, rgba(184, 134, 11, 0.08) 100%);
         border: 2px solid {border_color} !important;
@@ -74,34 +74,34 @@ custom_css = f"""
     .countdown-grid {{
         display: flex;
         justify-content: center;
-        gap: 16px;
+        gap: 12px;
         flex-wrap: wrap;
     }}
     .countdown-box {{
         background-color: #ffffff;
         border: 1.5px solid {border_color};
         border-radius: 14px;
-        padding: 10px 16px;
-        min-width: 75px;
+        padding: 10px 12px;
+        min-width: 65px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }}
     .countdown-num {{
         font-family: 'Montserrat', sans-serif !important;
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         font-weight: 700;
         color: {gold_accent};
         line-height: 1.2;
     }}
     .countdown-label {{
         font-family: 'Montserrat', sans-serif !important;
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 600;
         color: {text_color};
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin-top: 2px;
     }}
-    /* ------------------------------------- */
+    /* --------------------------------------------- */
     div.stButton > button {{
         width: 100%;
         border-radius: 16px !important;
@@ -198,15 +198,18 @@ banner_html = f"""
 """
 components.html(banner_html, height=banner_height + 30)
 
-# --- COUNTDOWN TIMER LOGIC ---
+# --- COUNTDOWN TIMER LOGIC (WITH SECONDS) ---
 target_date = datetime(2026, 12, 20, 5, 55, 0)
 now = datetime.now()
 time_left = target_date - now
-days_left = time_left.days
-hours_left = time_left.seconds // 3600
-minutes_left = (time_left.seconds % 3600) // 60
+total_seconds_left = int(time_left.total_seconds())
 
-if days_left >= 0:
+if total_seconds_left >= 0:
+    days_left = total_seconds_left // 86400
+    hours_left = (total_seconds_left % 86400) // 3600
+    minutes_left = (total_seconds_left % 3600) // 60
+    seconds_left = total_seconds_left % 60
+
     st.markdown(f"""
     <div class="countdown-card">
         <div class="countdown-title">⏳ Countdown hanggang sa Baguio Trip! 🎒🌲</div>
@@ -222,6 +225,10 @@ if days_left >= 0:
             <div class="countdown-box">
                 <div class="countdown-num">{minutes_left}</div>
                 <div class="countdown-label">Minuto</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-num">{seconds_left}</div>
+                <div class="countdown-label">Segundo</div>
             </div>
         </div>
     </div>
