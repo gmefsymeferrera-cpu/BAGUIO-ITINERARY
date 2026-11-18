@@ -156,33 +156,12 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- CLEAN VECTOR ROAD MAP EMBED (Matching Reference) ---
-st.subheader("🗺️ Baguio Downtown Reference Map")
-st.markdown("Clean vector map highlighting Burnham Park, Benguet Prime Hotel, and city center stops:")
-
-# Using standard roadmap view (`t=m`) focused right on downtown Baguio at zoom level 16
-map_html = """
-<iframe 
-    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=16&output=embed" 
-    width="100%" 
-    height="420" 
-    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);" 
-    allowfullscreen="" 
-    loading="lazy">
-</iframe>
-"""
-components.html(map_html, height=430)
-
-st.caption("🗺️ *Interactive vector map showing streets, landmarks, and parks just like your reference.*")
-
-st.divider()
-
 # Itinerary Data with Walking Estimates
 stops = [
     {
         "time": "5:55 AM - 6:15 AM",
         "title": "1. Arrival - Baguio City Terminal",
-        "desc": "Touch Down! Welcome to Baguio.",
+        "desc": f"Touch Down! Welcome to Baguio. Stay at [Benguet Prime Hotel](link{{place_id:ChIJFXd6_2ehkTMRDo3Of5y4MHI}}).",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
         "transit": "🚶‍♂️ Walk ~5 mins (400m) to Benguet Prime Hotel",
     },
@@ -196,21 +175,21 @@ stops = [
     {
         "time": "6:30 AM – 8:30 AM",
         "title": "3. Breakfast at Good Taste Restaurant",
-        "desc": "Fuel up with a hearty breakfast and experience getting your food served by their robot crew.",
+        "desc": f"Fuel up with a hearty breakfast at [The Original Good Taste Cafe & Restaurant](link{{place_id:ChIJTc4JcGehkTMRF0lG3u4bhDw}}).",
         "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
         "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
     },
     {
         "time": "8:30 AM – 9:30 AM",
         "title": "4. Burnham Park",
-        "desc": "Enjoy the crisp morning air around Burnham Lagoon before the daytime crowds arrive.",
+        "desc": f"Enjoy the crisp morning air around [Burnham Park](link{{place_id:ChIJiYLvmGmhkTMR8rwh5qkzitE}}) before the daytime crowds arrive.",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
         "transit": "🚶‍♂️ Walk ~8 mins (600m uphill via Session Rd/Assumption Rd)",
     },
     {
         "time": "10:00 AM – 1:00 PM",
         "title": "5. Ili-Likha Artists Village",
-        "desc": "Explore this hidden food and art park filled with woodwork, sculptures, stained glass art, and cozy cafes.",
+        "desc": f"Explore [Ili-Likha Artists Village](link{{place_id:ChIJ2w0UZ12hkTMRpJn52VDBf_U}}), a hidden food and art park filled with woodwork, sculptures, and cozy cafes.",
         "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
         "transit": "🚶‍♂️ Walk ~6 mins (500m) back down to Calderon St.",
     },
@@ -224,14 +203,14 @@ stops = [
     {
         "time": "6:00 PM – 8:30 PM",
         "title": "7. SM City Baguio & Dinner",
-        "desc": "Enjoy the cool evening breeze and panoramic city views from the open-air terraces of SM Baguio.",
+        "desc": f"Enjoy cool evening breezes and panoramic views from [SM City Baguio](link{{place_id:ChIJd5wuUEKhkTMR2M1ll8O2f1U}}).",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
         "transit": "🚶‍♂️ Walk ~8 mins downhill (700m) back to Harrison Road",
     },
     {
         "time": "9:00 PM – 10:00 PM",
         "title": "8. Baguio Night Market (Harrison Road)",
-        "desc": "Browse through ukay-ukay thrift stalls and sample hot street food just a short walk from the hotel.",
+        "desc": f"Browse ukay-ukay stalls at [Baguio Night Market (Food Stalls)](link{{place_id:ChIJvbe53mehkTMR8T_ioyknfYk}}).",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
         "transit": "🏨 Short walk back to Benguet Prime Hotel to rest for Day 2!",
     },
@@ -287,6 +266,26 @@ st.caption(f"✨ Packed: **{completed_items} / {total_items}** items ready")
 
 if completed_items == total_items:
   st.success("🎉 All set! You're fully packed and ready for Baguio!")
+
+st.divider()
+
+# --- MAP MOVED TO THE LAST SECTION ---
+st.subheader("🗺️ Baguio Downtown Reference Map")
+st.markdown("Interactive vector map showing your downtown route and destinations:")
+
+map_html = """
+<iframe 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=16&output=embed" 
+    width="100%" 
+    height="420" 
+    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);" 
+    allowfullscreen="" 
+    loading="lazy">
+</iframe>
+"""
+components.html(map_html, height=430)
+
+st.caption("🗺️ *Interactive map positioned at the bottom for quick neighborhood reference.*")
 
 st.divider()
 st.caption("Safe travels to the Summer Capital of the Philippines! 🌲")
