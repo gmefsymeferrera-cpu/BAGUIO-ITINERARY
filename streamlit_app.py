@@ -42,7 +42,7 @@ custom_css = f"""
         font-family: 'Montserrat', sans-serif !important;
         color: {text_color} !important;
     }}
-    .stop-card {{
+    .stop-card, .contact-card {{
         background-color: {card_bg};
         border: 1.5px solid {border_color} !important;
         border-radius: 20px;
@@ -131,260 +131,361 @@ components.html(banner_html, height=banner_height + 30)
 st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
 st.divider()
 
-# --- ITINERARY DATA (Gamit ang original images mo) ---
-itinerary_days = [
-    {
-        "tab_label": "DAY 1",
-        "header": "DAY 1 — Downtown Core, Art & Night Market",
-        "stops": [
-            {
-                "time": "5:55 AM - 6:15 AM",
-                "title": "1. Arrival - Baguio City Terminal",
-                "desc": "Touch Down! Welcome to Baguio.",
-                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
-                "transit": "🚶‍♂️ Walk ~5 mins (400m) to Benguet Prime Hotel",
-            },
-            {
-                "time": "6:15 AM – 6:30 AM",
-                "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
-                "desc": "Secure our belongings at the front desk on F. Calderon St. to explore hands-free.",
-                "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232",
-                "transit": "🚶‍♂️ Walk ~4 mins (300m) to Carantes St.",
-            },
-            {
-                "time": "6:30 AM – 8:30 AM",
-                "title": "3. Breakfast at Good Taste Restaurant",
-                "desc": "Enjoy local breakfast served by their signature robotic staff.",
-                "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
-                "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
-            },
-            {
-                "time": "8:30 AM – 9:30 AM",
-                "title": "4. Burnham Park",
-                "desc": "Breathe in the crisp morning pine air and enjoy a peaceful stroll by the lagoon.",
-                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
-                "transit": "🚶‍♂️ Walk ~8 mins (600m uphill via Session Rd/Assumption Rd)",
-            },
-            {
-                "time": "10:00 AM – 1:00 PM",
-                "title": "5. Ili-Likha Artists Village",
-                "desc": "Discover an architectural masterpiece filled with artisan cafes and sculptures.",
-                "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
-                "transit": "🚶‍♂️ Walk ~6 mins (500m) back down to Calderon St.",
-            },
-            {
-                "time": "1:30 PM – 2:00 PM",
-                "title": "6. Hotel Check-In & Rest",
-                "desc": "Return to Benguet Prime Hotel to claim our room and refresh for the evening.",
-                "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
-                "transit": "🚶‍♂️ / 🚕 Walk ~12 mins uphill (900m) or 4-min taxi to SM City",
-            },
-            {
-                "time": "6:00 PM – 8:30 PM",
-                "title": "7. SM City Baguio & Dinner",
-                "desc": "Savor dinner overlooking panoramic city lights from the open-air terraces.",
-                "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
-                "transit": "🚶‍♂️ Walk ~8 mins downhill (700m) back to Harrison Road",
-            },
-            {
-                "time": "9:00 PM – 10:00 PM",
-                "title": "8. Baguio Night Market (Harrison Road)",
-                "desc": "Experience the bustling ukay-ukay thrift stalls and local street food culture.",
-                "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
-                "transit": "🏨 Short walk back to Benguet Prime Hotel for a restful night.",
-            },
-        ],
-    },
-    {
-        "tab_label": "DAY 2",
-        "header": "DAY 2 — Pine Forests, Parks & Mountain Views",
-        "stops": [
-            {
-                "time": "7:30 AM – 8:30 AM",
-                "title": "1. Breakfast at Café by the Ruins",
-                "desc": "Enjoy artisan hot chocolate-eh and traditional Cordillera breakfast specialties.",
-                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
-                "transit": "🚕 Taxi (~12 mins) or Mines View Jeepney from Gov. Pack Rd",
-            },
-            {
-                "time": "9:00 AM – 10:30 AM",
-                "title": "2. Baguio Botanical Garden",
-                "desc": "Wander through towering pine avenues, orchid houses, and cultural heritage huts.",
-                "img": "https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140",
-                "transit": "🚶‍♂️ Walk ~10 mins (750m) along Leonard Wood Rd to Wright Park",
-            },
-            {
-                "time": "10:30 AM – 12:00 PM",
-                "title": "3. Wright Park & The Mansion",
-                "desc": "Marvel at the iconic Pool of Pines and the historic presidential summer residence.",
-                "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
-                "transit": "🚕 Short taxi or jeepney ride (~6 mins) uphill to Mines View",
-            },
-            {
-                "time": "12:15 PM – 2:30 PM",
-                "title": "4. Mines View Park & Good Shepherd Convent",
-                "desc": "Take in sweeping mountain vistas and purchase world-famous Good Shepherd Ube Jam.",
-                "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
-                "transit": "🚕 Taxi (~10 mins) to Camp John Hay",
-            },
-            {
-                "time": "3:00 PM – 6:30 PM",
-                "title": "5. Camp John Hay (Bell House & Eco-Trail)",
-                "desc": "Unwind amidst American-era heritage architecture and pine forest walking trails.",
-                "img": "https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140",
-                "transit": "🚕 Taxi (~10 mins) back to Benguet Prime Hotel / Session Road",
-            },
-        ],
-    },
-    {
-        "tab_label": "DAY 3",
-        "header": "DAY 3 — Strawberry Farms, Culture & Pasalubong",
-        "stops": [
-            {
-                "time": "7:30 AM – 10:00 AM",
-                "title": "1. La Trinidad Strawberry Farm & StoBoSa",
-                "desc": "Pick fresh strawberries, enjoy strawberry taho, and admire the vibrant hillside mural art.",
-                "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
-                "transit": "🚕 Taxi (~15 mins) to Tam-awan Village",
-            },
-            {
-                "time": "10:15 AM – 12:00 PM",
-                "title": "2. Tam-awan Village",
-                "desc": "Immerse yourself in authentic Ifugao indigenous art and mountainside galleries.",
-                "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
-                "transit": "🚕 Taxi (~15 mins) back to downtown / Benguet Prime Hotel",
-            },
-            {
-                "time": "12:00 PM – 1:30 PM",
-                "title": "3. Hotel Check-Out & Baguio Public Market",
-                "desc": "Check out, retrieve luggage, and acquire local Benguet coffee beans and fresh produce.",
-                "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
-                "transit": "🚶‍♂️ Walk ~5 mins (400m) back to Benguet Prime Hotel",
-            },
-            {
-                "time": "2:00 PM – 3:30 PM",
-                "title": "4. Farewell Lunch on Session Road & Departure",
-                "desc": "Relish a final meal on Session Road before heading to the bus terminal for departure.",
-                "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
-                "transit": "🚌 Safe travels back home!",
-            },
-        ],
-    },
-]
+# --- NAVIGATION TABS (MAIN SECTIONS) ---
+selected_tab = st.selectbox(
+    "Pumili ng pahina:",
+    [
+        "📅 3-Day Itinerary", 
+        "💰 Expense Calculator & Splitter", 
+        "🎒 Packing Checklist", 
+        "📝 Travel Journal & Notes", 
+        "📸 Photo Gallery",
+        "🗺️ Map & 🚨 Emergency Contacts"
+    ]
+)
 
-# Initialize session state
-if "selected_day_idx" not in st.session_state:
-    st.session_state.selected_day_idx = 0
-if "is_expanded" not in st.session_state:
-    st.session_state.is_expanded = True
+st.divider()
 
-st.markdown("### ⏰ 3 Days Itinerary")
-st.markdown("<p style='font-size: 0.95rem; margin-top: -10px;'>Select a day below to reveal its schedule:</p>", unsafe_allow_html=True)
+# ==========================================
+# 1. ITINERARY SECTION
+# ==========================================
+if selected_tab == "📅 3-Day Itinerary":
+    itinerary_days = [
+        {
+            "tab_label": "DAY 1",
+            "header": "DAY 1 — Downtown Core, Art & Night Market",
+            "stops": [
+                {
+                    "time": "5:55 AM - 6:15 AM",
+                    "title": "1. Arrival - Baguio City Terminal",
+                    "desc": "Touch Down! Welcome to Baguio.",
+                    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
+                    "transit": "🚶‍♂️ Walk ~5 mins (400m) to Benguet Prime Hotel",
+                },
+                {
+                    "time": "6:15 AM – 6:30 AM",
+                    "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
+                    "desc": "Secure our belongings at the front desk on F. Calderon St. to explore hands-free.",
+                    "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232",
+                    "transit": "🚶‍♂️ Walk ~4 mins (300m) to Carantes St.",
+                },
+                {
+                    "time": "6:30 AM – 8:30 AM",
+                    "title": "3. Breakfast at Good Taste Restaurant",
+                    "desc": "Enjoy local breakfast served by their signature robotic staff.",
+                    "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
+                    "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
+                },
+                {
+                    "time": "8:30 AM – 9:30 AM",
+                    "title": "4. Burnham Park",
+                    "desc": "Breathe in the crisp morning pine air and enjoy a peaceful stroll by the lagoon.",
+                    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
+                    "transit": "🚶‍♂️ Walk ~8 mins (600m uphill via Session Rd/Assumption Rd)",
+                },
+                {
+                    "time": "10:00 AM – 1:00 PM",
+                    "title": "5. Ili-Likha Artists Village",
+                    "desc": "Discover an architectural masterpiece filled with artisan cafes and sculptures.",
+                    "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
+                    "transit": "🚶‍♂️ Walk ~6 mins (500m) back down to Calderon St.",
+                },
+                {
+                    "time": "1:30 PM – 2:00 PM",
+                    "title": "6. Hotel Check-In & Rest",
+                    "desc": "Return to Benguet Prime Hotel to claim our room and refresh for the evening.",
+                    "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
+                    "transit": "🚶‍♂️ / 🚕 Walk ~12 mins uphill (900m) or 4-min taxi to SM City",
+                },
+                {
+                    "time": "6:00 PM – 8:30 PM",
+                    "title": "7. SM City Baguio & Dinner",
+                    "desc": "Savor dinner overlooking panoramic city lights from the open-air terraces.",
+                    "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
+                    "transit": "🚶‍♂️ Walk ~8 mins downhill (700m) back to Harrison Road",
+                },
+                {
+                    "time": "9:00 PM – 10:00 PM",
+                    "title": "8. Baguio Night Market (Harrison Road)",
+                    "desc": "Experience the bustling ukay-ukay thrift stalls and local street food culture.",
+                    "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
+                    "transit": "🏨 Short walk back to Benguet Prime Hotel for a restful night.",
+                },
+            ],
+        },
+        {
+            "tab_label": "DAY 2",
+            "header": "DAY 2 — Pine Forests, Parks & Mountain Views",
+            "stops": [
+                {
+                    "time": "7:30 AM – 8:30 AM",
+                    "title": "1. Breakfast at Café by the Ruins",
+                    "desc": "Enjoy artisan hot chocolate-eh and traditional Cordillera breakfast specialties.",
+                    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
+                    "transit": "🚕 Taxi (~12 mins) or Mines View Jeepney from Gov. Pack Rd",
+                },
+                {
+                    "time": "9:00 AM – 10:30 AM",
+                    "title": "2. Baguio Botanical Garden",
+                    "desc": "Wander through towering pine avenues, orchid houses, and cultural heritage huts.",
+                    "img": "https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140",
+                    "transit": "🚶‍♂️ Walk ~10 mins (750m) along Leonard Wood Rd to Wright Park",
+                },
+                {
+                    "time": "10:30 AM – 12:00 PM",
+                    "title": "3. Wright Park & The Mansion",
+                    "desc": "Marvel at the iconic Pool of Pines and the historic presidential summer residence.",
+                    "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
+                    "transit": "🚕 Short taxi or jeepney ride (~6 mins) uphill to Mines View",
+                },
+                {
+                    "time": "12:15 PM – 2:30 PM",
+                    "title": "4. Mines View Park & Good Shepherd Convent",
+                    "desc": "Take in sweeping mountain vistas and purchase world-famous Good Shepherd Ube Jam.",
+                    "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
+                    "transit": "🚕 Taxi (~10 mins) to Camp John Hay",
+                },
+                {
+                    "time": "3:00 PM – 6:30 PM",
+                    "title": "5. Camp John Hay (Bell House & Eco-Trail)",
+                    "desc": "Unwind amidst American-era heritage architecture and pine forest walking trails.",
+                    "img": "https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140",
+                    "transit": "🚕 Taxi (~10 mins) back to Benguet Prime Hotel / Session Road",
+                },
+            ],
+        },
+        {
+            "tab_label": "DAY 3",
+            "header": "DAY 3 — Strawberry Farms, Culture & Pasalubong",
+            "stops": [
+                {
+                    "time": "7:30 AM – 10:00 AM",
+                    "title": "1. La Trinidad Strawberry Farm & StoBoSa",
+                    "desc": "Pick fresh strawberries, enjoy strawberry taho, and admire the vibrant hillside mural art.",
+                    "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
+                    "transit": "🚕 Taxi (~15 mins) to Tam-awan Village",
+                },
+                {
+                    "time": "10:15 AM – 12:00 PM",
+                    "title": "2. Tam-awan Village",
+                    "desc": "Immerse yourself in authentic Ifugao indigenous art and mountainside galleries.",
+                    "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
+                    "transit": "🚕 Taxi (~15 mins) back to downtown / Benguet Prime Hotel",
+                },
+                {
+                    "time": "12:00 PM – 1:30 PM",
+                    "title": "3. Hotel Check-Out & Baguio Public Market",
+                    "desc": "Check out, retrieve luggage, and acquire local Benguet coffee beans and fresh produce.",
+                    "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
+                    "transit": "🚶‍♂️ Walk ~5 mins (400m) back to Benguet Prime Hotel",
+                },
+                {
+                    "time": "2:00 PM – 3:30 PM",
+                    "title": "4. Farewell Lunch on Session Road & Departure",
+                    "desc": "Relish a final meal on Session Road before heading to the bus terminal for departure.",
+                    "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
+                    "transit": "🚌 Safe travels back home!",
+                },
+            ],
+        },
+    ]
 
-# --- HORIZONTAL NAVIGATION BUTTONS ---
-day_cols = st.columns(3, gap="small")
-for idx, day in enumerate(itinerary_days):
-    is_selected = st.session_state.selected_day_idx == idx
-    arrow = "▴" if (is_selected and st.session_state.is_expanded) else "▾"
-    btn_type = "primary" if (is_selected and st.session_state.is_expanded) else "secondary"
+    if "selected_day_idx" not in st.session_state:
+        st.session_state.selected_day_idx = 0
+    if "is_expanded" not in st.session_state:
+        st.session_state.is_expanded = True
 
-    with day_cols[idx]:
-        if st.button(f"{day['tab_label']} {arrow}", key=f"day_nav_{idx}", type=btn_type, use_container_width=True):
-            if is_selected:
-                st.session_state.is_expanded = not st.session_state.is_expanded
-            else:
-                st.session_state.selected_day_idx = idx
-                st.session_state.is_expanded = True
-            st.rerun()
+    st.markdown("### ⏰ Select Day")
+    day_cols = st.columns(3, gap="small")
+    for idx, day in enumerate(itinerary_days):
+        is_selected = st.session_state.selected_day_idx == idx
+        arrow = "▴" if (is_selected and st.session_state.is_expanded) else "▾"
+        btn_type = "primary" if (is_selected and st.session_state.is_expanded) else "secondary"
 
-# --- CONTENT DISPLAY CONTAINER ---
-if st.session_state.is_expanded:
-    active_day = itinerary_days[st.session_state.selected_day_idx]
-    st.markdown(f"<h4 style='margin-top: 25px; margin-bottom: 15px;'>{active_day['header']}</h4>", unsafe_allow_html=True)
+        with day_cols[idx]:
+            if st.button(f"{day['tab_label']} {arrow}", key=f"day_nav_{idx}", type=btn_type, use_container_width=True):
+                if is_selected:
+                    st.session_state.is_expanded = not st.session_state.is_expanded
+                else:
+                    st.session_state.selected_day_idx = idx
+                    st.session_state.is_expanded = True
+                st.rerun()
 
-    for stop in active_day["stops"]:
-        st.markdown(f"""
-        <div class="stop-card">
-            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                <div style="flex: 1; min-width: 200px;">
-                    <img src="{stop['img']}" style="width: 100%; height: 140px; object-fit: cover; border-radius: 12px;" />
-                </div>
-                <div style="flex: 2; min-width: 250px;">
-                    <span class="time-tag">{stop['time']}</span>
-                    <h3 style="margin: 5px 0 8px 0; font-size: 1.1rem;">{stop['title']}</h3>
-                    <p style="margin: 0; font-size: 0.95rem;">{stop['desc']}</p>
-                    <div class="transit-badge">{stop['transit']}</div>
+    if st.session_state.is_expanded:
+        active_day = itinerary_days[st.session_state.selected_day_idx]
+        st.markdown(f"<h4 style='margin-top: 25px; margin-bottom: 15px;'>{active_day['header']}</h4>", unsafe_allow_html=True)
+
+        for stop in active_day["stops"]:
+            st.markdown(f"""
+            <div class="stop-card">
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px;">
+                        <img src="{stop['img']}" style="width: 100%; height: 140px; object-fit: cover; border-radius: 12px;" />
+                    </div>
+                    <div style="flex: 2; min-width: 250px;">
+                        <span class="time-tag">{stop['time']}</span>
+                        <h3 style="margin: 5px 0 8px 0; font-size: 1.1rem;">{stop['title']}</h3>
+                        <p style="margin: 0; font-size: 0.95rem;">{stop['desc']}</p>
+                        <div class="transit-badge">{stop['transit']}</div>
+                    </div>
                 </div>
             </div>
+            """, unsafe_allow_html=True)
+    else:
+        st.markdown("<div style='text-align: center; padding: 25px; font-style: italic;'>✨ Itinerary curtain is closed. Click any DAY above to reveal.</div>", unsafe_allow_html=True)
+
+# ==========================================
+# 2. EXPENSE CALCULATOR & SPLITTER SECTION
+# ==========================================
+elif selected_tab == "💰 Expense Calculator & Splitter":
+    st.subheader("💰 Trip Budget & Expense Splitter")
+    st.markdown("Kalkulahin ang pangkalahatang gastos at hatiin ito kung kayo ay magkakasama:")
+
+    col_b1, col_b2, col_b3 = st.columns(3)
+    with col_b1:
+        transpo_cost = st.number_input("Taxi / Transpo & Fees (PHP)", min_value=0, value=1200, step=100)
+    with col_b2:
+        food_cost = st.number_input("Food & Dining (PHP)", min_value=0, value=3500, step=200)
+    with col_b3:
+        pasalubong_cost = st.number_input("Pasalubong & Souvenirs (PHP)", min_value=0, value=2000, step=200)
+
+    total_est_budget = transpo_cost + food_cost + pasalubong_cost
+    st.info(f"💡 **Total Estimated Expenses:** ₱{total_est_budget:,} (Hindi kasama ang hotel)")
+
+    st.markdown("---")
+    st.subheader("👥 Group Expense Splitter")
+    num_persons = st.slider("Ilan kayong maghahati sa gastusin?", min_value=1, max_value=10, value=2)
+    
+    if num_persons > 0:
+        share_per_person = total_est_budget / num_persons
+        st.success(f"✨ Bawat isa ay mag-aambag ng: **₱{share_per_person:,.2f}** (para sa {num_persons} katao)")
+
+# ==========================================
+# 3. PACKING CHECKLIST SECTION
+# ==========================================
+elif selected_tab == "🎒 Packing Checklist":
+    st.subheader("🎒 Curated Packing Checklist")
+    st.markdown("Check off essentials for your highland escape:")
+
+    checklist_items = [
+        "Warm wool jacket or cashmere sweater (Baguio evenings drop significantly)",
+        "Comfortable walking shoes or boots (For heritage walks and pine trails)",
+        "Insulated or reusable tumbler for hot chocolate and mountain tea",
+        "Compact umbrella / lightweight weather shell",
+        "Power bank and high-speed charging cables",
+        "Philippine Peso cash & small bills (Essential for local taxis & night markets)",
+    ]
+
+    checked_states = []
+    for i, item in enumerate(checklist_items):
+        is_checked = st.checkbox(item, key=f"check_{i}")
+        checked_states.append(is_checked)
+
+    total_items = len(checklist_items)
+    completed_items = sum(checked_states)
+    progress_pct = completed_items / total_items
+
+    st.progress(progress_pct)
+    st.caption(f"✨ Packed Essentials: **{completed_items} / {total_items}** ready")
+
+    if completed_items == total_items:
+        st.success("🌟 All set! You are fully prepared for our Baguio Escape.")
+
+# ==========================================
+# 4. TRAVEL JOURNAL & NOTES SECTION
+# ==========================================
+elif selected_tab == "📝 Travel Journal & Notes":
+    st.subheader("📝 Interactive Travel Journal & Notes")
+    st.markdown("Isulat dito ang iyong mga alaala, mga biniling pasalubong, resibo, o mga susunod na pupuntahan habang naglalakbay:")
+
+    if "travel_journal" not in st.session_state:
+        st.session_state.travel_journal = "Day 1 Notes:\n- Natikman namin ang strawberry taho sa Burnham Park.\n- Masarap ang kape sa Ili-Likha!\n\nMga Resibo / Gastos:\n- Taxi going to hotel: ₱150"
+
+    journal_text = st.text_area("I-edit ang iyong Journal:", value=st.session_state.travel_journal, height=250)
+    
+    if st.button("I-save ang Notes"):
+        st.session_state.travel_journal = journal_text
+        st.success("✅ Matagumpay na nai-save ang iyong journal notes!")
+
+    st.markdown("---")
+    st.download_button(
+        label="📥 I-download ang Journal bilang Text File (.txt)",
+        data=st.session_state.travel_journal,
+        file_name="baguio_trip_journal.txt",
+        mime="text/plain"
+    )
+
+# ==========================================
+# 5. PHOTO GALLERY SECTION (NEW)
+# ==========================================
+elif selected_tab == "📸 Photo Gallery":
+    st.subheader("📸 Baguio Memories & Photo Gallery")
+    st.markdown("Mag-upload ng mga litrato o tingnan ang gallery ng inyong mga alaala sa Baguio:")
+
+    # Initialize session state for uploaded images
+    if "uploaded_photos" not in st.session_state:
+        st.session_state.uploaded_photos = []
+
+    uploaded_files = st.file_uploader(
+        "Mag-upload ng mga larawan (PNG, JPG, JPEG):", 
+        type=["png", "jpg", "jpeg"], 
+        accept_multiple_files=True
+    )
+
+    if uploaded_files:
+        for file in uploaded_files:
+            if file not in st.session_state.uploaded_photos:
+                st.session_state.uploaded_photos.append(file)
+
+    if st.session_state.uploaded_photos:
+        st.markdown("### 🖼️ Na-upload na mga Larawan:")
+        cols = st.columns(3)
+        for idx, photo in enumerate(st.session_state.uploaded_photos):
+            with cols[idx % 3]:
+                st.image(photo, use_container_width=True, caption=f"Photo {idx+1}")
+    else:
+        st.info("Wala pang na-upload na larawan. Pindutin ang button sa taas para magdagdag ng mga kuha ninyo sa Baguio!")
+
+# ==========================================
+# 6. MAP & EMERGENCY CONTACTS SECTION
+# ==========================================
+elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
+    st.subheader("🗺️ Neighborhood Reference Map")
+    st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
+
+    map_html = """
+    <iframe 
+        src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
+        width="100%" 
+        height="350" 
+        style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);" 
+        allowfullscreen="" 
+        loading="lazy">
+    </iframe>
+    """
+    components.html(map_html, height=370)
+
+    st.divider()
+    st.subheader("🚨 Emergency & Important Contacts (Baguio)")
+    st.markdown("Mga importanteng numero sakaling kailanganin habang naglalakbay:")
+
+    col_c1, col_c2 = st.columns(2)
+    with col_c1:
+        st.markdown("""
+        <div class="contact-card">
+            <h4>👮‍♂️ Public Safety</h4>
+            <p><b>Baguio City Police Office:</b> (074) 442-1211</p>
+            <p><b>Emergency Hotline:</b> 911</p>
         </div>
         """, unsafe_allow_html=True)
-else:
-    st.markdown("<div style='text-align: center; padding: 25px; font-style: italic;'>✨ Itinerary curtain is closed. Click any DAY above to reveal.</div>", unsafe_allow_html=True)
+    with col_c2:
+        st.markdown("""
+        <div class="contact-card">
+            <h4>🏥 Medical & Health</h4>
+            <p><b>SLU Hospital of the Sacred Heart:</b> (074) 444-5720</p>
+            <p><b>Baguio General Hospital (BGH):</b> (074) 442-4216</p>
+        </div>
+        """, unsafe_allow_html=True)
 
 st.divider()
-
-# --- BUDGET & EXPENSE CALCULATOR ---
-st.subheader("💰 Expense Calculator")
-st.markdown("Calculate our Travel expenses:")
-
-col_b1, col_b2, col_b3 = st.columns(3)
-with col_b1:
-    transpo_cost = st.number_input("Taxi / Transpo & Entrance Fee (PHP)", min_value=0, value=1200, step=100)
-with col_b2:
-    food_cost = st.number_input("Food & Dining (PHP)", min_value=0, value=3500, step=200)
-with col_b3:
-    pasalubong_cost = st.number_input("Pasalubong & Souvenirs (PHP)", min_value=0, value=2000, step=200)
-
-total_est_budget = transpo_cost + food_cost + pasalubong_cost
-st.info(f"💡 **Estimated Out-of-Pocket Expenses:** ₱{total_est_budget:,} (Not including hotel accommodation)")
-
-st.divider()
-
-# --- MAP SECTION ---
-st.subheader("🗺️ Neighborhood Reference Map")
-st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
-
-map_html = """
-<iframe 
-    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
-    width="100%" 
-    height="380" 
-    style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);" 
-    allowfullscreen="" 
-    loading="lazy">
-</iframe>
-"""
-components.html(map_html, height=400)
-
-st.divider()
-
-# --- INTERACTIVE PACKING CHECKLIST ---
-st.subheader("🎒 Curated Packing Checklist")
-st.markdown("Check off essentials for your highland escape:")
-
-checklist_items = [
-    "Warm wool jacket or cashmere sweater (Baguio evenings drop significantly)",
-    "Comfortable walking shoes or boots (For heritage walks and pine trails)",
-    "Insulated or reusable tumbler for hot chocolate and mountain tea",
-    "Compact umbrella / lightweight weather shell",
-    "Power bank and high-speed charging cables",
-    "Philippine Peso cash & small bills (Essential for local taxis & night markets)",
-]
-
-checked_states = []
-for i, item in enumerate(checklist_items):
-    is_checked = st.checkbox(item, key=f"check_{i}")
-    checked_states.append(is_checked)
-
-total_items = len(checklist_items)
-completed_items = sum(checked_states)
-progress_pct = completed_items / total_items
-
-st.progress(progress_pct)
-st.caption(f"✨ Packed Essentials: **{completed_items} / {total_items}** ready")
-
-if completed_items == total_items:
-    st.success("🌟 All set! You are fully prepared for our Baguio Escape.")
-
-st.divider()
-st.markdown("<p style='text-align: center; font-size: 0.9rem;'>Enjoy! 🍓 </p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 0.9rem;'>Enjoy your Baguio Trip! 🍓 </p>", unsafe_allow_html=True)
