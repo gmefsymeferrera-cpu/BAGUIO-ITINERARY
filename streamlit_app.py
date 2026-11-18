@@ -86,7 +86,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS na pinuwersa ang lahat ng text at elements na sumunod sa kulay
+# Custom CSS kung saan ginawang White (#ffffff) ang Title
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -184,12 +184,13 @@ custom_css = f"""
         align-items: center;
     }}
     
+    /* GINAWANG WHITE ANG TITLE NA BAGUIO ITINERARY */
     .header-box h1 {{
         font-family: 'Pacifico', cursive !important;
-        color: #fff6d6 !important;
+        color: #ffffff !important;
         font-size: 5.5rem !important;
         font-weight: 400 !important;
-        text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 40px rgba(212, 175, 55, 0.7);
+        text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4);
         margin: 0px 0px 5px 0px;
         line-height: 1.1;
         letter-spacing: 2px;
