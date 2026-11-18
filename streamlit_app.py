@@ -137,8 +137,8 @@ banner_html = f"""
     border: 2px solid rgba(255, 255, 255, 0.4);
 ">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 3.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin: 0px 0px 2px 0px; line-height: 1.5;">Baguio Itinerary</h1>
-        <p style="color: #FFFFFF !important; font-size: 1rem !important; font-weight: 600; letter-spacing: 2px; margin: 5px 0 10px 0; text-shadow: 0 2px 6px rgba(0,0,0,0.7); text-transform: uppercase;"> 🍓 3 Days & 2 Nights Escape 🍓</p>
+        <h1 style="font-family: 'Ziglets', cursive !important; color: #FFFFFF !important; font-size: 4.2rem !important; font-weight: 400 !important; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin: 0px 0px 2px 0px; line-height: 1.5;">Baguio Itinerary</h1>
+        <p style="color: #FFFFFF !important; font-size: 1rem !important; font-weight: 600; letter-spacing: 2px; margin: 5px 0 10px 0; text-shadow: 0 2px 6px rgba(0,0,0,0.7); text-transform: uppercase;"> 🍓3 Days & 2 Nights Escape 🍓</p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
             <span style="background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important;">🚌 Arrival: December 20, 5:55 AM</span>
             <span style="background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important;">🏨 Benguet Prime Hotel</span>
@@ -148,7 +148,7 @@ banner_html = f"""
 """
 components.html(banner_html, height=banner_height + 60)
 
-# --- WEATHER WIDGET ---
+# --- REDESIGNED STYLISH WEATHER WIDGET ---
 weather_widget_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
@@ -173,7 +173,7 @@ weather_widget_html = f"""
     }}
     .weather-icon {{
         font-size: 2.5rem;
-        background: #ffffff;
+        background: #Ffffff;
         border: 1.5px solid {border_color};
         border-radius: 16px;
         padding: 8px 12px;
@@ -340,10 +340,10 @@ selected_tab = st.selectbox(
     "Choices:",
     [
         "📅 3-Day Itinerary", 
-        "💰 Expense Calculator & Splitter", 
+        "💰 Expense Calculator", 
         "🎒 Packing Checklist", 
         "📝 Travel Journal & Notes", 
-        "📸 Photo Collage Gallery",
+        "📸 Photo Gallery",
         "🗺️ Map & 🚨 Emergency Contacts"
     ]
 )
@@ -405,14 +405,14 @@ if selected_tab == "📅 3-Day Itinerary":
                     "time": "6:00 PM – 8:30 PM",
                     "title": "7. SM City Baguio & Dinner",
                     "desc": "Savor dinner overlooking panoramic city lights from the open-air terraces.",
-                    "img": "https://encrypted-tbn2.licensed-image.com/q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
+                    "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
                     "transit": "🚶‍♂️ Walk ~8 mins downhill (700m) back to Harrison Road",
                 },
                 {
                     "time": "9:00 PM – 10:00 PM",
                     "title": "8. Baguio Night Market (Harrison Road)",
                     "desc": "Experience the bustling ukay-ukay thrift stalls and local street food culture.",
-                    "img": "https://encrypted-tbn2.licensed-image.com/q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
+                    "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
                     "transit": "🏨 Short walk back to Benguet Prime Hotel for a restful night.",
                 },
             ],
@@ -439,7 +439,7 @@ if selected_tab == "📅 3-Day Itinerary":
                     "time": "10:30 AM – 12:00 PM",
                     "title": "3. Wright Park & The Mansion",
                     "desc": "Marvel at the iconic Pool of Pines and the historic presidential summer residence.",
-                    "img": "https://encrypted-tbn2.licensed-image.com/q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
+                    "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
                     "transit": "🚕 Short taxi or jeepney ride (~6 mins) uphill to Mines View",
                 },
                 {
@@ -541,7 +541,7 @@ if selected_tab == "📅 3-Day Itinerary":
 # ==========================================
 # 2. EXPENSE CALCULATOR & SPLITTER SECTION
 # ==========================================
-elif selected_tab == "💰 Expense Calculator & Splitter":
+elif selected_tab == "💰 Expense Calculator":
     st.subheader("💰 Trip Budget & Expense Splitter")
     st.markdown("Kalkulahin ang pangkalahatang gastos at hatiin ito kung kayo ay magkakasama:")
 
@@ -622,7 +622,7 @@ elif selected_tab == "📝 Travel Journal & Notes":
 # ==========================================
 # 5. PHOTO COLLAGE GALLERY SECTION
 # ==========================================
-elif selected_tab == "📸 Photo Collage Gallery":
+elif selected_tab == "📸 Photo Gallery":
     st.subheader("📸 Baguio Memories Photo Collage")
     st.markdown("Just Upload Our Memories 💕**:")
 
@@ -695,7 +695,8 @@ elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
         st.markdown("""
         <div class="contact-card">
             <h4>👮‍♂️ Public Safety</h4>
-            <p><b>Baguio City Police Office:</b> (074) 442-1211</p>
+            <p><b>Baguio City Police Office:
+            </b> (074) 442-1211</p>
             <p><b>Emergency Hotline:</b> 911</p>
         </div>
         """, unsafe_allow_html=True)
@@ -703,8 +704,10 @@ elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
         st.markdown("""
         <div class="contact-card">
             <h4>🏥 Medical & Health</h4>
-            <p><b>SLU Hospital of the Sacred Heart:</b> (074) 444-5720</p>
-            <p><b>Baguio General Hospital (BGH):</b> (074) 442-4216</p>
+            <p><b>SLU Hospital of the Sacred Heart:
+            </b> (074) 444-5720</p>
+            <p><b>Baguio General Hospital (BGH):
+            </b> (074) 442-4216</p>
         </div>
         """, unsafe_allow_html=True)
 
