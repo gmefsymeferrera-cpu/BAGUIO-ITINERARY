@@ -241,7 +241,7 @@ countdown_html = f"""
 </script>
 """
 
-components.html(countdown_html, height=200)
+components.html(countdown_html, height=150)
 st.divider()
 
 # --- NAVIGATION TABS (MAIN SECTIONS) ---
