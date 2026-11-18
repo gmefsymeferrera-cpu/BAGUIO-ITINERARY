@@ -239,7 +239,7 @@ weather_widget_html = f"""
     </div>
 </div>
 """
-components.html(weather_widget_html, height=105)
+components.html(weather_widget_html, height=115)
 
 # --- LIVE COUNTDOWN ---
 countdown_html = f"""
