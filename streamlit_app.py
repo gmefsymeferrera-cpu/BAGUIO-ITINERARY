@@ -19,7 +19,7 @@ banner_alpha = 0.50
 # Color Tokens (Light Mode Only)
 bg_css_rule = "background-color: #ffffff;"
 text_color = "#23332a"
-card_bg = "#ffffff"
+card_bg = "#F4C2C2"
 border_color = "#d6e0d8"
 accent_color = "#507a64"
 gold_accent = "#b8860b"
