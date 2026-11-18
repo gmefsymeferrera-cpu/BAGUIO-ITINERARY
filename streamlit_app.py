@@ -9,7 +9,7 @@ st.set_page_config(
 )
 
 # --- SIDEBAR: THEME & HEADER CUSTOMIZER ---
-st.sidebar.header("🎨 Customize Theme")
+st.sidebar.header("🎨 Customize Pastel Theme")
 
 page_theme = st.sidebar.selectbox(
     "Page Background",
@@ -18,7 +18,7 @@ page_theme = st.sidebar.selectbox(
         "Pastel Cream (Warm Neutral)",
         "Pastel Sky (Soft Blue)",
         "Morning Fog (Soft Gray)",
-        "Crisp White",
+        "Dreamy Lavender",
     ],
 )
 
@@ -40,55 +40,55 @@ banner_vertical_pos = st.sidebar.slider(
 )
 
 banner_tint = st.sidebar.slider(
-    "Title Banner Dark Overlay (%)", min_value=20, max_value=80, value=45, step=5
+    "Title Banner Dark Overlay (%)", min_value=20, max_value=80, value=40, step=5
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Pastel theme tokens
-bg_css_rule = "background-color: #f0f4f1;"
-text_color = "#2c3e35"
+# Ultra-Soft Pastel Theme Tokens
+bg_css_rule = "background-color: #f2f7f4;"
+text_color = "#2f4f40"
 card_bg = "#ffffff"
-border_color = "#d6e2d9"
-accent_color = "#527767"
+border_color = "#dce8e1"
+accent_color = "#739e82"
 
 if page_theme == "Pastel Cream (Warm Neutral)":
-  bg_css_rule = "background-color: #fbf9f5;"
-  text_color = "#3d3832"
+  bg_css_rule = "background-color: #fcf9f4;"
+  text_color = "#4a4036"
   card_bg = "#ffffff"
-  border_color = "#eae4db"
-  accent_color = "#8c6d46"
+  border_color = "#f0e6dc"
+  accent_color = "#b09575"
 elif page_theme == "Pastel Sky (Soft Blue)":
-  bg_css_rule = "background-color: #f0f4f8;"
-  text_color = "#2b3a4a"
+  bg_css_rule = "background-color: #f1f5fb;"
+  text_color = "#33465e"
   card_bg = "#ffffff"
-  border_color = "#d3e0ed"
-  accent_color = "#4a6fa5"
+  border_color = "#d9e4f0"
+  accent_color = "#6f8cb8"
 elif page_theme == "Morning Fog (Soft Gray)":
-  bg_css_rule = "background-color: #f5f6f8;"
-  text_color = "#333d47"
+  bg_css_rule = "background-color: #f4f5f7;"
+  text_color = "#3e4651"
   card_bg = "#ffffff"
   border_color = "#e2e6eb"
-  accent_color = "#5a6772"
-elif page_theme == "Crisp White":
-  bg_css_rule = "background-color: #ffffff;"
-  text_color = "#2d3748"
-  card_bg = "#fcfdfd"
-  border_color = "#edf2f7"
-  accent_color = "#4a5568"
+  accent_color = "#7c8998"
+elif page_theme == "Dreamy Lavender":
+  bg_css_rule = "background-color: #f7f4f9;"
+  text_color = "#4c3b52"
+  card_bg = "#ffffff"
+  border_color = "#ebdff2"
+  accent_color = "#997ba3"
 
 # Header box background rule: keeps left side clear for Lion's Head, tints right side for text readability
 if header_img_url:
   header_bg_rule = (
-      "background-image: linear-gradient(90deg, rgba(44, 62, 53, 0.05) 0%,"
-      f" rgba(64, 96, 82, {round(banner_alpha * 0.75, 2)}) 45%, rgba(44, 62,"
-      f" 53, {min(round(banner_alpha + 0.25, 2), 0.9)}) 100%),"
+      "background-image: linear-gradient(90deg, rgba(44, 62, 53, 0.03) 0%,"
+      f" rgba(74, 107, 92, {round(banner_alpha * 0.7, 2)}) 45%, rgba(47, 79,"
+      f" 64, {min(round(banner_alpha + 0.2, 2), 0.85)}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
       f" left {banner_vertical_pos}%;"
   )
 else:
-  header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
+  header_bg_rule = "background: linear-gradient(135deg, #8ba899, #b5ccc0);"
 
-# Custom CSS injecting pastel theme rules + BIG UPPERCASE DAY 1 | DAY 2 | DAY 3 toggle buttons
+# Custom CSS injecting ultra-soft pastel rules + BIG UPPERCASE DAY buttons
 custom_css = """
     <style>
     .stApp {
@@ -101,17 +101,17 @@ custom_css = """
     [data-testid="stVerticalBlockBorderWrapper"] {
         background-color: REPLACE_CARD;
         border-color: REPLACE_BORDER !important;
-        border-radius: 14px;
-        padding: 10px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        border-radius: 16px;
+        padding: 12px;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.02);
     }
-    /* Horizontal DAY 1 ▾ | DAY 2 ▾ | DAY 3 ▾ bar styling with BIG LETTERS */
+    /* Horizontal DAY 1 ▾ | DAY 2 ▾ | DAY 3 ▾ pastel toggle buttons */
     div.stButton > button {
         width: 100%;
         border-radius: 14px !important;
         padding: 16px 12px !important;
         border: 2px solid REPLACE_BORDER !important;
-        transition: all 0.2s ease;
+        transition: all 0.25s ease;
     }
     div.stButton > button p {
         font-size: 1.45rem !important;
@@ -126,13 +126,14 @@ custom_css = """
     }
     div.stButton > button[kind="secondary"]:hover {
         border-color: REPLACE_ACCENT !important;
+        background-color: rgba(0,0,0,0.015) !important;
         transform: translateY(-2px);
     }
     div.stButton > button[kind="primary"] {
         background-color: REPLACE_ACCENT !important;
         color: #ffffff !important;
         border-color: REPLACE_ACCENT !important;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.14);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
     }
     div.stButton > button[kind="primary"] p {
         color: #ffffff !important;
@@ -141,7 +142,7 @@ custom_css = """
     .header-box {
         REPLACE_HEADER_BG
         padding: 36px 28px;
-        border-radius: 16px;
+        border-radius: 18px;
         color: white !important;
         display: flex;
         flex-direction: column;
@@ -150,20 +151,20 @@ custom_css = """
         text-align: right;
         min-height: REPLACE_HEIGHTpx;
         margin-bottom: 25px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     .header-content {
         max-width: 65%;
     }
     .header-box h1 {
         color: white !important;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        text-shadow: 0 2px 8px rgba(0,0,0,0.4);
         margin-bottom: 6px;
         line-height: 1.2;
     }
     .header-box p, .header-box span {
         color: white !important;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+        text-shadow: 0 2px 6px rgba(0,0,0,0.4);
     }
     .badge-row {
         display: flex;
@@ -174,9 +175,9 @@ custom_css = """
     }
     .badge {
         display: inline-block;
-        background: rgba(255, 255, 255, 0.22);
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(255, 255, 255, 0.45);
+        background: rgba(255, 255, 255, 0.25);
+        backdrop-filter: blur(6px);
+        border: 1px solid rgba(255, 255, 255, 0.5);
         padding: 5px 12px;
         border-radius: 20px;
         font-size: 0.85rem;
@@ -191,22 +192,22 @@ custom_css = """
         }
     }
     .time-tag {
-        color: #b87a3d !important;
+        color: #c48847 !important;
         font-weight: 700;
         font-size: 0.9rem;
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
     .transit-badge {
-        background-color: rgba(184, 122, 61, 0.12);
-        color: #b87a3d;
+        background-color: rgba(196, 136, 71, 0.08);
+        color: #c48847;
         padding: 6px 12px;
         border-radius: 8px;
         font-size: 0.85rem;
         font-weight: 600;
         display: inline-block;
         margin: 10px 0px;
-        border-left: 3px solid #b87a3d;
+        border-left: 3px solid #c48847;
     }
     </style>
 """
