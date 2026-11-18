@@ -148,7 +148,9 @@ banner_html = f"""
 """
 components.html(banner_html, height=banner_height + 30)
 
-# --- LIVE COUNTDOWN COMPONENT (NO REFRESH NEEDED) ---
+# --- MOVED WEATHER WIDGET & LIVE COUNTDOWN TO THE TOP ---
+st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
+
 countdown_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
@@ -157,6 +159,7 @@ countdown_html = f"""
         border: 2px solid {border_color};
         border-radius: 20px;
         padding: 22px 18px;
+        margin-top: 15px;
         margin-bottom: 20px;
         box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         text-align: center;
@@ -239,9 +242,6 @@ countdown_html = f"""
 """
 
 components.html(countdown_html, height=130)
-
-# Weather Widget
-st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
 st.divider()
 
 # --- NAVIGATION TABS (MAIN SECTIONS) ---
