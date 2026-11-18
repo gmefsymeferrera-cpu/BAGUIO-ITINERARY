@@ -42,7 +42,7 @@ banner_alpha = round(banner_tint / 100, 2)
 
 # Maliwanag at Preskong Kulay Tokens
 bg_css_rule = "background-color: #ffffff;"
-text_color = "#FFFFFF"
+text_color = "#23332a"
 card_bg = "#ffffff"
 border_color = "#d6e0d8"
 accent_color = "#507a64"
