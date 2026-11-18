@@ -86,7 +86,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS kung saan ginawang White (#ffffff) ang Title
+# Custom CSS na may malakas na override para maging puti ang title
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -97,7 +97,7 @@ custom_css = f"""
         font-family: 'Montserrat', sans-serif !important;
     }}
     
-    h1, h2, h3, h4, h5, h6, .stApp h1, .stApp h2, .stApp h3, .stApp h4 {{
+    h2, h3, h4, h5, h6 {{
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 700;
         letter-spacing: 0.3px;
@@ -184,29 +184,6 @@ custom_css = f"""
         align-items: center;
     }}
     
-    /* GINAWANG WHITE ANG TITLE NA BAGUIO ITINERARY */
-    .header-box h1 {{
-        font-family: 'Pacifico', cursive !important;
-        color: #ffffff !important;
-        font-size: 5.5rem !important;
-        font-weight: 400 !important;
-        text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4);
-        margin: 0px 0px 5px 0px;
-        line-height: 1.1;
-        letter-spacing: 2px;
-    }}
-    
-    .header-box p {{
-        font-size: 1.25rem !important;
-        font-weight: 600;
-        letter-spacing: 3px;
-        margin-top: 5px;
-        margin-bottom: 18px;
-        color: #ffffff !important;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-        text-transform: uppercase;
-    }}
-
     .badge-row {{
         display: flex;
         flex-wrap: wrap;
@@ -227,9 +204,6 @@ custom_css = f"""
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }}
     @media (max-width: 640px) {{
-        .header-box h1 {{
-            font-size: 3.8rem !important;
-        }}
         div.stButton > button p {{
             font-size: 1rem !important;
         }}
@@ -257,13 +231,13 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section
+# Header Section na may direktang inline white color sa Pacifico title
 st.markdown(
     """
     <div class="header-box">
         <div class="header-content">
-            <h1>Baguio Itinerary</h1>
-            <p>🌲 3 Days & 2 Nights Highland Escape 🌲</p>
+            <h1 style="font-family: 'Pacifico', cursive !important; color: #ffffff !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
+            <p style="color: #ffffff !important; font-size: 1.25rem !important; font-weight: 600; letter-spacing: 3px; margin-top: 5px; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
                 <span class="badge">🏨 Benguet Prime Hotel</span>
