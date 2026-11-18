@@ -11,7 +11,6 @@ st.set_page_config(
 # --- SIDEBAR: REFINED THEME & BANNER CONTROLS ---
 st.sidebar.header("✨ Elegance & Theme Studio")
 
-# Feature 4: Dedicated Dark/Light Mode Switch
 mode_switch = st.sidebar.radio("Appearance Mode", ["Light Mode", "Dark Mode"])
 
 page_theme = st.sidebar.selectbox(
@@ -43,21 +42,21 @@ banner_tint = st.sidebar.slider(
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Luxury Color Tokens (Adapts to Dark Mode if selected)
+# Luxury Color Tokens
 if mode_switch == "Dark Mode":
   bg_css_rule = "background-color: #121815;"
   text_color = "#e2e8e4"
   card_bg = "#1b241f"
   border_color = "#2d3832"
   accent_color = "#5a7a69"
-  gold_accent = "#e5c585"
+  gold_accent = "#ffd700"
 else:
   bg_css_rule = "background-color: #f4f6f4;"
   text_color = "#2c3830"
   card_bg = "#ffffff"
   border_color = "#e2e8e4"
   accent_color = "#829c8e"
-  gold_accent = "#c29b61"
+  gold_accent = "#d4af37"
 
   if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
     bg_css_rule = "background-color: #f7f5f0;"
@@ -65,57 +64,58 @@ else:
     card_bg = "#ffffff"
     border_color = "#eae4db"
     accent_color = "#a38b6d"
-    gold_accent = "#b8976b"
+    gold_accent = "#d4af37"
   elif page_theme == "Midnight Pine & Emerald":
     bg_css_rule = "background-color: #edf2ef;"
     text_color = "#1e3026"
     card_bg = "#ffffff"
     border_color = "#d1dfd6"
     accent_color = "#3d6b52"
-    gold_accent = "#d4af37"
+    gold_accent = "#ffd700"
   elif page_theme == "Soft Rose & Champagne":
     bg_css_rule = "background-color: #f8f4f5;"
     text_color = "#4a383b"
     card_bg = "#ffffff"
     border_color = "#f0e1e4"
     accent_color = "#b5838d"
-    gold_accent = "#d4af37"
+    gold_accent = "#ffd700"
   elif page_theme == "Minimalist Pearl White":
     bg_css_rule = "background-color: #ffffff;"
     text_color = "#2a2a2a"
     card_bg = "#fafafa"
     border_color = "#eaeaea"
     accent_color = "#666666"
-    gold_accent = "#999999"
+    gold_accent = "#d4af37"
 
 if header_img_url:
   header_bg_rule = (
-      f"background-image: linear-gradient(135deg, rgba(20, 30, 25, {banner_alpha}) 0%, rgba(10, 15, 12, {banner_alpha - 0.05}) 100%),"
+      f"background-image: linear-gradient(135deg, rgba(15, 35, 25, {banner_alpha}) 0%, rgba(30, 20, 10, {banner_alpha + 0.15}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
       f" center {banner_vertical_pos}%;"
   )
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS with Brightened, Clean, and Centered Calligraphy Title
+# Custom CSS with Lively Typography (Pacifico & Montserrat Fonts)
 custom_css = f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
 
     .stApp {{
         {bg_css_rule}
         color: {text_color};
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        font-family: 'Montserrat', sans-serif !important;
     }}
     
     h2, h3, .stApp h2, .stApp h3 {{
-        font-family: 'Playfair Display', serif !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-weight: 700;
         letter-spacing: 0.3px;
         color: {text_color};
     }}
 
     p, span, label, div {{
-        font-family: 'Plus Jakarta Sans', sans-serif !important;
+        font-family: 'Montserrat', sans-serif !important;
         color: {text_color};
     }}
 
@@ -150,10 +150,10 @@ custom_css = f"""
         background-color: {card_bg} !important;
     }}
     div.stButton > button p {{
-        font-family: 'Playfair Display', serif !important;
-        font-size: 1.35rem !important;
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 1.25rem !important;
         font-weight: 700 !important;
-        letter-spacing: 2px !important;
+        letter-spacing: 1px !important;
         margin: 0 !important;
         color: {text_color} !important;
     }}
@@ -165,7 +165,7 @@ custom_css = f"""
     div.stButton > button[kind="primary"] {{
         background: linear-gradient(135deg, {accent_color}, {gold_accent}) !important;
         border-color: transparent !important;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
     }}
     div.stButton > button[kind="primary"] p {{
         color: #ffffff !important;
@@ -174,8 +174,8 @@ custom_css = f"""
 
     .header-box {{
         {header_bg_rule}
-        padding: 50px 30px;
-        border-radius: 24px;
+        padding: 55px 30px;
+        border-radius: 28px;
         color: white !important;
         display: flex;
         flex-direction: column;
@@ -184,7 +184,8 @@ custom_css = f"""
         text-align: center;
         min-height: {banner_height}px;
         margin-bottom: 30px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+        border: 2px solid rgba(255, 215, 0, 0.3);
     }}
     .header-content {{
         width: 100%;
@@ -193,25 +194,27 @@ custom_css = f"""
         align-items: center;
     }}
     
+    /* LIVELY & FUN PACIFICO FONT TITLE */
     .header-box h1 {{
-        font-family: 'Great Vibes', cursive !important;
-        color: #f7e1b5 !important;
-        font-size: 7.5rem !important;
+        font-family: 'Pacifico', cursive !important;
+        color: #ffea79 !important;
+        font-size: 5.5rem !important;
         font-weight: 400 !important;
-        text-shadow: 0 4px 15px rgba(0,0,0,0.7), 0 0 25px rgba(194, 155, 97, 0.4);
-        margin: 0px 0px -10px 0px;
-        line-height: 0.95;
-        letter-spacing: 3px;
+        text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 35px rgba(255, 215, 0, 0.6);
+        margin: 0px 0px 5px 0px;
+        line-height: 1.1;
+        letter-spacing: 2px;
     }}
     
     .header-box p {{
-        font-size: 1.3rem !important;
+        font-size: 1.25rem !important;
         font-weight: 600;
-        letter-spacing: 2px;
-        margin-top: 10px;
-        margin-bottom: 15px;
+        letter-spacing: 3px;
+        margin-top: 5px;
+        margin-bottom: 18px;
         color: #ffffff !important;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+        text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+        text-transform: uppercase;
     }}
 
     .badge-row {{
@@ -223,22 +226,22 @@ custom_css = f"""
     }}
     .badge {{
         display: inline-block;
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        padding: 8px 16px;
+        background: rgba(255, 255, 255, 0.28);
+        backdrop-filter: blur(12px);
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
+        padding: 8px 18px;
         border-radius: 30px;
         font-size: 0.95rem;
         font-weight: 600;
         color: #ffffff;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.25);
     }}
     @media (max-width: 640px) {{
         .header-box h1 {{
-            font-size: 5rem !important;
+            font-size: 3.8rem !important;
         }}
         div.stButton > button p {{
-            font-size: 1.1rem !important;
+            font-size: 1rem !important;
         }}
     }}
     .time-tag {{
@@ -249,7 +252,7 @@ custom_css = f"""
         letter-spacing: 1px;
     }}
     .transit-badge {{
-        background-color: rgba(194, 155, 97, 0.1);
+        background-color: rgba(255, 215, 0, 0.12);
         color: {gold_accent};
         padding: 6px 14px;
         border-radius: 10px;
@@ -270,7 +273,7 @@ st.markdown(
     <div class="header-box">
         <div class="header-content">
             <h1>Baguio Itinerary</h1>
-            <p>3 Days & 2 Nights</p>
+            <p>🌲 3 Days & 2 Nights Highland Escape 🌲</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
                 <span class="badge">🏨 Benguet Prime Hotel</span>
@@ -294,7 +297,7 @@ with col_w2:
   st.markdown(
       """
         <div style="text-align: right;">
-            <button onclick="window.print()" style="background-color: #c29b61; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+            <button onclick="window.print()" style="background-color: #d4af37; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer;">
                 🖨️ Print / Save PDF
             </button>
         </div>
