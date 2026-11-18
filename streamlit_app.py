@@ -137,7 +137,7 @@ banner_html = f"""
     border: 2px solid rgba(255, 255, 255, 0.4);
 ">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
-        <h1 style="font-family: 'Ziglets', cursive !important; color: #FFFFFF !important; font-size: 4.2rem !important; font-weight: 400 !important; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin: 0px 0px 2px 0px; line-height: 1.1;">Baguio Itinerary</h1>
+        <h1 style="font-family: 'Ziglets', cursive !important; color: #FFFFFF !important; font-size: 4.2rem !important; font-weight: 400 !important; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin: 0px 0px 2px 0px; line-height: 1.5;">Baguio Itinerary</h1>
         <p style="color: #FFFFFF !important; font-size: 1rem !important; font-weight: 600; letter-spacing: 2px; margin: 5px 0 10px 0; text-shadow: 0 2px 6px rgba(0,0,0,0.7); text-transform: uppercase;"> 🍓3 Days & 2 Nights Escape 🍓</p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
             <span style="background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important;">🚌 Arrival: December 20, 5:55 AM</span>
