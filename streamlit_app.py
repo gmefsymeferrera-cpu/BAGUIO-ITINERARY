@@ -8,37 +8,12 @@ st.set_page_config(
     layout="centered",
 )
 
-# --- SIDEBAR: REFINED THEME & BANNER CONTROLS ---
-st.sidebar.header("✨ Elegance & Theme Studio")
-
-page_theme = st.sidebar.selectbox(
-    "Curated Color Palette",
-    [
-        "Earthy Sage & Gold (Botanical)",
-        "Warm Cashmere & Sand (Luxury Neutral)",
-        "Midnight Pine & Emerald",
-        "Soft Rose & Champagne",
-        "Minimalist Pearl White",
-    ],
-)
-
-header_img_url = st.sidebar.text_input(
-    "Title Banner Image URL",
-    value="https://cdn.corner.inc/place-photo/Ab43m-t7jaJzsCTchqAeA-yawcbwHPOITbjj2Mz0uiBiR90VfW5yaFfzVDYvGQXXxEVOnMoFrtBpqoixwUg2SY0oOYFdfhtdJkvgfrjzcHfKTnED0afxFsLEpdne9X-XuyoN3gFpmnf6TUcBl9vogDTjmJZkkZdGCFVSPnF7LunVVaroHAD5KELaHf6Q5QKBXyZxXo0fLGOLKRXrF8khWj7XqD1V_oKA0HdrWomHZqL_mwn39ZXNwSuVFiRBrhqnMNmg9Koxkhn92irpi_h-ETlQ919Srksyc1Q9nfZYpsA2rKf6WQIBZpbQo7FS9pS7fe_BwmRu3iqDi0vb3WuLn3KunmHU51pkcscEDpyZC-51EoSpmcTpZ_BsiuDnTSo72HbSA_FiB0MNu7CrkHguJO0J1UyOGY0irSBNqeVdNvams-ciYzpFZdBPlegCKE_tl1bf.jpeg",
-)
-
-banner_height = st.sidebar.slider(
-    "Banner Compact Height (px)", min_value=150, max_value=350, value=210, step=10
-)
-
-banner_vertical_pos = st.sidebar.slider(
-    "Banner Framing (%)", min_value=0, max_value=100, value=35, step=5
-)
-
-banner_tint = st.sidebar.slider(
-    "Banner Dark Luxury Gradient (%)", min_value=5, max_value=40, value=15, step=5
-)
-banner_alpha = round(banner_tint / 100, 2)
+# --- CONFIG & BANNER CONTROLS (Naka-embed na sa Main Page nang walang Sidebar) ---
+page_theme = "Earthy Sage & Gold (Botanical)"
+header_img_url = "https://cdn.corner.inc/place-photo/Ab43m-t7jaJzsCTchqAeA-yawcbwHPOITbjj2Mz0uiBiR90VfW5yaFfzVDYvGQXXxEVOnMoFrtBpqoixwUg2SY0oOYFdfhtdJkvgfrjzcHfKTnED0afxFsLEpdne9X-XuyoN3gFpmnf6TUcBl9vogDTjmJZkkZdGCFVSPnF7LunVVaroHAD5KELaHf6Q5QKBXyZxXo0fLGOLKRXrF8khWj7XqD1V_oKA0HdrWomHZqL_mwn39ZXNwSuVFiRBrhqnMNmg9Koxkhn92irpi_h-ETlQ919Srksyc1Q9nfZYpsA2rKf6WQIBZpbQo7FS9pS7fe_BwmRu3iqDi0vb3WuLn3KunmHU51pkcscEDpyZC-51EoSpmcTpZ_BsiuDnTSo72HbSA_FiB0MNu7CrkHguJO0J1UyOGY0irSBNqeVdNvams-ciYzpFZdBPlegCKE_tl1bf.jpeg"
+banner_height = 210
+banner_vertical_pos = 35
+banner_alpha = 0.15
 
 # Maliwanag at Preskong Kulay Tokens (Light Mode Only)
 bg_css_rule = "background-color: #ffffff;"
@@ -47,44 +22,6 @@ card_bg = "#ffffff"
 border_color = "#d6e0d8"
 accent_color = "#507a64"
 gold_accent = "#b8860b"
-
-if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
-  bg_css_rule = "background-color: #fcfbf9;"
-  text_color = "#3a322b"
-  card_bg = "#ffffff"
-  border_color = "#e6dfd5"
-  accent_color = "#8c7355"
-  gold_accent = "#a67c52"
-elif page_theme == "Midnight Pine & Emerald":
-  bg_css_rule = "background-color: #f4f8f5;"
-  text_color = "#182e22"
-  card_bg = "#ffffff"
-  border_color = "#c2d6cb"
-  accent_color = "#2d523d"
-  gold_accent = "#b8860b"
-elif page_theme == "Soft Rose & Champagne":
-  bg_css_rule = "background-color: #fbf7f8;"
-  text_color = "#423035"
-  card_bg = "#ffffff"
-  border_color = "#ead5da"
-  accent_color = "#996670"
-  gold_accent = "#b8860b"
-elif page_theme == "Minimalist Pearl White":
-  bg_css_rule = "background-color: #ffffff;"
-  text_color = "#222222"
-  card_bg = "#ffffff"
-  border_color = "#e0e0e0"
-  accent_color = "#555555"
-  gold_accent = "#888888"
-
-if header_img_url:
-  header_bg_rule = (
-      f"background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%),"
-      f" url('{header_img_url}'); background-size: cover; background-position:"
-      f" center {banner_vertical_pos}%;"
-  )
-else:
-  header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
 # Custom CSS
 custom_css = f"""
@@ -190,7 +127,7 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Compact Banner na walang glitch text
+# Compact Banner na walang sidebar
 banner_html = f"""
 <div style="
     background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%), url('{header_img_url}');
