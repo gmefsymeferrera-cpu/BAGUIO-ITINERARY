@@ -3,22 +3,22 @@ import streamlit.components.v1 as components
 
 # Page setup
 st.set_page_config(
-    page_title="Baguio Itinerary | Benguet Prime Hotel",
+    page_title="Baguio Itinerary | Luxury Edition",
     page_icon="🌲",
     layout="centered",
 )
 
-# --- SIDEBAR: THEME & HEADER CUSTOMIZER ---
-st.sidebar.header("🎨 Customize Pastel Theme")
+# --- SIDEBAR: REFINED THEME & BANNER CONTROLS ---
+st.sidebar.header("✨ Elegance & Theme Studio")
 
 page_theme = st.sidebar.selectbox(
-    "Page Background",
+    "Curated Color Palette",
     [
-        "Pastel Sage (Soft Green)",
-        "Pastel Cream (Warm Neutral)",
-        "Pastel Sky (Soft Blue)",
-        "Morning Fog (Soft Gray)",
-        "Dreamy Lavender",
+        "Earthy Sage & Gold (Botanical)",
+        "Warm Cashmere & Sand (Luxury Neutral)",
+        "Midnight Pine & Emerald",
+        "Soft Rose & Champagne",
+        "Minimalist Pearl White",
     ],
 )
 
@@ -28,209 +28,242 @@ header_img_url = st.sidebar.text_input(
 )
 
 banner_height = st.sidebar.slider(
-    "Title Banner Height (px)", min_value=180, max_value=450, value=260, step=10
+    "Banner Elegance Height (px)", min_value=200, max_value=500, value=300, step=10
 )
 
 banner_vertical_pos = st.sidebar.slider(
-    "Vertical Framing (%) — Move Lion's Head Up/Down",
-    min_value=0,
-    max_value=100,
-    value=35,
-    step=5,
+    "Lion's Head Framing (%)", min_value=0, max_value=100, value=35, step=5
 )
 
 banner_tint = st.sidebar.slider(
-    "Title Banner Dark Overlay (%)", min_value=20, max_value=80, value=40, step=5
+    "Banner Dark Luxury Gradient (%)", min_value=20, max_value=85, value=45, step=5
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Ultra-Soft Pastel Theme Tokens
-bg_css_rule = "background-color: #f2f7f4;"
-text_color = "#2f4f40"
+# Luxury Color Tokens
+bg_css_rule = "background-color: #f4f6f4;"
+text_color = "#2c3830"
 card_bg = "#ffffff"
-border_color = "#dce8e1"
-accent_color = "#739e82"
+border_color = "#e2e8e4"
+accent_color = "#829c8e"
+gold_accent = "#c29b61"
 
-if page_theme == "Pastel Cream (Warm Neutral)":
-  bg_css_rule = "background-color: #fcf9f4;"
-  text_color = "#4a4036"
+if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
+  bg_css_rule = "background-color: #f7f5f0;"
+  text_color = "#3d3832"
   card_bg = "#ffffff"
-  border_color = "#f0e6dc"
-  accent_color = "#b09575"
-elif page_theme == "Pastel Sky (Soft Blue)":
-  bg_css_rule = "background-color: #f1f5fb;"
-  text_color = "#33465e"
+  border_color = "#eae4db"
+  accent_color = "#a38b6d"
+  gold_accent = "#b8976b"
+elif page_theme == "Midnight Pine & Emerald":
+  bg_css_rule = "background-color: #edf2ef;"
+  text_color = "#1e3026"
   card_bg = "#ffffff"
-  border_color = "#d9e4f0"
-  accent_color = "#6f8cb8"
-elif page_theme == "Morning Fog (Soft Gray)":
-  bg_css_rule = "background-color: #f4f5f7;"
-  text_color = "#3e4651"
+  border_color = "#d1dfd6"
+  accent_color = "#3d6b52"
+  gold_accent = "#d4af37"
+elif page_theme == "Soft Rose & Champagne":
+  bg_css_rule = "background-color: #f8f4f5;"
+  text_color = "#4a383b"
   card_bg = "#ffffff"
-  border_color = "#e2e6eb"
-  accent_color = "#7c8998"
-elif page_theme == "Dreamy Lavender":
-  bg_css_rule = "background-color: #f7f4f9;"
-  text_color = "#4c3b52"
-  card_bg = "#ffffff"
-  border_color = "#ebdff2"
-  accent_color = "#997ba3"
+  border_color = "#f0e1e4"
+  accent_color = "#b5838d"
+  gold_accent = "#d4af37"
+elif page_theme == "Minimalist Pearl White":
+  bg_css_rule = "background-color: #ffffff;"
+  text_color = "#2a2a2a"
+  card_bg = "#fafafa"
+  border_color = "#eaeaea"
+  accent_color = "#666666"
+  gold_accent = "#999999"
 
-# Header box background rule: keeps left side clear for Lion's Head, tints right side for text readability
+# Header box background rule: keeps left side clear for Lion's Head, rich gradient on the right
 if header_img_url:
   header_bg_rule = (
-      "background-image: linear-gradient(90deg, rgba(44, 62, 53, 0.03) 0%,"
-      f" rgba(74, 107, 92, {round(banner_alpha * 0.7, 2)}) 45%, rgba(47, 79,"
-      f" 64, {min(round(banner_alpha + 0.2, 2), 0.85)}) 100%),"
+      "background-image: linear-gradient(90deg, rgba(30, 40, 35, 0.02) 0%,"
+      f" rgba(44, 56, 48, {round(banner_alpha * 0.75, 2)}) 45%, rgba(30, 40,"
+      f" 35, {min(round(banner_alpha + 0.25, 2), 0.9)}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
       f" left {banner_vertical_pos}%;"
   )
 else:
-  header_bg_rule = "background: linear-gradient(135deg, #8ba899, #b5ccc0);"
+  header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS injecting ultra-soft pastel rules + BIG UPPERCASE DAY buttons
-custom_css = """
+# Custom CSS for Luxury Typography, Glassmorphism, and Curtain Animation
+custom_css = f"""
     <style>
-    .stApp {
-        REPLACE_BG
-        color: REPLACE_TEXT;
-    }
-    .stApp h1, .stApp h2, .stApp h3, .stApp p, .stApp label, .stApp span {
-        color: REPLACE_TEXT;
-    }
-    [data-testid="stVerticalBlockBorderWrapper"] {
-        background-color: REPLACE_CARD;
-        border-color: REPLACE_BORDER !important;
-        border-radius: 16px;
-        padding: 12px;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.02);
-    }
-    /* Horizontal DAY 1 ▾ | DAY 2 ▾ | DAY 3 ▾ pastel toggle buttons */
-    div.stButton > button {
-        width: 100%;
-        border-radius: 14px !important;
-        padding: 16px 12px !important;
-        border: 2px solid REPLACE_BORDER !important;
-        transition: all 0.25s ease;
-    }
-    div.stButton > button p {
-        font-size: 1.45rem !important;
-        font-weight: 800 !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1.5px !important;
-        margin: 0 !important;
-    }
-    div.stButton > button[kind="secondary"] {
-        background-color: REPLACE_CARD !important;
-        color: REPLACE_TEXT !important;
-    }
-    div.stButton > button[kind="secondary"]:hover {
-        border-color: REPLACE_ACCENT !important;
-        background-color: rgba(0,0,0,0.015) !important;
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+    .stApp {{
+        {bg_css_rule}
+        color: {text_color};
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }}
+    
+    /* Elegant Serif Headings */
+    h1, h2, h3, .stApp h1, .stApp h2, .stApp h3 {{
+        font-family: 'Playfair Display', serif !important;
+        letter-spacing: 0.3px;
+        color: {text_color};
+    }}
+
+    p, span, label, div {{
+        font-family: 'Plus Jakarta Sans', sans-serif !important;
+    }}
+
+    /* Glassmorphic Cards */
+    [data-testid="stVerticalBlockBorderWrapper"] {{
+        background-color: {card_bg};
+        border: 1px solid {border_color} !important;
+        border-radius: 20px;
+        padding: 16px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }}
+    [data-testid="stVerticalBlockBorderWrapper"]:hover {{
         transform: translateY(-2px);
-    }
-    div.stButton > button[kind="primary"] {
-        background-color: REPLACE_ACCENT !important;
+        box-shadow: 0 14px 35px rgba(0,0,0,0.06);
+    }}
+
+    /* Curtain Slide-Down Animation for Active Day */
+    @keyframes slideDown {{
+        0% {{
+            opacity: 0;
+            transform: translateY(-12px);
+        }}
+        100% {{
+            opacity: 1;
+            transform: translateY(0);
+        }}
+    }}
+
+    .curtain-container {{
+        animation: slideDown 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }}
+
+    /* Luxurious Horizontal DAY Toggle Buttons */
+    div.stButton > button {{
+        width: 100%;
+        border-radius: 16px !important;
+        padding: 18px 14px !important;
+        border: 1.5px solid {border_color} !important;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        background-color: {card_bg} !important;
+    }}
+    div.stButton > button p {{
+        font-family: 'Playfair Display', serif !important;
+        font-size: 1.35rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 2px !important;
+        margin: 0 !important;
+        color: {text_color} !important;
+    }}
+    div.stButton > button:hover {{
+        border-color: {accent_color} !important;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+        transform: translateY(-2px);
+    }}
+    div.stButton > button[kind="primary"] {{
+        background: linear-gradient(135deg, {accent_color}, {gold_accent}) !important;
+        border-color: transparent !important;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    }}
+    div.stButton > button[kind="primary"] p {{
         color: #ffffff !important;
-        border-color: REPLACE_ACCENT !important;
-        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    }
-    div.stButton > button[kind="primary"] p {
-        color: #ffffff !important;
-    }
-    /* Right-aligned Header Box to expose Lion's Head on the left */
-    .header-box {
-        REPLACE_HEADER_BG
-        padding: 36px 28px;
-        border-radius: 18px;
+        text-shadow: 0 1px 3px rgba(0,0,0,0.2);
+    }}
+
+    /* Right-aligned Luxury Header Box */
+    .header-box {{
+        {header_bg_rule}
+        padding: 45px 35px;
+        border-radius: 24px;
         color: white !important;
         display: flex;
         flex-direction: column;
         align-items: flex-end;
         justify-content: center;
         text-align: right;
-        min-height: REPLACE_HEIGHTpx;
-        margin-bottom: 25px;
-        box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-    }
-    .header-content {
-        max-width: 65%;
-    }
-    .header-box h1 {
+        min-height: {banner_height}px;
+        margin-bottom: 30px;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+    }}
+    .header-content {{
+        max-width: 68%;
+    }}
+    .header-box h1 {{
+        font-family: 'Playfair Display', serif !important;
         color: white !important;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.4);
-        margin-bottom: 6px;
-        line-height: 1.2;
-    }
-    .header-box p, .header-box span {
-        color: white !important;
+        font-size: 2.4rem;
+        font-weight: 700;
+        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        margin-bottom: 8px;
+        line-height: 1.15;
+    }}
+    .header-box p, .header-box span {{
+        color: rgba(255, 255, 255, 0.95) !important;
         text-shadow: 0 2px 6px rgba(0,0,0,0.4);
-    }
-    .badge-row {
+        font-size: 1.05rem;
+    }}
+    .badge-row {{
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
-        gap: 6px;
-        margin-top: 10px;
-    }
-    .badge {
+        gap: 8px;
+        margin-top: 14px;
+    }}
+    .badge {{
         display: inline-block;
-        background: rgba(255, 255, 255, 0.25);
-        backdrop-filter: blur(6px);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-        padding: 5px 12px;
-        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.18);
+        backdrop-filter: blur(8px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 6px 14px;
+        border-radius: 30px;
         font-size: 0.85rem;
+        font-weight: 500;
         color: #ffffff;
-    }
-    @media (max-width: 640px) {
-        .header-content {
-            max-width: 85%;
-        }
-        div.stButton > button p {
-            font-size: 1.15rem !important;
-        }
-    }
-    .time-tag {
-        color: #c48847 !important;
+    }}
+    @media (max-width: 640px) {{
+        .header-content {{
+            max-width: 90%;
+        }}
+        .header-box h1 {{
+            font-size: 1.8rem;
+        }}
+        div.stButton > button p {{
+            font-size: 1.1rem !important;
+        }}
+    }}
+    .time-tag {{
+        color: {gold_accent} !important;
         font-weight: 700;
-        font-size: 0.9rem;
+        font-size: 0.85rem;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .transit-badge {
-        background-color: rgba(196, 136, 71, 0.08);
-        color: #c48847;
-        padding: 6px 12px;
-        border-radius: 8px;
+        letter-spacing: 1px;
+    }}
+    .transit-badge {{
+        background-color: rgba(194, 155, 97, 0.1);
+        color: {gold_accent};
+        padding: 6px 14px;
+        border-radius: 10px;
         font-size: 0.85rem;
         font-weight: 600;
         display: inline-block;
         margin: 10px 0px;
-        border-left: 3px solid #c48847;
-    }
+        border-left: 3px solid {gold_accent};
+    }}
     </style>
 """
 
-custom_css = (
-    custom_css.replace("REPLACE_BG", bg_css_rule)
-    .replace("REPLACE_TEXT", text_color)
-    .replace("REPLACE_CARD", card_bg)
-    .replace("REPLACE_BORDER", border_color)
-    .replace("REPLACE_ACCENT", accent_color)
-    .replace("REPLACE_HEADER_BG", header_bg_rule)
-    .replace("REPLACE_HEIGHT", str(banner_height))
-)
-
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section (Right-aligned to showcase Lion's Head on the left)
+# Header Section
 st.markdown(
     """
     <div class="header-box">
         <div class="header-content">
-            <h1>Baguio Itinerary</h1>
-            <p>3 Days & 2 Nights</p>
+            <h1>Baguio Luxury Itinerary</h1>
+            <p>An Exclusive 3-Day Journey & Guide</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
                 <span class="badge">🏨 Benguet Prime Hotel</span>
@@ -242,7 +275,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- MULTI-DAY ITINERARY DATA ---
+# --- ITINERARY DATA ---
 itinerary_days = [
     {
         "tab_label": "DAY 1",
@@ -251,7 +284,7 @@ itinerary_days = [
             {
                 "time": "5:55 AM - 6:15 AM",
                 "title": "1. Arrival - Baguio City Terminal",
-                "desc": "Touch Down! Welcome to Baguio.",
+                "desc": "Touch Down! Welcome to the Summer Capital.",
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
                 "transit": "🚶‍♂️ Walk ~5 mins (400m) to Benguet Prime Hotel",
             },
@@ -259,9 +292,8 @@ itinerary_days = [
                 "time": "6:15 AM – 6:30 AM",
                 "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
                 "desc": (
-                    "Head directly to Benguet Prime Hotel on F. Calderon St."
-                    " Leave our bags at the front desk so we can explore"
-                    " hands-free."
+                    "Secure your belongings at the front desk on F. Calderon St."
+                    " to explore hands-free."
                 ),
                 "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232",
                 "transit": "🚶‍♂️ Walk ~4 mins (300m) to Carantes St.",
@@ -270,8 +302,8 @@ itinerary_days = [
                 "time": "6:30 AM – 8:30 AM",
                 "title": "3. Breakfast at Good Taste Restaurant",
                 "desc": (
-                    "Fuel up with a hearty local breakfast. Experience getting"
-                    " our food served with their famous robot crew."
+                    "Indulge in a hearty local breakfast served by their"
+                    " signature robotic staff."
                 ),
                 "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
                 "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
@@ -280,9 +312,8 @@ itinerary_days = [
                 "time": "8:30 AM – 9:30 AM",
                 "title": "4. Burnham Park",
                 "desc": (
-                    "Experience the famous Burnham Lagoon. Rent a small"
-                    " rowboat or enjoy the quiet, crisp morning air walking"
-                    " around the pathways."
+                    "Breathe in the crisp morning pine air and enjoy a peaceful"
+                    " stroll by the lagoon."
                 ),
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
                 "transit": (
@@ -293,8 +324,8 @@ itinerary_days = [
                 "time": "10:00 AM – 1:00 PM",
                 "title": "5. Ili-Likha Artists Village",
                 "desc": (
-                    "Explore a hidden food and art park filled with woodwork,"
-                    " sculptures, and cozy cafes."
+                    "Discover an architectural masterpiece filled with artisan"
+                    " cafes and sculptures."
                 ),
                 "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
                 "transit": "🚶‍♂️ Walk ~6 mins (500m) back down to Calderon St.",
@@ -303,8 +334,8 @@ itinerary_days = [
                 "time": "1:30 PM – 2:00 PM",
                 "title": "6. Hotel Check-In & Rest",
                 "desc": (
-                    "Return to Benguet Prime Hotel to claim your luggage, check"
-                    " into your room, and rest up."
+                    "Return to Benguet Prime Hotel to claim your room and refresh"
+                    " for the evening."
                 ),
                 "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
                 "transit": (
@@ -316,8 +347,8 @@ itinerary_days = [
                 "time": "6:00 PM – 8:30 PM",
                 "title": "7. SM City Baguio & Dinner",
                 "desc": (
-                    "Enjoy the cool evening breeze and panoramic views of the"
-                    " city proper from the open-air terraces of SM Baguio."
+                    "Savor dinner overlooking panoramic city lights from the"
+                    " open-air terraces."
                 ),
                 "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
                 "transit": (
@@ -328,13 +359,13 @@ itinerary_days = [
                 "time": "9:00 PM – 10:00 PM",
                 "title": "8. Baguio Night Market (Harrison Road)",
                 "desc": (
-                    "Browse through the vibrant ukay-ukay thrift stalls and"
-                    " sample delicious street food right near Burnham Park."
+                    "Experience the bustling ukay-ukay thrift stalls and local"
+                    " street food culture."
                 ),
                 "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
                 "transit": (
-                    "🏨 Short walk back to Benguet Prime Hotel to rest for Day"
-                    " 2!"
+                    "🏨 Short walk back to Benguet Prime Hotel for a restful"
+                    " night."
                 ),
             },
         ],
@@ -347,8 +378,8 @@ itinerary_days = [
                 "time": "7:30 AM – 8:30 AM",
                 "title": "1. Breakfast at Café by the Ruins",
                 "desc": (
-                    "Start Day 2 with Baguio chocolate-eh, fresh pan de sal,"
-                    " and mountain-inspired Filipino breakfast dishes."
+                    "Enjoy artisan hot chocolate-eh and traditional Cordillera"
+                    " breakfast specialties."
                 ),
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
                 "transit": (
@@ -360,9 +391,8 @@ itinerary_days = [
                 "time": "9:00 AM – 10:30 AM",
                 "title": "2. Baguio Botanical Garden",
                 "desc": (
-                    "Stroll through towering pine trees, vibrant flower"
-                    " terraces, Japanese-inspired tunnels, and Cordillera"
-                    " huts."
+                    "Wander through towering pine avenues, orchid houses, and"
+                    " cultural heritage huts."
                 ),
                 "img": "https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140",
                 "transit": (
@@ -374,9 +404,8 @@ itinerary_days = [
                 "time": "10:30 AM – 12:00 PM",
                 "title": "3. Wright Park & The Mansion",
                 "desc": (
-                    "Take photos across the iconic Pool of Pines facing The"
-                    " Mansion, or try horseback riding along the pine-lined"
-                    " trails."
+                    "Marvel at the iconic Pool of Pines and the historic"
+                    " presidential summer residence."
                 ),
                 "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
                 "transit": (
@@ -388,9 +417,8 @@ itinerary_days = [
                 "time": "12:15 PM – 2:30 PM",
                 "title": "4. Mines View Park & Good Shepherd Convent",
                 "desc": (
-                    "Take in panoramic views of the Benguet mining town and"
-                    " stock up on famous Good Shepherd Ube Jam and strawberry"
-                    " preserves."
+                    "Take in sweeping mountain vistas and purchase world-famous"
+                    " Good Shepherd Ube Jam."
                 ),
                 "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
                 "transit": "🚕 Taxi (~10 mins) to Camp John Hay",
@@ -399,9 +427,8 @@ itinerary_days = [
                 "time": "3:00 PM – 6:30 PM",
                 "title": "5. Camp John Hay (Bell House & Eco-Trail)",
                 "desc": (
-                    "Walk through the historic Bell House amphitheater, Lost"
-                    " Cemetery, and Yellow Trail before grabbing hot chocolate"
-                    " at Choco-late de Batirol."
+                    "Unwind amidst American-era heritage architecture and pine"
+                    " forest walking trails."
                 ),
                 "img": "https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140",
                 "transit": (
@@ -419,9 +446,8 @@ itinerary_days = [
                 "time": "7:30 AM – 10:00 AM",
                 "title": "1. La Trinidad Strawberry Farm & StoBoSa",
                 "desc": (
-                    "Head north to La Trinidad for fresh strawberry taho, farm"
-                    " walks, and photos at the colorful hillside murals of"
-                    " StoBoSa."
+                    "Pick fresh strawberries, enjoy strawberry taho, and admire"
+                    " the vibrant hillside mural art."
                 ),
                 "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
                 "transit": "🚕 Taxi (~15 mins) to Tam-awan Village",
@@ -430,8 +456,8 @@ itinerary_days = [
                 "time": "10:15 AM – 12:00 PM",
                 "title": "2. Tam-awan Village",
                 "desc": (
-                    "Explore reconstructed traditional Ifugao and Kalinga huts"
-                    " nestled on a forested hillside with local art galleries."
+                    "Immerse yourself in authentic Ifugao indigenous art and"
+                    " mountainside galleries."
                 ),
                 "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
                 "transit": (
@@ -442,37 +468,40 @@ itinerary_days = [
                 "time": "12:00 PM – 1:30 PM",
                 "title": "3. Hotel Check-Out & Baguio Public Market",
                 "desc": (
-                    "Check out of Benguet Prime Hotel (leave bags at front"
-                    " desk) and walk 5 minutes to Baguio Public Market for"
-                    " fresh veggies, coffee beans, and brooms."
+                    "Check out, retrieve luggage, and acquire local Benguet"
+                    " coffee beans and fresh produce."
                 ),
                 "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o=",
                 "transit": "🚶‍♂️ Walk ~5 mins (400m) back to Benguet Prime Hotel",
             },
             {
                 "time": "2:00 PM – 3:30 PM",
-                "title": "4. Final Lunch on Session Road & Departure",
+                "title": "4. Farewell Lunch on Session Road & Departure",
                 "desc": (
-                    "Enjoy a farewell meal along Session Road, claim your"
-                    " luggage at the hotel, and walk 5 minutes to the bus"
-                    " terminal."
+                    "Relish a final meal on Session Road before heading to the"
+                    " bus terminal for departure."
                 ),
                 "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
-                "transit": "🚌 Safe trip back home!",
+                "transit": "🚌 Safe travels back home!",
             },
         ],
     },
 ]
 
-# Initialize session state for selected day and visibility toggle
+# Initialize session state
 if "selected_day_idx" not in st.session_state:
   st.session_state.selected_day_idx = 0
 if "is_expanded" not in st.session_state:
   st.session_state.is_expanded = True
 
-st.subheader("⏰ 3-Day Schedule & Walking Guide")
+st.markdown("### ⏰ Daily Itinerary Guide")
+st.markdown(
+    "<p style='color: #666; font-size: 0.95rem; margin-top: -10px;'>Select a"
+    " day below to reveal its curated schedule with curtain-like smoothness:</p>",
+    unsafe_allow_html=True,
+)
 
-# --- HORIZONTAL TOGGLE BAR: DAY 1 ▾ | DAY 2 ▾ | DAY 3 ▾ ---
+# --- HORIZONTAL ELEGANT TOGGLE BAR ---
 day_cols = st.columns(3, gap="small")
 for idx, day in enumerate(itinerary_days):
   is_selected = st.session_state.selected_day_idx == idx
@@ -495,10 +524,14 @@ for idx, day in enumerate(itinerary_days):
         st.session_state.is_expanded = True
       st.rerun()
 
-# Render cards only if expanded
+# --- CURTAIN REVEAL CONTAINER ---
 if st.session_state.is_expanded:
   active_day = itinerary_days[st.session_state.selected_day_idx]
-  st.markdown(f"#### {active_day['header']}")
+  st.markdown(
+      f"<div class='curtain-container'><h4 style='margin-top: 25px;"
+      f" margin-bottom: 15px;'>{active_day['header']}</h4>",
+      unsafe_allow_html=True,
+  )
 
   for stop in active_day["stops"]:
     with st.container(border=True):
@@ -516,28 +549,34 @@ if st.session_state.is_expanded:
             f'<div class="transit-badge">{stop["transit"]}</div>',
             unsafe_allow_html=True,
         )
+  st.markdown("</div>", unsafe_allow_html=True)
 else:
-  st.info(
-      "📌 Itinerary view is collapsed. Click any DAY button above to expand"
-      " its schedule."
+  st.markdown(
+      "<div style='text-align: center; padding: 25px; color: #777; font-style:"
+      " italic;'>✨ Itinerary curtain is closed. Click any DAY above to"
+      " reveal.</div>",
+      unsafe_allow_html=True,
   )
 
 st.divider()
 
 # --- INTERACTIVE CHECKLIST ---
-st.subheader("🎒 Interactive Packing Checklist")
-st.markdown("Check items off as you pack your bags:")
+st.subheader("🎒 Curated Packing Checklist")
+st.markdown("Check off essentials for your highland escape:")
 
 checklist_items = [
     (
-        "Light jacket or sweater (Crucial: Baguio mornings & evenings get"
-        " chilly!)"
+        "Warm wool jacket or cashmere sweater (Baguio evenings drop"
+        " significantly)"
     ),
-    "Comfortable walking shoes (For parks & uphill walks)",
-    "Reusable water bottle",
-    "Compact umbrella or light rain gear",
-    "Power bank and charging cables",
-    "Cash & small bills (For taxis, jeepneys, and Night Market stalls)",
+    "Comfortable walking shoes or boots (For heritage walks and pine trails)",
+    "Insulated or reusable tumbler for hot chocolate and mountain tea",
+    "Compact umbrella / lightweight weather shell",
+    "Power bank and high-speed charging cables",
+    (
+        "Philippine Peso cash & small bills (Essential for local taxis & night"
+        " markets)"
+    ),
 ]
 
 checked_states = []
@@ -550,32 +589,32 @@ completed_items = sum(checked_states)
 progress_pct = completed_items / total_items
 
 st.progress(progress_pct)
-st.caption(f"✨ Packed: **{completed_items} / {total_items}** items ready")
+st.caption(f"✨ Packed Essentials: **{completed_items} / {total_items}** ready")
 
 if completed_items == total_items:
-  st.success("🎉 All set! You're fully packed and ready for Baguio!")
+  st.success("🌟 All set! You are fully prepared for your luxury Baguio retreat.")
 
 st.divider()
 
-# --- MAP AT THE BOTTOM ---
-st.subheader("🗺️ Baguio Reference Map")
-st.markdown(
-    "Interactive vector map centered on your hotel and downtown starting point:"
-)
+# --- MAP SECTION ---
+st.subheader("🗺️ Neighborhood Reference Map")
+st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
 
 map_html = """
 <iframe 
     src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
     width="100%" 
     height="420" 
-    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);" 
+    style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);" 
     allowfullscreen="" 
     loading="lazy">
 </iframe>
 """
 components.html(map_html, height=430)
 
-st.caption("🗺️ *Interactive map positioned at the bottom for quick neighborhood reference.*")
-
 st.divider()
-st.caption("Safe travels to the Summer Capital of the Philippines! 🌲")
+st.markdown(
+    "<p style='text-align: center; color: #888; font-size: 0.9rem;'>Wishing you"
+    " an extraordinary journey to the Summer Capital of the Philippines! 🌲</p>",
+    unsafe_allow_html=True,
+)
