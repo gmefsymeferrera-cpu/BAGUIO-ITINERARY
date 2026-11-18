@@ -521,7 +521,6 @@ if completed_items == total_items:
 
 st.divider()
 st.markdown(
-    "<p style='text-align: center; font-size: 0.9rem;'>
-    "Enjoy! 🍓 </p>",
+    "<p style='text-align: center; font-size: 0.9rem;'>Enjoy! 🍓 </p>",
     unsafe_allow_html=True,
 )
