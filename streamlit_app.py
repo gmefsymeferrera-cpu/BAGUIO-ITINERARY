@@ -11,8 +11,6 @@ st.set_page_config(
 # --- SIDEBAR: REFINED THEME & BANNER CONTROLS ---
 st.sidebar.header("✨ Elegance & Theme Studio")
 
-mode_switch = st.sidebar.radio("Appearance Mode", ["Light Mode", "Dark Mode"])
-
 page_theme = st.sidebar.selectbox(
     "Curated Color Palette",
     [
@@ -42,50 +40,42 @@ banner_tint = st.sidebar.slider(
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Ligwanag at Kulay Tokens (Super Liwanag sa Light Mode)
-if mode_switch == "Dark Mode":
-  bg_css_rule = "background-color: #121815;"
-  text_color = "#e2e8e4"
-  card_bg = "#1b241f"
-  border_color = "#2d3832"
-  accent_color = "#5a7a69"
-  gold_accent = "#ffd700"
-else:
-  bg_css_rule = "background-color: #f8faf9;"
-  text_color = "#1f2923"
-  card_bg = "#ffffff"
-  border_color = "#d6e0d8"
-  accent_color = "#507a64"
-  gold_accent = "#b8860b"
+# Maliwanag at Preskong Kulay Tokens para sa Light Mode
+bg_css_rule = "background-color: #ffffff;"
+text_color = "#2b3e34"
+card_bg = "#ffffff"
+border_color = "#d6e0d8"
+accent_color = "#507a64"
+gold_accent = "#b8860b"
 
-  if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
-    bg_css_rule = "background-color: #fcfbf9;"
-    text_color = "#2b2621"
-    card_bg = "#ffffff"
-    border_color = "#e6dfd5"
-    accent_color = "#8c7355"
-    gold_accent = "#a67c52"
-  elif page_theme == "Midnight Pine & Emerald":
-    bg_css_rule = "background-color: #f0f5f2;"
-    text_color = "#14241b"
-    card_bg = "#ffffff"
-    border_color = "#c2d6cb"
-    accent_color = "#2d523d"
-    gold_accent = "#b8860b"
-  elif page_theme == "Soft Rose & Champagne":
-    bg_css_rule = "background-color: #fbf7f8;"
-    text_color = "#38282b"
-    card_bg = "#ffffff"
-    border_color = "#ead5da"
-    accent_color = "#996670"
-    gold_accent = "#b8860b"
-  elif page_theme == "Minimalist Pearl White":
-    bg_css_rule = "background-color: #ffffff;"
-    text_color = "#1a1a1a"
-    card_bg = "#fdfdfd"
-    border_color = "#e0e0e0"
-    accent_color = "#555555"
-    gold_accent = "#888888"
+if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
+  bg_css_rule = "background-color: #fcfbf9;"
+  text_color = "#3a322b"
+  card_bg = "#ffffff"
+  border_color = "#e6dfd5"
+  accent_color = "#8c7355"
+  gold_accent = "#a67c52"
+elif page_theme == "Midnight Pine & Emerald":
+  bg_css_rule = "background-color: #f4f8f5;"
+  text_color = "#182e22"
+  card_bg = "#ffffff"
+  border_color = "#c2d6cb"
+  accent_color = "#2d523d"
+  gold_accent = "#b8860b"
+elif page_theme == "Soft Rose & Champagne":
+  bg_css_rule = "background-color: #fbf7f8;"
+  text_color = "#423035"
+  card_bg = "#ffffff"
+  border_color = "#ead5da"
+  accent_color = "#996670"
+  gold_accent = "#b8860b"
+elif page_theme == "Minimalist Pearl White":
+  bg_css_rule = "background-color: #ffffff;"
+  text_color = "#222222"
+  card_bg = "#ffffff"
+  border_color = "#e0e0e0"
+  accent_color = "#555555"
+  gold_accent = "#888888"
 
 if header_img_url:
   header_bg_rule = (
@@ -96,7 +86,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS na Maliwanag at Klaro
+# Custom CSS
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -116,7 +106,7 @@ custom_css = f"""
 
     p, span, label, div {{
         font-family: 'Montserrat', sans-serif !important;
-        color: {text_color};
+        color: {text_color} !important;
     }}
 
     [data-testid="stVerticalBlockBorderWrapper"] {{
@@ -232,7 +222,7 @@ custom_css = f"""
         border-radius: 30px;
         font-size: 0.95rem;
         font-weight: 600;
-        color: #ffffff;
+        color: #ffffff !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }}
     @media (max-width: 640px) {{
@@ -286,7 +276,8 @@ st.markdown(
 
 # Weather Widget
 st.markdown(
-    "🌲 **Baguio Live Weather Forecast:** `18°C" 
+    "🌲 **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool"
+    " Breeze** (Perfect highland weather)"
 )
 
 st.divider()
