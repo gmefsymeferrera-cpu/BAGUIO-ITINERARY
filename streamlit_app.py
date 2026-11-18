@@ -284,24 +284,11 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Weather Widget & Print Button Row
-col_w1, col_w2 = st.columns([2, 1])
-with col_w1:
-  st.markdown(
-      "🌲 **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool"
-      " Breeze** (Perfect highland weather)"
-  )
-with col_w2:
-  st.markdown(
-      """
-        <div style="text-align: right;">
-            <button onclick="window.print()" style="background-color: #b8860b; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer;">
-                🖨️ Print / Save PDF
-            </button>
-        </div>
-        """,
-      unsafe_allow_html=True,
-  )
+# Weather Widget
+st.markdown(
+    "🌲 **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool"
+    " Breeze** (Perfect highland weather)"
+)
 
 st.divider()
 
