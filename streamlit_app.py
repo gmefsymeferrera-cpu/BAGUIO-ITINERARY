@@ -688,7 +688,7 @@ elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
 
     st.divider()
     st.subheader("🚨 Emergency & Important Contacts (Baguio)")
-    st.markdown("Mga importanteng numero sakaling kailanganin habang naglalakbay:")
+    st.markdown("Contact these numbers if there's an Emergency:")
 
     col_c1, col_c2 = st.columns(2)
     with col_c1:
