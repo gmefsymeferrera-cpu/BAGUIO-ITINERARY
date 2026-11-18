@@ -70,7 +70,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS injecting pastel theme rules safely
+# Custom CSS injecting pastel theme rules + styled Day Dropdown Expanders
 custom_css = """
     <style>
     .stApp {
@@ -86,6 +86,18 @@ custom_css = """
         border-radius: 14px;
         padding: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+    /* Style the Day 1, Day 2, Day 3 dropdown headers */
+    [data-testid="stExpander"] {
+        background-color: REPLACE_CARD;
+        border: 1.5px solid REPLACE_BORDER !important;
+        border-radius: 14px !important;
+        margin-bottom: 12px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    [data-testid="stExpander"] summary p {
+        font-size: 1.15rem !important;
+        font-weight: 700 !important;
     }
     .header-box {
         REPLACE_HEADER_BG
@@ -159,10 +171,10 @@ st.markdown(
 )
 
 # --- MULTI-DAY ITINERARY DATA ---
-itinerary_by_day = {
-    "Day 1: Downtown Core, Art & Night Market": {
-        "map_query": "Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City",
-        "map_zoom": 16,
+itinerary_days = [
+    {
+        "header": "DAY 1 — Downtown Core, Art & Night Market",
+        "expanded": True,
         "stops": [
             {
                 "time": "5:55 AM - 6:15 AM",
@@ -255,9 +267,9 @@ itinerary_by_day = {
             },
         ],
     },
-    "Day 2: Pine Forests, Parks & Mountain Views": {
-        "map_query": "Mines+View+Park,+Baguio+City",
-        "map_zoom": 14,
+    {
+        "header": "DAY 2 — Pine Forests, Parks & Mountain Views",
+        "expanded": False,
         "stops": [
             {
                 "time": "7:30 AM – 8:30 AM",
@@ -327,9 +339,9 @@ itinerary_by_day = {
             },
         ],
     },
-    "Day 3: Strawberry Farms, Culture & Pasalubong": {
-        "map_query": "La+Trinidad+Strawberry+Farm,+Benguet",
-        "map_zoom": 14,
+    {
+        "header": "DAY 3 — Strawberry Farms, Culture & Pasalubong",
+        "expanded": False,
         "stops": [
             {
                 "time": "7:30 AM – 10:00 AM",
@@ -378,32 +390,30 @@ itinerary_by_day = {
             },
         ],
     },
-}
+]
 
-# --- DROPDOWN SELECTOR FOR DAY 1 TO DAY 3 ---
-selected_day = st.selectbox(
-    "📅 Select Itinerary Day:", list(itinerary_by_day.keys()), index=0
-)
+st.subheader("⏰ 3-Day Schedule & Walking Guide")
+st.caption("Click any day bar below to expand or collapse its destinations:")
 
-current_day_data = itinerary_by_day[selected_day]
-
-st.subheader(f"⏰ {selected_day}")
-
-for stop in current_day_data["stops"]:
-  with st.container(border=True):
-    col1, col2 = st.columns([1, 2])
-    with col1:
-      st.image(stop["img"], use_container_width=True)
-    with col2:
-      st.markdown(
-          f'<span class="time-tag">{stop["time"]}</span>', unsafe_allow_html=True
-      )
-      st.markdown(f"### {stop['title']}")
-      st.write(stop["desc"])
-      st.markdown(
-          f'<div class="transit-badge">{stop["transit"]}</div>',
-          unsafe_allow_html=True,
-      )
+# --- VISIBLE STACKED DROPDOWN ACCORDIONS (DAY 1, DAY 2, DAY 3) ---
+for day in itinerary_days:
+  with st.expander(day["header"], expanded=day["expanded"]):
+    for stop in day["stops"]:
+      with st.container(border=True):
+        col1, col2 = st.columns([1, 2])
+        with col1:
+          st.image(stop["img"], use_container_width=True)
+        with col2:
+          st.markdown(
+              f'<span class="time-tag">{stop["time"]}</span>',
+              unsafe_allow_html=True,
+          )
+          st.markdown(f"### {stop['title']}")
+          st.write(stop["desc"])
+          st.markdown(
+              f'<div class="transit-badge">{stop["transit"]}</div>',
+              unsafe_allow_html=True,
+          )
 
 st.divider()
 
@@ -440,16 +450,15 @@ if completed_items == total_items:
 
 st.divider()
 
-# --- DYNAMIC MAP BASED ON SELECTED DAY ---
-st.subheader(f"🗺️ Reference Map ({selected_day.split(':')[0]})")
+# --- MAP AT THE BOTTOM ---
+st.subheader("🗺️ Baguio Reference Map")
 st.markdown(
-    "Interactive vector map automatically centered on your selected day's"
-    " area:"
+    "Interactive vector map centered on your hotel and downtown starting point:"
 )
 
-map_html = f"""
+map_html = """
 <iframe 
-    src="https://maps.google.com/maps?q={current_day_data['map_query']}&t=m&z={current_day_data['map_zoom']}&output=embed" 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
     width="100%" 
     height="420" 
     style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);" 
@@ -459,10 +468,7 @@ map_html = f"""
 """
 components.html(map_html, height=430)
 
-st.caption(
-    "🗺️ *Interactive map updates automatically when you switch between Day 1,"
-    " Day 2, and Day 3.*"
-)
+st.caption("🗺️ *Interactive map positioned at the bottom for quick neighborhood reference.*")
 
 st.divider()
 st.caption("Safe travels to the Summer Capital of the Philippines! 🌲")
