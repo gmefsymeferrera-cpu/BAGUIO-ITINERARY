@@ -11,7 +11,7 @@ st.set_page_config(
 
 # --- CONFIG & BANNER CONTROLS ---
 page_theme = "Earthy Sage & Gold (Botanical)"
-header_img_url = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5oZgg4FjcocaQnevAXkkXO86DsNxAqQ6AERao-1UGJX-erEjhI1xAQWcA&s=10"
+header_img_url = "https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140"
 banner_height = 210
 banner_vertical_pos = 35
 banner_alpha = 0.15
