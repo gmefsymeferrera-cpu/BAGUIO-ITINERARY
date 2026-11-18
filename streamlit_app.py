@@ -1,5 +1,6 @@
 import streamlit as st
 import streamlit.components.v1 as components
+from datetime import datetime
 
 # Page setup
 st.set_page_config(
@@ -42,13 +43,14 @@ custom_css = f"""
         font-family: 'Montserrat', sans-serif !important;
         color: {text_color} !important;
     }}
-    .stop-card, .contact-card {{
+    .stop-card, .contact-card, .countdown-card {{
         background-color: {card_bg};
         border: 1.5px solid {border_color} !important;
         border-radius: 20px;
         padding: 18px;
         margin-bottom: 16px;
         box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+        text-align: center;
     }}
     div.stButton > button {{
         width: 100%;
@@ -93,6 +95,25 @@ custom_css = f"""
         margin: 10px 0px;
         border-left: 3px solid {gold_accent};
     }}
+    .collage-grid {{
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 12px;
+        padding: 10px 0;
+    }}
+    .collage-item {{
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease;
+        border: 2px solid {border_color};
+        background: #fff;
+        padding: 8px;
+    }}
+    .collage-item:hover {{
+        transform: scale(1.03);
+    }}
     </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
@@ -119,13 +140,33 @@ banner_html = f"""
         <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 4.2rem !important; font-weight: 400 !important; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin: 0px 0px 2px 0px; line-height: 1.1;">Baguio Itinerary</h1>
         <p style="color: #FFFFFF !important; font-size: 1rem !important; font-weight: 600; letter-spacing: 2px; margin: 5px 0 10px 0; text-shadow: 0 2px 6px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
         <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;">
-            <span style="background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important;">🚌 Arrival: 5:55 AM</span>
+            <span style="background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important;">🚌 Arrival: December 20, 5:55 AM</span>
             <span style="background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.6); padding: 5px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #FFFFFF !important;">🏨 Benguet Prime Hotel</span>
         </div>
     </div>
 </div>
 """
 components.html(banner_html, height=banner_height + 30)
+
+# --- COUNTDOWN TIMER LOGIC ---
+target_date = datetime(2026, 12, 20, 5, 55, 0)
+now = datetime.now()
+time_left = target_date - now
+days_left = time_left.days
+hours_left = time_left.seconds // 3600
+minutes_left = (time_left.seconds % 3600) // 60
+
+if days_left >= 0:
+    st.markdown(f"""
+    <div class="countdown-card">
+        <h3 style="margin: 0 0 5px 0; color: {accent_color};">⏳ Countdown hanggang sa Baguio Trip!</h3>
+        <p style="font-size: 1.2rem; font-weight: 700; margin: 0; color: {gold_accent};">
+            {days_left} Araw • {hours_left} Oras • {minutes_left} Minuto na lang! 🎒🌲
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
+else:
+    st.success("🎉 Nandito na tayo o nakalipas na ang petsa ng ating Baguio trip! Enjoy!")
 
 # Weather Widget
 st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
@@ -139,7 +180,7 @@ selected_tab = st.selectbox(
         "💰 Expense Calculator & Splitter", 
         "🎒 Packing Checklist", 
         "📝 Travel Journal & Notes", 
-        "📸 Photo Gallery",
+        "📸 Photo Collage Gallery",
         "🗺️ Map & 🚨 Emergency Contacts"
     ]
 )
@@ -416,18 +457,17 @@ elif selected_tab == "📝 Travel Journal & Notes":
     )
 
 # ==========================================
-# 5. PHOTO GALLERY SECTION (NEW)
+# 5. PHOTO COLLAGE GALLERY SECTION
 # ==========================================
-elif selected_tab == "📸 Photo Gallery":
-    st.subheader("📸 Baguio Memories & Photo Gallery")
-    st.markdown("Mag-upload ng mga litrato o tingnan ang gallery ng inyong mga alaala sa Baguio:")
+elif selected_tab == "📸 Photo Collage Gallery":
+    st.subheader("📸 Baguio Memories Photo Collage")
+    st.markdown("Mag-upload ng mga litrato para awtomatikong mabuo ang iyong **Photo Collage Album**:")
 
-    # Initialize session state for uploaded images
     if "uploaded_photos" not in st.session_state:
         st.session_state.uploaded_photos = []
 
     uploaded_files = st.file_uploader(
-        "Mag-upload ng mga larawan (PNG, JPG, JPEG):", 
+        "Mag-upload ng mga larawan para sa Collage:", 
         type=["png", "jpg", "jpeg"], 
         accept_multiple_files=True
     )
@@ -438,13 +478,31 @@ elif selected_tab == "📸 Photo Gallery":
                 st.session_state.uploaded_photos.append(file)
 
     if st.session_state.uploaded_photos:
-        st.markdown("### 🖼️ Na-upload na mga Larawan:")
-        cols = st.columns(3)
+        st.markdown("### 🖼️ Na-upload na Collage:")
+        
+        collage_html = '<div class="collage-grid">'
         for idx, photo in enumerate(st.session_state.uploaded_photos):
-            with cols[idx % 3]:
-                st.image(photo, use_container_width=True, caption=f"Photo {idx+1}")
+            import base64
+            bytes_data = photo.getvalue()
+            b64_str = base64.b64encode(bytes_data).decode()
+            img_format = photo.type.split('/')[-1]
+            
+            collage_html += f'''
+            <div class="collage-item">
+                <img src="data:image/{img_format};base64,{b64_str}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 10px;" />
+                <p style="text-align: center; font-size: 0.75rem; margin: 5px 0 0 0; font-weight: 600;">Memories #{idx+1}</p>
+            </div>
+            '''
+        collage_html += '</div>'
+        
+        st.markdown(collage_html, unsafe_allow_html=True)
+        
+        st.markdown("<br>", unsafe_allow_html=True)
+        if st.button("🗑️ Linisin / Alisin lahat ng Larawan"):
+            st.session_state.uploaded_photos = []
+            st.rerun()
     else:
-        st.info("Wala pang na-upload na larawan. Pindutin ang button sa taas para magdagdag ng mga kuha ninyo sa Baguio!")
+        st.info("Wala pang na-upload na larawan para sa collage. Mag-upload sa itaas para makita ang epekto!")
 
 # ==========================================
 # 6. MAP & EMERGENCY CONTACTS SECTION
