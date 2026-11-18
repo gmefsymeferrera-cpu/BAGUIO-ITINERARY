@@ -127,6 +127,12 @@ custom_css = """
         margin: 10px 0px;
         border-left: 3px solid #b87a3d;
     }
+    .picture-map-container {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        margin-bottom: 25px;
+    }
     </style>
 """
 
@@ -269,23 +275,21 @@ if completed_items == total_items:
 
 st.divider()
 
-# --- MAP MOVED TO THE LAST SECTION ---
-st.subheader("🗺️ Baguio Downtown Reference Map")
-st.markdown("Interactive vector map showing your downtown route and destinations:")
+# --- PASTEL PICTURE MAP SECTION (MOVED TO THE LAST SECTION) ---
+st.subheader("🗺️ Baguio Pastel Destination Map")
+st.markdown("A visual guide to your Day 1 route, styled with soft pastel colors and icons:")
 
-map_html = """
-<iframe 
-    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=16&output=embed" 
-    width="100%" 
-    height="420" 
-    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);" 
-    allowfullscreen="" 
-    loading="lazy">
-</iframe>
-"""
-components.html(map_html, height=430)
+# Here we embed the picture map.
+st.markdown(
+    """
+    <div class="picture-map-container">
+        <img src="https://i.imgur.com/vHq0L5b.png" alt="Pastel Baguio Destination Map" style="width:100%; height:auto; display:block;">
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-st.caption("🗺️ *Interactive map positioned at the bottom for quick neighborhood reference.*")
+st.caption("🗺️ *Picture map showing pins for Terminal, Hotel, Good Taste, Burnham, Ili-Likha, SM City, and Night Market.*")
 
 st.divider()
 st.caption("Safe travels to the Summer Capital of the Philippines! 🌲")
