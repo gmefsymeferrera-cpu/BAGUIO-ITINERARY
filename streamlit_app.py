@@ -150,32 +150,36 @@ st.markdown(
             <span class="badge">🚌 Arrival: 5:55 AM</span>
             <span class="badge">🏨 Benguet Prime Hotel</span>
             <span class="badge">🔑 Check-in: 2:00 PM</span>
+            <span class="badge">🛍️ SM City Baguio</span>
         </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-# --- REAL GOOGLE MAP SATELLITE EMBED ---
-st.subheader("🛰️ Live Satellite Map of Baguio Itinerary")
-st.markdown("Real interactive Google Maps **Satellite view** centered around your Day 1 route:")
+# --- REAL GOOGLE MAP EMBED (MATCHING YOUR SCREENSHOT) ---
+st.subheader("🗺️ Baguio City Center Route Map")
+st.markdown(
+    "Interactive real-world map centered on **Benguet Prime Hotel, Burnham"
+    " Park, and SM City Baguio**:"
+)
 
-# NOTE: `t=k` stands for Satellite view (whereas `t=m` is street map)
+# Using map center coordinates and zoom level 16 to match your exact screenshot bounds
 google_map_html = """
 <iframe 
-    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel+Baguio+City&t=k&z=16&output=embed" 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=16&output=embed" 
     width="100%" 
-    height="420" 
-    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" 
+    height="450" 
+    style="border:0; border-radius: 14px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);" 
     allowfullscreen="" 
     loading="lazy">
 </iframe>
 """
-components.html(google_map_html, height=430)
+components.html(google_map_html, height=460)
 
 st.caption(
-    "🛰️ *Powered by real Google Maps Satellite imagery. You can explore actual"
-    " rooftops, pine trees, and terrain in high resolution!*"
+    "🗺️ *Real Google Maps street view showing downtown Baguio landmarks, roads,"
+    " and parks.*"
 )
 
 st.divider()
