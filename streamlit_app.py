@@ -27,7 +27,6 @@ header_img_url = st.sidebar.text_input(
     value="https://cdn.corner.inc/place-photo/Ab43m-t7jaJzsCTchqAeA-yawcbwHPOITbjj2Mz0uiBiR90VfW5yaFfzVDYvGQXXxEVOnMoFrtBpqoixwUg2SY0oOYFdfhtdJkvgfrjzcHfKTnED0afxFsLEpdne9X-XuyoN3gFpmnf6TUcBl9vogDTjmJZkkZdGCFVSPnF7LunVVaroHAD5KELaHf6Q5QKBXyZxXo0fLGOLKRXrF8khWj7XqD1V_oKA0HdrWomHZqL_mwn39ZXNwSuVFiRBrhqnMNmg9Koxkhn92irpi_h-ETlQ919Srksyc1Q9nfZYpsA2rKf6WQIBZpbQo7FS9pS7fe_BwmRu3iqDi0vb3WuLn3KunmHU51pkcscEDpyZC-51EoSpmcTpZ_BsiuDnTSo72HbSA_FiB0MNu7CrkHguJO0J1UyOGY0irSBNqeVdNvams-ciYzpFZdBPlegCKE_tl1bf.jpeg",
 )
 
-# Ginawang compact ang default height para sumakto sa red rectangle box mo
 banner_height = st.sidebar.slider(
     "Banner Compact Height (px)", min_value=150, max_value=350, value=210, step=10
 )
@@ -191,7 +190,7 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Compact Banner na naka-angkop sa eksaktong sukat ng pulang kahon
+# Compact Banner na walang glitch/arrow text
 banner_html = f"""
 <div style="
     background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%), url('{header_img_url}');
