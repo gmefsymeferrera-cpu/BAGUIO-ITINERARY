@@ -156,7 +156,7 @@ stops = [
         "time": "5:55 AM - 6:15 AM",
         "title": "1. Arrival - Baguio City Terminal",
         "desc": "eyyyyyy",
-        "img": "https://www.google.com/imgres?q=baguio%20terminal%20victory%20liner%20interior&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D1081422770664743&imgrefurl=https%3A%2F%2Fwww.facebook.com%2F100063910891704%2Fposts%2Flook-the-newly-renovated-victory-liner-baguio-bus-terminal-at-pnr-kalsada-de-bag%2F1081423110664709%2F&docid=84ju9Et8FE9DTM&tbnid=z2UQMfD8neSzTM&vet=12ahUKEwjU6ci535CYAxVPluEIHXSYEK4QnPAOegQINhAA..i&w=2048&h=1536&hcb=2&ved=2ahUKEwjU6ci535CYAxVPluEIHXSYEK4QnPAOegQINhAA"
+        "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10"
     },
     {
         "time": "6:15 AM – 6:30 AM",
