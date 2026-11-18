@@ -295,12 +295,12 @@ countdown_html = f"""
 </style>
 
 <div class="countdown-card">
-    <div class="countdown-title">⏳ Countdown hanggang sa Baguio Trip! 🎒🌲</div>
+    <div class="countdown-title">⏳ Countdown Until This Baguio Trip! 🎒🌲</div>
     <div class="countdown-grid" id="countdown">
-        <div class="countdown-box"><div class="countdown-num" id="days">--</div><div class="countdown-label">Araw</div></div>
-        <div class="countdown-box"><div class="countdown-num" id="hours">--</div><div class="countdown-label">Oras</div></div>
-        <div class="countdown-box"><div class="countdown-num" id="minutes">--</div><div class="countdown-label">Minuto</div></div>
-        <div class="countdown-box"><div class="countdown-num" id="seconds">--</div><div class="countdown-label">Segundo</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="days">--</div><div class="countdown-label">Day</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="hours">--</div><div class="countdown-label">Hour</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="minutes">--</div><div class="countdown-label">Minute</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="seconds">--</div><div class="countdown-label">Second</div></div>
     </div>
 </div>
 
@@ -340,10 +340,10 @@ selected_tab = st.selectbox(
     "Pumili ng pahina:",
     [
         "📅 3-Day Itinerary", 
-        "💰 Expense Calculator & Splitter", 
+        "💰 Expense Calculator", 
         "🎒 Packing Checklist", 
         "📝 Travel Journal & Notes", 
-        "📸 Photo Collage Gallery",
+        "📸 Photo Gallery",
         "🗺️ Map & 🚨 Emergency Contacts"
     ]
 )
