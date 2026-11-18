@@ -24,23 +24,23 @@ page_theme = st.sidebar.selectbox(
 
 header_img_url = st.sidebar.text_input(
     "Title Banner Image URL",
-    value="https://images.unsplash.com/photo-1590523277543-a94d2e4eb00b?auto=format&fit=crop&w=1600&q=80",
+    value="https://cdn.corner.inc/place-photo/Ab43m-t7jaJzsCTchqAeA-yawcbwHPOITbjj2Mz0uiBiR90VfW5yaFfzVDYvGQXXxEVOnMoFrtBpqoixwUg2SY0oOYFdfhtdJkvgfrjzcHfKTnED0afxFsLEpdne9X-XuyoN3gFpmnf6TUcBl9vogDTjmJZkkZdGCFVSPnF7LunVVaroHAD5KELaHf6Q5QKBXyZxXo0fLGOLKRXrF8khWj7XqD1V_oKA0HdrWomHZqL_mwn39ZXNwSuVFiRBrhqnMNmg9Koxkhn92irpi_h-ETlQ919Srksyc1Q9nfZYpsA2rKf6WQIBZpbQo7FS9pS7fe_BwmRu3iqDi0vb3WuLn3KunmHU51pkcscEDpyZC-51EoSpmcTpZ_BsiuDnTSo72HbSA_FiB0MNu7CrkHguJO0J1UyOGY0irSBNqeVdNvams-ciYzpFZdBPlegCKE_tl1bf.jpeg",
 )
 
 banner_height = st.sidebar.slider(
-    "Banner Elegance Height (px)", min_value=200, max_value=600, value=400, step=10
+    "Banner Elegance Height (px)", min_value=200, max_value=600, value=380, step=10
 )
 
 banner_vertical_pos = st.sidebar.slider(
-    "Banner Framing (%)", min_value=0, max_value=100, value=40, step=5
+    "Banner Framing (%)", min_value=0, max_value=100, value=35, step=5
 )
 
 banner_tint = st.sidebar.slider(
-    "Banner Dark Luxury Gradient (%)", min_value=0, max_value=30, value=10, step=5
+    "Banner Dark Luxury Gradient (%)", min_value=5, max_value=40, value=15, step=5
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Maliwanag at Preskong Kulay Tokens
+# Maliwanag at Preskong Kulay Tokens (Light Mode Only)
 bg_css_rule = "background-color: #ffffff;"
 text_color = "#23332a"
 card_bg = "#ffffff"
@@ -79,7 +79,7 @@ elif page_theme == "Minimalist Pearl White":
 
 if header_img_url:
   header_bg_rule = (
-      f"background-image: linear-gradient(135deg, rgba(15, 30, 20, {banner_alpha}) 0%, rgba(10, 20, 10, {banner_alpha}) 100%),"
+      f"background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
       f" center {banner_vertical_pos}%;"
   )
@@ -164,8 +164,8 @@ custom_css = f"""
 
     .header-box {{
         {header_bg_rule}
-        padding: 60px 30px;
-        border-radius: 30px;
+        padding: 55px 30px;
+        border-radius: 28px;
         color: white !important;
         display: flex;
         flex-direction: column;
@@ -174,8 +174,8 @@ custom_css = f"""
         text-align: center;
         min-height: {banner_height}px;
         margin-bottom: 30px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.25);
-        border: 2px solid rgba(255, 255, 255, 0.5);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+        border: 2px solid rgba(255, 255, 255, 0.4);
     }}
     .header-content {{
         width: 100%;
@@ -189,19 +189,24 @@ custom_css = f"""
         flex-wrap: wrap;
         justify-content: center;
         gap: 10px;
-        margin-top: 15px;
+        margin-top: 10px;
     }}
     .badge {{
         display: inline-block;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(0, 0, 0, 0.45);
         backdrop-filter: blur(12px);
-        border: 1.5px solid rgba(255, 255, 255, 0.7);
+        border: 1.5px solid rgba(255, 255, 255, 0.6);
         padding: 8px 18px;
         border-radius: 30px;
         font-size: 0.95rem;
         font-weight: 600;
         color: #ffffff !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }}
+    @media (max-width: 640px) {{
+        div.stButton > button p {{
+            font-size: 1rem !important;
+        }}
     }}
     .time-tag {{
         color: {gold_accent} !important;
@@ -226,13 +231,13 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section na may Lively & Pure White Title
+# Header Section na may garantisadong White Text para sa "Baguio Itinerary"
 st.markdown(
     """
     <div class="header-box">
         <div class="header-content">
-            <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 5.8rem !important; font-weight: 400 !important; text-shadow: 0 4px 30px rgba(0,0,0,0.95), 0 0 40px rgba(255, 255, 255, 0.5); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
-            <p style="color: #FFFFFF !important; font-size: 1.3rem !important; font-weight: 700; letter-spacing: 3px; margin-top: 5px; margin-bottom: 15px; text-shadow: 0 2px 10px rgba(0,0,0,0.8); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
+            <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
+            <p style="color: #FFFFFF !important; font-size: 1.25rem !important; font-weight: 600; letter-spacing: 3px; margin-top: 5px; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
                 <span class="badge">🏨 Benguet Prime Hotel</span>
