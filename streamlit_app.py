@@ -173,7 +173,7 @@ weather_widget_html = f"""
     }}
     .weather-icon {{
         font-size: 2.5rem;
-        background: #ffffff;
+        background: #F4C2C2;
         border: 1.5px solid {border_color};
         border-radius: 16px;
         padding: 8px 12px;
