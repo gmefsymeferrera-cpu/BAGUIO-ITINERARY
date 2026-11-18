@@ -1,4 +1,4 @@
-import streamlit as st
+ximport streamlit as st
 import streamlit.components.v1 as components
 
 # Page setup
@@ -13,7 +13,7 @@ page_theme = "Earthy Sage & Gold (Botanical)"
 header_img_url = "https://cdn.corner.inc/place-photo/Ab43m-t7jaJzsCTchqAeA-yawcbwHPOITbjj2Mz0uiBiR90VfW5yaFfzVDYvGQXXxEVOnMoFrtBpqoixwUg2SY0oOYFdfhtdJkvgfrjzcHfKTnED0afxFsLEpdne9X-XuyoN3gFpmnf6TUcBl9vogDTjmJZkkZdGCFVSPnF7LunVVaroHAD5KELaHf6Q5QKBXyZxXo0fLGOLKRXrF8khWj7XqD1V_oKA0HdrWomHZqL_mwn39ZXNwSuVFiRBrhqnMNmg9Koxkhn92irpi_h-ETlQ919Srksyc1Q9nfZYpsA2rKf6WQIBZpbQo7FS9pS7fe_BwmRu3iqDi0vb3WuLn3KunmHU51pkcscEDpyZC-51EoSpmcTpZ_BsiuDnTSo72HbSA_FiB0MNu7CrkHguJO0J1UyOGY0irSBNqeVdNvams-ciYzpFZdBPlegCKE_tl1bf.jpeg"
 banner_height = 210
 banner_vertical_pos = 35
-banner_alpha = 0.15
+banner_alpha = 0.130
 
 # Maliwanag at Preskong Kulay Tokens (Light Mode Only)
 bg_css_rule = "background-color: #ffffff;"
@@ -375,7 +375,7 @@ if "selected_day_idx" not in st.session_state:
 if "is_expanded" not in st.session_state:
   st.session_state.is_expanded = True
 
-st.markdown("### ⏰ Daily Itinerary Guide")
+st.markdown("### ⏰ 3 Days Itinerary ")
 st.markdown(
     "<p style='font-size: 0.95rem; margin-top: -10px;'>Select a day below to"
     " reveal its curated schedule with curtain-like smoothness:</p>",
@@ -438,17 +438,15 @@ else:
       " reveal.</div>",
       unsafe_allow_html=True,
   )
-
 st.divider()
-
 # --- BUDGET & EXPENSE CALCULATOR ---
-st.subheader("💰 Trip Budget & Expense Calculator")
-st.markdown("Estimate and calculate your daily estimated travel expenses:")
+st.subheader("💰 Expense Calculator")
+st.markdown("Calculate our Travel expenses:")
 
 col_b1, col_b2, col_b3 = st.columns(3)
 with col_b1:
   transpo_cost = st.number_input(
-      "Taxi / Transpo (PHP)", min_value=0, value=1200, step=100
+      "Taxi / Transpo & Entrance Fee (PHP)", min_value=0, value=1200, step=100
   )
 with col_b2:
   food_cost = st.number_input(
@@ -464,9 +462,7 @@ st.info(
     f"💡 **Estimated Out-of-Pocket Expenses:** ₱{total_est_budget:,} (Not"
     " including hotel accommodation)"
 )
-
 st.divider()
-
 # --- MAP SECTION ---
 st.subheader("🗺️ Neighborhood Reference Map")
 st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
@@ -484,7 +480,6 @@ map_html = """
 components.html(map_html, height=430)
 
 st.divider()
-
 # --- INTERACTIVE PACKING CHECKLIST ---
 st.subheader("🎒 Curated Packing Checklist")
 st.markdown("Check off essentials for your highland escape:")
@@ -503,7 +498,6 @@ checklist_items = [
         " markets)"
     ),
 ]
-
 checked_states = []
 for i, item in enumerate(checklist_items):
   is_checked = st.checkbox(item, key=f"check_{i}")
@@ -517,7 +511,7 @@ st.progress(progress_pct)
 st.caption(f"✨ Packed Essentials: **{completed_items} / {total_items}** ready")
 
 if completed_items == total_items:
-  st.success("🌟 All set! You are fully prepared for your luxury Baguio retreat.")
+  st.success("🌟 All set! You are fully prepared for our Baguio Escape.")
 
 st.divider()
 st.markdown(
