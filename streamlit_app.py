@@ -28,7 +28,7 @@ header_img_url = st.sidebar.text_input(
 )
 
 banner_height = st.sidebar.slider(
-    "Banner Elegance Height (px)", min_value=140, max_value=600, value=380, step=10
+    "Banner Elegance Height (px)", min_value=140, max_value=140, value=380, step=10
 )
 
 banner_vertical_pos = st.sidebar.slider(
