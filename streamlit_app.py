@@ -522,6 +522,6 @@ if completed_items == total_items:
 st.divider()
 st.markdown(
     "<p style='text-align: center; font-size: 0.9rem;'>Wishing you an"
-    " extraordinary journey to the Summer Capital of the Philippines! 🌲</p>",
+    " Enjoy! 🍓 </p>",
     unsafe_allow_html=True,
 )
