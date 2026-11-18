@@ -262,8 +262,8 @@ st.markdown(
     """
     <div class="header-box">
         <div class="header-content">
-            <h1>Baguio Luxury Itinerary</h1>
-            <p>An Exclusive 3-Day Journey & Guide</p>
+            <h1>Baguio Itinerary</h1>
+            <p>3 Days & 2 Nights</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
                 <span class="badge">🏨 Benguet Prime Hotel</span>
