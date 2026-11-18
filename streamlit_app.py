@@ -86,7 +86,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS na may malakas na override para maging puti ang title
+# Custom CSS
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -231,12 +231,12 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section na may direktang inline white color sa Pacifico title
+# Header Section na may pure white (#FFFFFF) na pamagat
 st.markdown(
     """
     <div class="header-box">
         <div class="header-content">
-            <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFF00 !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
+            <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
             <p style="color: #ffffff !important; font-size: 1.25rem !important; font-weight: 600; letter-spacing: 3px; margin-top: 5px; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
