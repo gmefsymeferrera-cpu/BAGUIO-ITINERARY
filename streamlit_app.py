@@ -271,7 +271,7 @@ countdown_html = f"""
         flex-wrap: wrap;
     }}
     .countdown-box {{
-        background-color: #ffffff;
+        background-color: #F4C2C2;
         border: 1.5px solid {border_color};
         border-radius: 14px;
         padding: 10px 12px;
