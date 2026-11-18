@@ -24,7 +24,7 @@ page_theme = st.sidebar.selectbox(
 
 header_img_url = st.sidebar.text_input(
     "Title Banner Image URL",
-    value="https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140",
+    value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQKMMW-LwHbNVZcyMwdl1P-nOVPuzhfWEVTyF8HwyjIkNugqqTJ7MsTfE&s=10",
 )
 
 banner_tint = st.sidebar.slider(
