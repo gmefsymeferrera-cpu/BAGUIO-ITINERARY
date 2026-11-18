@@ -88,7 +88,7 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS injecting pastel theme rules + horizontal Day 1 | Day 2 | Day 3 toggle buttons
+# Custom CSS injecting pastel theme rules + BIG UPPERCASE DAY 1 | DAY 2 | DAY 3 toggle buttons
 custom_css = """
     <style>
     .stApp {
@@ -105,15 +105,20 @@ custom_css = """
         padding: 10px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
-    /* Horizontal Day 1 ▾ | Day 2 ▾ | Day 3 ▾ bar styling */
+    /* Horizontal DAY 1 ▾ | DAY 2 ▾ | DAY 3 ▾ bar styling with BIG LETTERS */
     div.stButton > button {
         width: 100%;
-        border-radius: 12px !important;
-        font-weight: 700 !important;
-        font-size: 1.05rem !important;
-        padding: 12px 10px !important;
-        border: 1.5px solid REPLACE_BORDER !important;
+        border-radius: 14px !important;
+        padding: 16px 12px !important;
+        border: 2px solid REPLACE_BORDER !important;
         transition: all 0.2s ease;
+    }
+    div.stButton > button p {
+        font-size: 1.45rem !important;
+        font-weight: 800 !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1.5px !important;
+        margin: 0 !important;
     }
     div.stButton > button[kind="secondary"] {
         background-color: REPLACE_CARD !important;
@@ -121,13 +126,13 @@ custom_css = """
     }
     div.stButton > button[kind="secondary"]:hover {
         border-color: REPLACE_ACCENT !important;
-        transform: translateY(-1px);
+        transform: translateY(-2px);
     }
     div.stButton > button[kind="primary"] {
         background-color: REPLACE_ACCENT !important;
         color: #ffffff !important;
         border-color: REPLACE_ACCENT !important;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+        box-shadow: 0 6px 16px rgba(0,0,0,0.14);
     }
     div.stButton > button[kind="primary"] p {
         color: #ffffff !important;
@@ -180,6 +185,9 @@ custom_css = """
     @media (max-width: 640px) {
         .header-content {
             max-width: 85%;
+        }
+        div.stButton > button p {
+            font-size: 1.15rem !important;
         }
     }
     .time-tag {
@@ -236,7 +244,7 @@ st.markdown(
 # --- MULTI-DAY ITINERARY DATA ---
 itinerary_days = [
     {
-        "tab_label": "Day 1",
+        "tab_label": "DAY 1",
         "header": "DAY 1 — Downtown Core, Art & Night Market",
         "stops": [
             {
@@ -331,7 +339,7 @@ itinerary_days = [
         ],
     },
     {
-        "tab_label": "Day 2",
+        "tab_label": "DAY 2",
         "header": "DAY 2 — Pine Forests, Parks & Mountain Views",
         "stops": [
             {
@@ -403,7 +411,7 @@ itinerary_days = [
         ],
     },
     {
-        "tab_label": "Day 3",
+        "tab_label": "DAY 3",
         "header": "DAY 3 — Strawberry Farms, Culture & Pasalubong",
         "stops": [
             {
@@ -463,11 +471,10 @@ if "is_expanded" not in st.session_state:
 
 st.subheader("⏰ 3-Day Schedule & Walking Guide")
 
-# --- HORIZONTAL TOGGLE BAR: Day 1 | Day 2 | Day 3 ---
+# --- HORIZONTAL TOGGLE BAR: DAY 1 ▾ | DAY 2 ▾ | DAY 3 ▾ ---
 day_cols = st.columns(3, gap="small")
 for idx, day in enumerate(itinerary_days):
   is_selected = st.session_state.selected_day_idx == idx
-  # Show upward arrow if active and expanded, downward otherwise
   arrow = "▴" if (is_selected and st.session_state.is_expanded) else "▾"
   btn_type = (
       "primary" if (is_selected and st.session_state.is_expanded) else "secondary"
@@ -481,10 +488,8 @@ for idx, day in enumerate(itinerary_days):
         use_container_width=True,
     ):
       if is_selected:
-        # Toggle visibility if clicking the already active day
         st.session_state.is_expanded = not st.session_state.is_expanded
       else:
-        # Switch to new day and ensure it's expanded
         st.session_state.selected_day_idx = idx
         st.session_state.is_expanded = True
       st.rerun()
@@ -512,7 +517,7 @@ if st.session_state.is_expanded:
         )
 else:
   st.info(
-      "📌 Itinerary view is collapsed. Click any Day button above to expand"
+      "📌 Itinerary view is collapsed. Click any DAY button above to expand"
       " its schedule."
   )
 
