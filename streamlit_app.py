@@ -108,7 +108,7 @@ custom_css = f"""
         box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         transition: transform 0.3s ease;
         border: 2px solid {border_color};
-        background: #fff;
+        background: #F4C2C2;
         padding: 8px;
     }}
     .collage-item:hover {{
