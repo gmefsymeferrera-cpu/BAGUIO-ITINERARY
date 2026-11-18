@@ -59,18 +59,19 @@ elif page_theme == "Crisp White":
   card_bg = "#fcfdfd"
   border_color = "#edf2f7"
 
-# Header box background rule (Image + Pastel Sage Tint)
+# Header box background rule: keeps left side clear for Lion's Head, tints right side for text readability
 if header_img_url:
   header_bg_rule = (
-      f"background-image: linear-gradient(135deg, rgba(82, 119, 103,"
-      f" {banner_alpha}), rgba(118, 150, 134, {banner_alpha})), "
-      f"url('{header_img_url}'); background-size: cover; background-position:"
-      " center;"
+      "background-image: linear-gradient(90deg, rgba(44, 62, 53, 0.05) 0%,"
+      f" rgba(64, 96, 82, {round(banner_alpha * 0.75, 2)}) 45%, rgba(44, 62,"
+      f" 53, {min(round(banner_alpha + 0.25, 2), 0.9)}) 100%),"
+      f" url('{header_img_url}'); background-size: cover; background-position:"
+      " left center;"
   )
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS injecting pastel theme rules + styled Day Dropdown Expanders
+# Custom CSS injecting pastel theme rules + right-aligned hero header
 custom_css = """
     <style>
     .stApp {
@@ -99,29 +100,55 @@ custom_css = """
         font-size: 1.15rem !important;
         font-weight: 700 !important;
     }
+    /* Right-aligned Header Box to expose Lion's Head on the left */
     .header-box {
         REPLACE_HEADER_BG
-        padding: 40px 20px;
+        padding: 36px 28px;
         border-radius: 16px;
         color: white !important;
-        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: center;
+        text-align: right;
+        min-height: 220px;
         margin-bottom: 25px;
         box-shadow: 0 8px 20px rgba(0,0,0,0.08);
     }
-    .header-box h1, .header-box p, .header-box span {
+    .header-content {
+        max-width: 65%;
+    }
+    .header-box h1 {
         color: white !important;
-        text-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        margin-bottom: 6px;
+        line-height: 1.2;
+    }
+    .header-box p, .header-box span {
+        color: white !important;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+    }
+    .badge-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        gap: 6px;
+        margin-top: 10px;
     }
     .badge {
         display: inline-block;
-        background: rgba(255, 255, 255, 0.25);
+        background: rgba(255, 255, 255, 0.22);
         backdrop-filter: blur(4px);
-        border: 1px solid rgba(255, 255, 255, 0.4);
-        padding: 6px 14px;
+        border: 1px solid rgba(255, 255, 255, 0.45);
+        padding: 5px 12px;
         border-radius: 20px;
-        font-size: 0.9rem;
-        margin: 5px;
+        font-size: 0.85rem;
         color: #ffffff;
+    }
+    @media (max-width: 640px) {
+        .header-content {
+            max-width: 85%;
+        }
     }
     .time-tag {
         color: #b87a3d !important;
@@ -154,16 +181,18 @@ custom_css = (
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section
+# Header Section (Right-aligned to showcase Lion's Head on the left)
 st.markdown(
     """
     <div class="header-box">
-        <h1>🌲 Baguio 3-Day Adventure Itinerary</h1>
-        <p>Complete Visual & Transit Guide from Benguet Prime Hotel</p>
-        <div>
-            <span class="badge">🚌 Arrival: 5:55 AM</span>
-            <span class="badge">🏨 Benguet Prime Hotel</span>
-            <span class="badge">📅 3 Days / 2 Nights</span>
+        <div class="header-content">
+            <h1>🌲 Baguio 3-Day Adventure Itinerary</h1>
+            <p>Complete Visual & Transit Guide from Benguet Prime Hotel</p>
+            <div class="badge-row">
+                <span class="badge">🚌 Arrival: 5:55 AM</span>
+                <span class="badge">🏨 Benguet Prime Hotel</span>
+                <span class="badge">📅 3 Days / 2 Nights</span>
+            </div>
         </div>
     </div>
     """,
