@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Page setup
 st.set_page_config(
@@ -160,7 +161,7 @@ stops = [
     {
         "time": "5:55 AM - 6:15 AM",
         "title": "1. Arrival - Baguio City Terminal",
-        "desc": "Touch Down! Welcome to Baguio.",
+        "desc": f"Touch Down! Welcome to Baguio. Stay at [Benguet Prime Hotel](link{{place_id:ChIJFXd6_2ehkTMRDo3Of5y4MHI}}).",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10",
         "transit": "🚶‍♂️ Walk ~5 mins (400m) to Benguet Prime Hotel",
     },
@@ -174,21 +175,21 @@ stops = [
     {
         "time": "6:30 AM – 8:30 AM",
         "title": "3. Breakfast at Good Taste Restaurant",
-        "desc": "Fuel up with a hearty breakfast and experience getting your food served by their robot crew.",
+        "desc": f"Fuel up with a hearty breakfast at [The Original Good Taste Cafe & Restaurant](link{{place_id:ChIJTc4JcGehkTMRF0lG3u4bhDw}}).",
         "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
         "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
     },
     {
         "time": "8:30 AM – 9:30 AM",
         "title": "4. Burnham Park",
-        "desc": "Enjoy the crisp morning air around Burnham Lagoon before the daytime crowds arrive.",
+        "desc": f"Enjoy the crisp morning air around [Burnham Park](link{{place_id:ChIJiYLvmGmhkTMR8rwh5qkzitE}}) before the daytime crowds arrive.",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmOEbzDrhZOWyTvF9DPkwsNph6mg3A8zsMJSITie6WM_TQODGtHNOjALc&s=10",
         "transit": "🚶‍♂️ Walk ~8 mins (600m uphill via Session Rd/Assumption Rd)",
     },
     {
         "time": "10:00 AM – 1:00 PM",
         "title": "5. Ili-Likha Artists Village",
-        "desc": "Explore this hidden food and art park filled with woodwork, sculptures, stained glass art, and cozy cafes.",
+        "desc": f"Explore [Ili-Likha Artists Village](link{{place_id:ChIJ2w0UZ12hkTMRpJn52VDBf_U}}), a hidden food and art park filled with woodwork, sculptures, and cozy cafes.",
         "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg",
         "transit": "🚶‍♂️ Walk ~6 mins (500m) back down to Calderon St.",
     },
@@ -202,14 +203,14 @@ stops = [
     {
         "time": "6:00 PM – 8:30 PM",
         "title": "7. SM City Baguio & Dinner",
-        "desc": "Enjoy the cool evening breeze and panoramic city views from the open-air terraces of SM Baguio.",
+        "desc": f"Enjoy cool evening breezes and panoramic views from [SM City Baguio](link{{place_id:ChIJd5wuUEKhkTMR2M1ll8O2f1U}}).",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0",
         "transit": "🚶‍♂️ Walk ~8 mins downhill (700m) back to Harrison Road",
     },
     {
         "time": "9:00 PM – 10:00 PM",
         "title": "8. Baguio Night Market (Harrison Road)",
-        "desc": "Browse through ukay-ukay thrift stalls and sample hot street food just a short walk from the hotel.",
+        "desc": f"Browse ukay-ukay stalls at [Baguio Night Market (Food Stalls)](link{{place_id:ChIJvbe53mehkTMR8T_ioyknfYk}}).",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I",
         "transit": "🏨 Short walk back to Benguet Prime Hotel to rest for Day 2!",
     },
@@ -268,70 +269,23 @@ if completed_items == total_items:
 
 st.divider()
 
-# --- CUSTOM PASTEL PICTURE MAP (AT THE VERY BOTTOM) ---
-st.subheader("🎨 Day 1 Illustrated Pastel Route Map")
-st.markdown("Custom illustrated vector map connecting all 8 of your stops:")
+# --- MAP MOVED TO THE LAST SECTION ---
+st.subheader("🗺️ Baguio Downtown Reference Map")
+st.markdown("Interactive vector map showing your downtown route and destinations:")
 
-pastel_picture_map_html = """
-<div style="background: linear-gradient(135deg, #e8f4ec 0%, #e2eff5 100%); border-radius: 20px; padding: 25px; box-shadow: 0 8px 24px rgba(0,0,0,0.06); font-family: sans-serif; text-align: center;">
-    <h3 style="color: #2c3e35; margin-top: 0; margin-bottom: 5px;">🌲 Baguio Downtown Walking Circuit</h3>
-    <p style="color: #607568; font-size: 0.9rem; margin-bottom: 20px;">Day 1 Pinned Destination Guide</p>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; text-align: left;">
-        
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #749c86; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #749c86; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 1</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">Baguio City Terminal</div>
-            <div style="font-size: 0.8rem; color: #666;">5:55 AM • Arrival</div>
-        </div>
-
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #82a3cc; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #82a3cc; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 2</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">Benguet Prime Hotel</div>
-            <div style="font-size: 0.8rem; color: #666;">6:15 AM • Luggage Drop</div>
-        </div>
-
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #e09f63; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #e09f63; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 3</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">Good Taste Restaurant</div>
-            <div style="font-size: 0.8rem; color: #666;">6:30 AM • Breakfast</div>
-        </div>
-
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #749c86; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #749c86; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 4</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">Burnham Park</div>
-            <div style="font-size: 0.8rem; color: #666;">8:30 AM • Morning Stroll</div>
-        </div>
-
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #9c7492; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #9c7492; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 5</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">Ili-Likha Artists Village</div>
-            <div style="font-size: 0.8rem; color: #666;">10:00 AM • Art & Cafes</div>
-        </div>
-
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #82a3cc; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #82a3cc; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 6</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">Hotel Check-In & Rest</div>
-            <div style="font-size: 0.8rem; color: #666;">1:30 PM • Benguet Prime</div>
-        </div>
-
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #e06363; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #e06363; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 7</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">SM City Baguio</div>
-            <div style="font-size: 0.8rem; color: #666;">6:00 PM • Dinner & Views</div>
-        </div>
-
-        <div style="background: white; padding: 12px 15px; border-radius: 12px; border-left: 5px solid #b87a3d; box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
-            <span style="background: #b87a3d; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.75rem; font-weight: bold;">Stop 8</span>
-            <div style="font-weight: 600; color: #2c3e35; margin-top: 5px; font-size: 0.95rem;">Baguio Night Market</div>
-            <div style="font-size: 0.8rem; color: #666;">9:00 PM • Harrison Road</div>
-        </div>
-
-    </div>
-</div>
+map_html = """
+<iframe 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=16&output=embed" 
+    width="100%" 
+    height="420" 
+    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);" 
+    allowfullscreen="" 
+    loading="lazy">
+</iframe>
 """
+components.html(map_html, height=430)
 
-st.components.v1.html(pastel_picture_map_html, height=270)
+st.caption("🗺️ *Interactive map positioned at the bottom for quick neighborhood reference.*")
 
 st.divider()
 st.caption("Safe travels to the Summer Capital of the Philippines! 🌲")
