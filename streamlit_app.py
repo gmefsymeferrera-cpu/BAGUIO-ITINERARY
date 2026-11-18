@@ -7,76 +7,57 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- SIDEBAR: BACKGROUND & THEME SWITCHER ---
-st.sidebar.header("🎨 Customize Background")
+# --- SIDEBAR: THEME & HEADER CUSTOMIZER ---
+st.sidebar.header("🎨 Customize Theme")
 
-bg_mode = st.sidebar.selectbox(
-    "Background Style",
+page_theme = st.sidebar.selectbox(
+    "Page Background",
     [
-        "Custom Image URL",
         "Morning Fog (Soft Gray)",
         "Crisp White",
         "Warm Cabin (Cream)",
         "Misty Pine (Dark Forest)",
-        "Midnight Baguio (Dark Slate)",
-        "Custom Solid Color"
+        "Midnight Baguio (Dark Slate)"
     ]
 )
 
-# Default theme tokens
+header_img_url = st.sidebar.text_input(
+    "Title Banner Image URL",
+    value="https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140"
+)
+
+banner_tint = st.sidebar.slider("Title Banner Dark Overlay (%)", min_value=30, max_value=85, value=60, step=5)
+banner_alpha = round(banner_tint / 100, 2)
+
+# Page theme tokens
 bg_css_rule = "background-color: #f4f7f5;"
 text_color = "#1f2937"
 card_bg = "#ffffff"
 border_color = "#e5e7eb"
 
-if bg_mode == "Crisp White":
+if page_theme == "Crisp White":
     bg_css_rule = "background-color: #ffffff;"
-elif bg_mode == "Warm Cabin (Cream)":
+elif page_theme == "Warm Cabin (Cream)":
     bg_css_rule = "background-color: #fdf8f0;"
-elif bg_mode == "Misty Pine (Dark Forest)":
+elif page_theme == "Misty Pine (Dark Forest)":
     bg_css_rule = "background-color: #0b291e;"
     text_color = "#f3f4f6"
     card_bg = "#133a2c"
     border_color = "#256149"
-elif bg_mode == "Midnight Baguio (Dark Slate)":
+elif page_theme == "Midnight Baguio (Dark Slate)":
     bg_css_rule = "background-color: #0f172a;"
     text_color = "#f8fafc"
     card_bg = "#1e293b"
     border_color = "#334155"
-elif bg_mode == "Custom Solid Color":
-    custom_hex = st.sidebar.color_picker("Pick a background color", "#e8f3ee")
-    bg_css_rule = f"background-color: {custom_hex};"
-    r, g, b = int(custom_hex[1:3], 16), int(custom_hex[3:5], 16), int(custom_hex[5:7], 16)
-    luminance = (0.299 * r + 0.587 * g + 0.114 * b)
-    if luminance < 130:
-        text_color = "#f8fafc"
-        card_bg = "rgba(30, 41, 59, 0.9)"
-        border_color = "#475569"
-elif bg_mode == "Custom Image URL":
-    img_url = st.sidebar.text_input(
-        "Paste Image URL",
-        value="https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140"
+
+# Header box background rule (Image + Forest Green Tint)
+if header_img_url:
+    header_bg_rule = (
+        f"background-image: linear-gradient(135deg, rgba(15, 61, 46, {banner_alpha}), rgba(37, 97, 73, {banner_alpha})), "
+        f"url('{header_img_url}'); background-size: cover; background-position: center;"
     )
-    fade_tint = st.sidebar.radio("Fade Style", ["Light Fog (Soft Wash)", "Dark Mist (Moody)"])
-    fade_strength = st.sidebar.slider("Background Fade Amount (%)", min_value=50, max_value=95, value=82, step=3)
-    alpha = round(fade_strength / 100, 2)
-
-    if img_url:
-        if fade_tint == "Light Fog (Soft Wash)":
-            overlay = f"rgba(244, 247, 245, {alpha})"
-            text_color = "#1f2937"
-            card_bg = "rgba(255, 255, 255, 0.92)"
-            border_color = "#d1d5db"
-        else:
-            overlay = f"rgba(15, 23, 42, {alpha})"
-            text_color = "#f8fafc"
-            card_bg = "rgba(15, 23, 42, 0.88)"
-            border_color = "rgba(255, 255, 255, 0.2)"
-
-        bg_css_rule = (
-            f"background-image: linear-gradient({overlay}, {overlay}), url('{img_url}'); "
-            "background-size: cover; background-position: center; background-attachment: fixed;"
-        )
+else:
+    header_bg_rule = "background: linear-gradient(135deg, #0f3d2e, #256149);"
 
 # Custom CSS injecting theme rules safely
 custom_css = """
@@ -93,23 +74,25 @@ custom_css = """
         border-color: REPLACE_BORDER !important;
         border-radius: 12px;
         padding: 8px;
-        backdrop-filter: blur(4px);
     }
     .header-box {
-        background: linear-gradient(135deg, #0f3d2e, #256149);
-        padding: 30px 20px;
+        REPLACE_HEADER_BG
+        padding: 40px 20px;
         border-radius: 15px;
         color: white !important;
         text-align: center;
         margin-bottom: 25px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.2);
     }
     .header-box h1, .header-box p, .header-box span {
         color: white !important;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.45);
     }
     .badge {
         display: inline-block;
-        background: rgba(255,255,255,0.2);
+        background: rgba(15, 23, 42, 0.45);
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255, 255, 255, 0.25);
         padding: 5px 14px;
         border-radius: 20px;
         font-size: 0.9rem;
@@ -129,6 +112,7 @@ custom_css = (
     .replace("REPLACE_TEXT", text_color)
     .replace("REPLACE_CARD", card_bg)
     .replace("REPLACE_BORDER", border_color)
+    .replace("REPLACE_HEADER_BG", header_bg_rule)
 )
 
 st.markdown(custom_css, unsafe_allow_html=True)
@@ -151,8 +135,7 @@ st.markdown(
 
 # Itinerary Data
 stops = [
-
-     {
+    {
         "time": "5:55 AM - 6:15 AM",
         "title": "1. Arrival - Baguio City Terminal",
         "desc": "Touch Down! Welcome to Baguio.",
