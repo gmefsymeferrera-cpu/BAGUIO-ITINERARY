@@ -24,7 +24,7 @@ page_theme = st.sidebar.selectbox(
 
 header_img_url = st.sidebar.text_input(
     "Title Banner Image URL",
-    value="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQKMMW-LwHbNVZcyMwdl1P-nOVPuzhfWEVTyF8HwyjIkNugqqTJ7MsTfE&s=10",
+    value="https://upload.wikimedia.org/wikipedia/commons/2/23/The_Mirador_Heritage_Eco_park.jpg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
 )
 
 banner_height = st.sidebar.slider(
