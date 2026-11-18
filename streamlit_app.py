@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Page setup
 st.set_page_config(
@@ -126,13 +127,6 @@ custom_css = """
         margin: 10px 0px;
         border-left: 3px solid #b87a3d;
     }
-    .route-summary {
-        background: rgba(255, 255, 255, 0.8);
-        border-left: 4px solid #749c86;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 25px;
-    }
     </style>
 """
 
@@ -162,17 +156,24 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- ROUTE SUMMARY CHIPS (Replaces Map) ---
-st.markdown(
-    """
-    <div class="route-summary">
-        <h3>📍 8 Pinned Destinations Overview</h3>
-        <p>Your optimized walking loop for Day 1:</p>
-        <b>1.</b> City Terminal &rarr; <b>2.</b> Benguet Prime Hotel &rarr; <b>3.</b> Good Taste &rarr; <b>4.</b> Burnham Park &rarr; <b>5.</b> Ili-Likha &rarr; <b>6.</b> Hotel Check-In &rarr; <b>7.</b> SM City Baguio &rarr; <b>8.</b> Night Market
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+# --- CLEAN VECTOR ROAD MAP EMBED (Matching Reference) ---
+st.subheader("🗺️ Baguio Downtown Reference Map")
+st.markdown("Clean vector map highlighting Burnham Park, Benguet Prime Hotel, and city center stops:")
+
+# Using standard roadmap view (`t=m`) focused right on downtown Baguio at zoom level 16
+map_html = """
+<iframe 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=16&output=embed" 
+    width="100%" 
+    height="420" 
+    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.06);" 
+    allowfullscreen="" 
+    loading="lazy">
+</iframe>
+"""
+components.html(map_html, height=430)
+
+st.caption("🗺️ *Interactive vector map showing streets, landmarks, and parks just like your reference.*")
 
 st.divider()
 
