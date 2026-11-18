@@ -89,10 +89,10 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS for Luxury Typography, Glassmorphism, and Curtain Animation
+# Custom CSS for Luxury Typography, Glassmorphism, and Calligraphy Title
 custom_css = f"""
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
 
     .stApp {{
         {bg_css_rule}
@@ -101,7 +101,7 @@ custom_css = f"""
     }}
     
     /* Elegant Serif Headings */
-    h1, h2, h3, .stApp h1, .stApp h2, .stApp h3 {{
+    h2, h3, .stApp h2, .stApp h3 {{
         font-family: 'Playfair Display', serif !important;
         letter-spacing: 0.3px;
         color: {text_color};
@@ -189,16 +189,17 @@ custom_css = f"""
         box-shadow: 0 12px 35px rgba(0,0,0,0.1);
     }}
     .header-content {{
-        max-width: 68%;
+        max-width: 75%;
     }}
+    /* Big Calligraphy Title */
     .header-box h1 {{
-        font-family: 'Playfair Display', serif !important;
-        color: white !important;
-        font-size: 2.4rem;
-        font-weight: 700;
-        text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        margin-bottom: 8px;
-        line-height: 1.15;
+        font-family: 'Great Vibes', cursive !important;
+        color: {gold_accent} !important;
+        font-size: 4.2rem !important;
+        font-weight: 400 !important;
+        text-shadow: 0 3px 15px rgba(0,0,0,0.6);
+        margin-bottom: 0px;
+        line-height: 1.1;
     }}
     .header-box p, .header-box span {{
         color: rgba(255, 255, 255, 0.95) !important;
@@ -228,7 +229,7 @@ custom_css = f"""
             max-width: 90%;
         }}
         .header-box h1 {{
-            font-size: 1.8rem;
+            font-size: 3rem !important;
         }}
         div.stButton > button p {{
             font-size: 1.1rem !important;
@@ -257,7 +258,7 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section
+# Header Section with Calligraphy Title
 st.markdown(
     """
     <div class="header-box">
