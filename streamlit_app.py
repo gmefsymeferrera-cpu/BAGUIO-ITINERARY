@@ -55,7 +55,7 @@ elif bg_mode == "Custom Solid Color":
 elif bg_mode == "Custom Image URL":
     img_url = st.sidebar.text_input(
         "Paste Image URL",
-        value="https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?q=80&w=1600&auto=format&fit=crop"
+        value="https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140"
     )
     if img_url:
         bg_css_rule = f"background-image: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)), url('{img_url}'); background-size: cover; background-position: center; background-attachment: fixed;"
