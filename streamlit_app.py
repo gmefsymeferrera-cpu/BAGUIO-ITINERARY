@@ -44,7 +44,7 @@
         <section id="theme-bar" aria-label="Background and Theme Switcher" class="bg-white/90 backdrop-blur-md rounded-2xl p-3.5 sm:p-4 shadow-sm border border-slate-200/80 mb-6 transition-colors duration-300">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
                 <div class="flex items-center gap-2 shrink-0">
-                    <span class="text-base">🎨</span>
+            
                     <span id="theme-bar-label" class="text-xs sm:text-sm font-bold text-slate-800 tracking-tight">Page Background:</span>
                 </div>
 
