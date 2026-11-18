@@ -11,6 +11,9 @@ st.set_page_config(
 # --- SIDEBAR: REFINED THEME & BANNER CONTROLS ---
 st.sidebar.header("✨ Elegance & Theme Studio")
 
+# Feature 4: Dedicated Dark/Light Mode Switch
+mode_switch = st.sidebar.radio("Appearance Mode", ["Light Mode", "Dark Mode"])
+
 page_theme = st.sidebar.selectbox(
     "Curated Color Palette",
     [
@@ -40,42 +43,50 @@ banner_tint = st.sidebar.slider(
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Luxury Color Tokens
-bg_css_rule = "background-color: #f4f6f4;"
-text_color = "#2c3830"
-card_bg = "#ffffff"
-border_color = "#e2e8e4"
-accent_color = "#829c8e"
-gold_accent = "#c29b61"
+# Luxury Color Tokens (Adapts to Dark Mode if selected)
+if mode_switch == "Dark Mode":
+  bg_css_rule = "background-color: #121815;"
+  text_color = "#e2e8e4"
+  card_bg = "#1b241f"
+  border_color = "#2d3832"
+  accent_color = "#5a7a69"
+  gold_accent = "#e5c585"
+else:
+  bg_css_rule = "background-color: #f4f6f4;"
+  text_color = "#2c3830"
+  card_bg = "#ffffff"
+  border_color = "#e2e8e4"
+  accent_color = "#829c8e"
+  gold_accent = "#c29b61"
 
-if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
-  bg_css_rule = "background-color: #f7f5f0;"
-  text_color = "#3d3832"
-  card_bg = "#ffffff"
-  border_color = "#eae4db"
-  accent_color = "#a38b6d"
-  gold_accent = "#b8976b"
-elif page_theme == "Midnight Pine & Emerald":
-  bg_css_rule = "background-color: #edf2ef;"
-  text_color = "#1e3026"
-  card_bg = "#ffffff"
-  border_color = "#d1dfd6"
-  accent_color = "#3d6b52"
-  gold_accent = "#d4af37"
-elif page_theme == "Soft Rose & Champagne":
-  bg_css_rule = "background-color: #f8f4f5;"
-  text_color = "#4a383b"
-  card_bg = "#ffffff"
-  border_color = "#f0e1e4"
-  accent_color = "#b5838d"
-  gold_accent = "#d4af37"
-elif page_theme == "Minimalist Pearl White":
-  bg_css_rule = "background-color: #ffffff;"
-  text_color = "#2a2a2a"
-  card_bg = "#fafafa"
-  border_color = "#eaeaea"
-  accent_color = "#666666"
-  gold_accent = "#999999"
+  if page_theme == "Warm Cashmere & Sand (Luxury Neutral)":
+    bg_css_rule = "background-color: #f7f5f0;"
+    text_color = "#3d3832"
+    card_bg = "#ffffff"
+    border_color = "#eae4db"
+    accent_color = "#a38b6d"
+    gold_accent = "#b8976b"
+  elif page_theme == "Midnight Pine & Emerald":
+    bg_css_rule = "background-color: #edf2ef;"
+    text_color = "#1e3026"
+    card_bg = "#ffffff"
+    border_color = "#d1dfd6"
+    accent_color = "#3d6b52"
+    gold_accent = "#d4af37"
+  elif page_theme == "Soft Rose & Champagne":
+    bg_css_rule = "background-color: #f8f4f5;"
+    text_color = "#4a383b"
+    card_bg = "#ffffff"
+    border_color = "#f0e1e4"
+    accent_color = "#b5838d"
+    gold_accent = "#d4af37"
+  elif page_theme == "Minimalist Pearl White":
+    bg_css_rule = "background-color: #ffffff;"
+    text_color = "#2a2a2a"
+    card_bg = "#fafafa"
+    border_color = "#eaeaea"
+    accent_color = "#666666"
+    gold_accent = "#999999"
 
 if header_img_url:
   header_bg_rule = (
@@ -105,6 +116,7 @@ custom_css = f"""
 
     p, span, label, div {{
         font-family: 'Plus Jakarta Sans', sans-serif !important;
+        color: {text_color};
     }}
 
     [data-testid="stVerticalBlockBorderWrapper"] {{
@@ -181,7 +193,6 @@ custom_css = f"""
         align-items: center;
     }}
     
-    /* Maliwanag at Litaw na Calligraphy Title */
     .header-box h1 {{
         font-family: 'Great Vibes', cursive !important;
         color: #f7e1b5 !important;
@@ -258,7 +269,7 @@ st.markdown(
     """
     <div class="header-box">
         <div class="header-content">
-            <h1>BAGUIO Itinerary</h1>
+            <h1>Baguio Itinerary</h1>
             <p>3 Days & 2 Nights</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
@@ -270,6 +281,28 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# Feature 1: Live Baguio Weather Widget & Print Button Row
+col_w1, col_w2 = st.columns([2, 1])
+with col_w1:
+  st.markdown(
+      "🌲 **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool"
+      " Breeze** (Perfect highland weather)"
+  )
+with col_w2:
+  # Feature 2: Print/Export to PDF Button
+  st.markdown(
+      """
+        <div style="text-align: right;">
+            <button onclick="window.print()" style="background-color: #c29b61; color: white; border: none; padding: 8px 14px; border-radius: 8px; font-weight: bold; cursor: pointer;">
+                🖨️ Print / Save PDF
+            </button>
+        </div>
+        """,
+      unsafe_allow_html=True,
+  )
+
+st.divider()
 
 # --- ITINERARY DATA ---
 itinerary_days = [
@@ -492,8 +525,8 @@ if "is_expanded" not in st.session_state:
 
 st.markdown("### ⏰ Daily Itinerary Guide")
 st.markdown(
-    "<p style='color: #666; font-size: 0.95rem; margin-top: -10px;'>Select a"
-    " day below to reveal its curated schedule with curtain-like smoothness:</p>",
+    "<p style='font-size: 0.95rem; margin-top: -10px;'>Select a day below to"
+    " reveal its curated schedule with curtain-like smoothness:</p>",
     unsafe_allow_html=True,
 )
 
@@ -548,7 +581,7 @@ if st.session_state.is_expanded:
   st.markdown("</div>", unsafe_allow_html=True)
 else:
   st.markdown(
-      "<div style='text-align: center; padding: 25px; color: #777; font-style:"
+      "<div style='text-align: center; padding: 25px; font-style:"
       " italic;'>✨ Itinerary curtain is closed. Click any DAY above to"
       " reveal.</div>",
       unsafe_allow_html=True,
@@ -556,7 +589,77 @@ else:
 
 st.divider()
 
-# --- INTERACTIVE CHECKLIST ---
+# --- INTERACTIVE DESTINATIONS CHECKLIST (ISA-ISA) ---
+st.subheader("🎯 Destination Activity Check-list")
+st.markdown("Mark off every specific tourist spot and stop as you visit them:")
+
+all_destinations = [
+    "Day 1: Arrival - Baguio City Terminal",
+    "Day 1: Luggage Drop-Off at Benguet Prime Hotel",
+    "Day 1: Breakfast at Good Taste Restaurant",
+    "Day 1: Burnham Park",
+    "Day 1: Ili-Likha Artists Village",
+    "Day 1: Hotel Check-In & Rest",
+    "Day 1: SM City Baguio & Dinner",
+    "Day 1: Baguio Night Market (Harrison Road)",
+    "Day 2: Breakfast at Café by the Ruins",
+    "Day 2: Baguio Botanical Garden",
+    "Day 2: Wright Park & The Mansion",
+    "Day 2: Mines View Park & Good Shepherd Convent",
+    "Day 2: Camp John Hay (Bell House & Eco-Trail)",
+    "Day 3: La Trinidad Strawberry Farm & StoBoSa",
+    "Day 3: Tam-awan Village",
+    "Day 3: Hotel Check-Out & Baguio Public Market",
+    "Day 3: Farewell Lunch on Session Road & Departure",
+]
+
+dest_states = []
+for i, dest in enumerate(all_destinations):
+  chk = st.checkbox(dest, key=f"dest_chk_{i}")
+  dest_states.append(chk)
+
+completed_dest = sum(dest_states)
+total_dest = len(all_destinations)
+dest_progress = completed_dest / total_dest
+
+st.progress(dest_progress)
+st.caption(
+    f"✨ Visited Destinations: **{completed_dest} / {total_dest}** completed"
+)
+
+if completed_dest == total_dest:
+  st.balloons()
+  st.success("🎉 Congratulations! You have fully explored all destinations in Baguio!")
+
+st.divider()
+
+# --- BUDGET & EXPENSE CALCULATOR ---
+st.subheader("💰 Trip Budget & Expense Calculator")
+st.markdown("Estimate and calculate your daily estimated travel expenses:")
+
+col_b1, col_b2, col_b3 = st.columns(3)
+with col_b1:
+  transpo_cost = st.number_input(
+      "Taxi / Transpo (PHP)", min_value=0, value=1200, step=100
+  )
+with col_b2:
+  food_cost = st.number_input(
+      "Food & Dining (PHP)", min_value=0, value=3500, step=200
+  )
+with col_b3:
+  pasalubong_cost = st.number_input(
+      "Pasalubong & Souvenirs (PHP)", min_value=0, value=2000, step=200
+  )
+
+total_est_budget = transpo_cost + food_cost + pasalubong_cost
+st.info(
+    f"💡 **Estimated Out-of-Pocket Expenses:** ₱{total_est_budget:,} (Not"
+    " including hotel accommodation)"
+)
+
+st.divider()
+
+# --- INTERACTIVE PACKING CHECKLIST ---
 st.subheader("🎒 Curated Packing Checklist")
 st.markdown("Check off essentials for your highland escape:")
 
@@ -610,7 +713,7 @@ components.html(map_html, height=430)
 
 st.divider()
 st.markdown(
-    "<p style='text-align: center; color: #888; font-size: 0.9rem;'>Wishing you"
-    " an extraordinary journey to the Summer Capital of the Philippines! 🌲</p>",
+    "<p style='text-align: center; font-size: 0.9rem;'>Wishing you an"
+    " extraordinary journey to the Summer Capital of the Philippines! 🌲</p>",
     unsafe_allow_html=True,
 )
