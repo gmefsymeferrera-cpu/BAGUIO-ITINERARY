@@ -236,7 +236,7 @@ st.markdown(
     """
     <div class="header-box">
         <div class="header-content">
-            <h1 style="font-family: 'Pacifico', cursive !important; color: #ffffff !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
+            <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFF00 !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
             <p style="color: #ffffff !important; font-size: 1.25rem !important; font-weight: 600; letter-spacing: 3px; margin-top: 5px; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
             <div class="badge-row">
                 <span class="badge">🚌 Arrival: 5:55 AM</span>
