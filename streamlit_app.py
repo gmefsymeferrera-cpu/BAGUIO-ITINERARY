@@ -516,4 +516,109 @@ for idx, day in enumerate(itinerary_days):
 
   with day_cols[idx]:
     if st.button(
-        f"{day
+        f"{day['tab_label']} {arrow}",
+        key=f"day_nav_{idx}",
+        type=btn_type,
+        use_container_width=True,
+    ):
+      if is_selected:
+        st.session_state.is_expanded = not st.session_state.is_expanded
+      else:
+        st.session_state.selected_day_idx = idx
+        st.session_state.is_expanded = True
+      st.rerun()
+
+# --- CURTAIN REVEAL CONTAINER ---
+if st.session_state.is_expanded:
+  active_day = itinerary_days[st.session_state.selected_day_idx]
+  st.markdown(
+      f"<div class='curtain-container'><h4 style='margin-top: 25px;"
+      f" margin-bottom: 15px;'>{active_day['header']}</h4>",
+      unsafe_allow_html=True,
+  )
+
+  for stop in active_day["stops"]:
+    with st.container(border=True):
+      col1, col2 = st.columns([1, 2])
+      with col1:
+        st.image(stop["img"], use_container_width=True)
+      with col2:
+        st.markdown(
+            f'<span class="time-tag">{stop["time"]}</span>',
+            unsafe_allow_html=True,
+        )
+        st.markdown(f"### {stop['title']}")
+        st.write(stop["desc"])
+        st.markdown(
+            f'<div class="transit-badge">{stop["transit"]}</div>',
+            unsafe_allow_html=True,
+        )
+  st.markdown("</div>", unsafe_allow_html=True)
+else:
+  st.markdown(
+      "<div style='text-align: center; padding: 25px; color: #777; font-style:"
+      " italic;'>✨ Itinerary curtain is closed. Click any DAY above to"
+      " reveal.</div>",
+      unsafe_allow_html=True,
+  )
+
+st.divider()
+
+# --- INTERACTIVE CHECKLIST ---
+st.subheader("🎒 Curated Packing Checklist")
+st.markdown("Check off essentials for your highland escape:")
+
+checklist_items = [
+    (
+        "Warm wool jacket or cashmere sweater (Baguio evenings drop"
+        " significantly)"
+    ),
+    "Comfortable walking shoes or boots (For heritage walks and pine trails)",
+    "Insulated or reusable tumbler for hot chocolate and mountain tea",
+    "Compact umbrella / lightweight weather shell",
+    "Power bank and high-speed charging cables",
+    (
+        "Philippine Peso cash & small bills (Essential for local taxis & night"
+        " markets)"
+    ),
+]
+
+checked_states = []
+for i, item in enumerate(checklist_items):
+  is_checked = st.checkbox(item, key=f"check_{i}")
+  checked_states.append(is_checked)
+
+total_items = len(checklist_items)
+completed_items = sum(checked_states)
+progress_pct = completed_items / total_items
+
+st.progress(progress_pct)
+st.caption(f"✨ Packed Essentials: **{completed_items} / {total_items}** ready")
+
+if completed_items == total_items:
+  st.success("🌟 All set! You are fully prepared for your luxury Baguio retreat.")
+
+st.divider()
+
+# --- MAP SECTION ---
+st.subheader("🗺️ Neighborhood Reference Map")
+st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
+
+map_html = """
+<iframe 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
+    width="100%" 
+    height="420" 
+    style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);" 
+    allowfullscreen="" 
+    loading="lazy">
+</iframe>
+"""
+components.html(map_html, height=430)
+
+st.divider()
+st.markdown(
+    "<p style='text-align: center; color: #888; font-size: 0.9rem;'>Wishing you"
+    " an extraordinary journey to the Summer Capital of the Philippines! 🌲</p>",
+    unsafe_allow_html=True,
+)
