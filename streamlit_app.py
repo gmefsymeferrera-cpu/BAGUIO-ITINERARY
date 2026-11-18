@@ -77,19 +77,17 @@ elif page_theme == "Minimalist Pearl White":
   accent_color = "#666666"
   gold_accent = "#999999"
 
-# Header box background rule: keeps left side clear for Lion's Head, rich gradient on the right
+# Header box background rule: centered gradient overlay with user image
 if header_img_url:
   header_bg_rule = (
-      "background-image: linear-gradient(90deg, rgba(30, 40, 35, 0.02) 0%,"
-      f" rgba(44, 56, 48, {round(banner_alpha * 0.75, 2)}) 45%, rgba(30, 40,"
-      f" 35, {min(round(banner_alpha + 0.25, 2), 0.9)}) 100%),"
+      f"background-image: linear-gradient(135deg, rgba(30, 40, 35, {banner_alpha}) 0%, rgba(20, 25, 22, {banner_alpha + 0.2}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
-      f" left {banner_vertical_pos}%;"
+      f" center {banner_vertical_pos}%;"
   )
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS with BIG ARTISTIC CALLIGRAPHY TITLE
+# Custom CSS with CENTERED BIG ARTISTIC CALLIGRAPHY TITLE
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
@@ -173,7 +171,7 @@ custom_css = f"""
         text-shadow: 0 1px 3px rgba(0,0,0,0.2);
     }}
 
-    /* Right-aligned Luxury Header Box */
+    /* Center-aligned Luxury Header Box */
     .header-box {{
         {header_bg_rule}
         padding: 45px 35px;
@@ -181,25 +179,28 @@ custom_css = f"""
         color: white !important;
         display: flex;
         flex-direction: column;
-        align-items: flex-end;
+        align-items: center;
         justify-content: center;
-        text-align: right;
+        text-align: center;
         min-height: {banner_height}px;
         margin-bottom: 30px;
-        box-shadow: 0 12px 35px rgba(0,0,0,0.1);
+        box-shadow: 0 12px 35px rgba(0,0,0,0.15);
     }}
     .header-content {{
-        max-width: 80%;
+        max-width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }}
     
-    /* GINAWANG MALAKI AT ARTISTIC CALLIGRAPHY ANG TITLE */
+    /* NAKA-CENTER NA MALAKI AT ARTISTIC CALLIGRAPHY TITLE */
     .header-box h1 {{
         font-family: 'Great Vibes', cursive !important;
         color: {gold_accent} !important;
         font-size: 5.2rem !important;
         font-weight: 400 !important;
         text-shadow: 0 4px 20px rgba(0,0,0,0.8), 0 0 35px rgba(194, 155, 97, 0.5);
-        margin-bottom: -5px;
+        margin-bottom: 0px;
         line-height: 1.0;
         letter-spacing: 2px;
     }}
@@ -212,7 +213,7 @@ custom_css = f"""
     .badge-row {{
         display: flex;
         flex-wrap: wrap;
-        justify-content: flex-end;
+        justify-content: center;
         gap: 8px;
         margin-top: 14px;
     }}
@@ -229,7 +230,7 @@ custom_css = f"""
     }}
     @media (max-width: 640px) {{
         .header-content {{
-            max-width: 90%;
+            max-width: 95%;
         }}
         .header-box h1 {{
             font-size: 3.5rem !important;
@@ -261,7 +262,7 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section
+# Header Section (Centered)
 st.markdown(
     """
     <div class="header-box">
