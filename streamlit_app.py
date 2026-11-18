@@ -21,7 +21,7 @@ bg_css_rule = "background-color: #ffffff;"
 text_color = "#23332a"
 card_bg = "#FFFFFF"
 border_color = "#d6e0d8"
-accent_color = "#FFCBC4"
+accent_color = "#23332a"
 gold_accent = "#b8860b"
 
 # Custom CSS
