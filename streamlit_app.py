@@ -43,7 +43,7 @@ custom_css = f"""
         font-family: 'Montserrat', sans-serif !important;
         color: {text_color} !important;
     }}
-    .stop-card, .contact-card, .countdown-card {{
+    .stop-card, .contact-card {{
         background-color: {card_bg};
         border: 1.5px solid {border_color} !important;
         border-radius: 20px;
@@ -52,6 +52,56 @@ custom_css = f"""
         box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         text-align: center;
     }}
+    /* --- NEW MODERN COUNTDOWN CARD STYLE --- */
+    .countdown-card {{
+        background: linear-gradient(135deg, rgba(80, 122, 100, 0.08) 0%, rgba(184, 134, 11, 0.08) 100%);
+        border: 2px solid {border_color} !important;
+        border-radius: 20px;
+        padding: 22px 18px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        text-align: center;
+    }}
+    .countdown-title {{
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: {accent_color};
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 12px;
+    }}
+    .countdown-grid {{
+        display: flex;
+        justify-content: center;
+        gap: 16px;
+        flex-wrap: wrap;
+    }}
+    .countdown-box {{
+        background-color: #ffffff;
+        border: 1.5px solid {border_color};
+        border-radius: 14px;
+        padding: 10px 16px;
+        min-width: 75px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }}
+    .countdown-num {{
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: {gold_accent};
+        line-height: 1.2;
+    }}
+    .countdown-label {{
+        font-family: 'Montserrat', sans-serif !important;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: {text_color};
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 2px;
+    }}
+    /* ------------------------------------- */
     div.stButton > button {{
         width: 100%;
         border-radius: 16px !important;
@@ -159,10 +209,21 @@ minutes_left = (time_left.seconds % 3600) // 60
 if days_left >= 0:
     st.markdown(f"""
     <div class="countdown-card">
-        <h3 style="margin: 0 0 5px 0; color: {accent_color};">⏳ Countdown hanggang sa Baguio Trip!</h3>
-        <p style="font-size: 1.2rem; font-weight: 700; margin: 0; color: {gold_accent};">
-            {days_left} Araw • {hours_left} Oras • {minutes_left} Minuto na lang! 🎒🌲
-        </p>
+        <div class="countdown-title">⏳ Countdown hanggang sa Baguio Trip! 🎒🌲</div>
+        <div class="countdown-grid">
+            <div class="countdown-box">
+                <div class="countdown-num">{days_left}</div>
+                <div class="countdown-label">Araw</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-num">{hours_left}</div>
+                <div class="countdown-label">Oras</div>
+            </div>
+            <div class="countdown-box">
+                <div class="countdown-num">{minutes_left}</div>
+                <div class="countdown-label">Minuto</div>
+            </div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 else:
