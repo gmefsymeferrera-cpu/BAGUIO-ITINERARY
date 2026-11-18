@@ -22,7 +22,7 @@ text_color = "#23332a"
 card_bg = "#FFFFFF"
 border_color = "#d6e0d8"
 accent_color = "#23332a"
-gold_accent = "#e6b1dd"
+gold_accent = "#b8860b"
 
 # Custom CSS
 custom_css = f"""
