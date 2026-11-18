@@ -190,7 +190,7 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Compact Banner na walang glitch/arrow text
+# Compact Banner na walang glitch text
 banner_html = f"""
 <div style="
     background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%), url('{header_img_url}');
