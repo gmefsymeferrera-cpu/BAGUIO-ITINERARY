@@ -13,13 +13,13 @@ st.sidebar.header("🎨 Customize Background")
 bg_mode = st.sidebar.selectbox(
     "Background Style",
     [
+        "Custom Image URL",
         "Morning Fog (Soft Gray)",
         "Crisp White",
         "Warm Cabin (Cream)",
         "Misty Pine (Dark Forest)",
         "Midnight Baguio (Dark Slate)",
-        "Custom Solid Color",
-        "Custom Image URL"
+        "Custom Solid Color"
     ]
 )
 
@@ -57,11 +57,26 @@ elif bg_mode == "Custom Image URL":
         "Paste Image URL",
         value="https://shoestringdiary.wordpress.com/wp-content/uploads/2023/05/miradorhill08-cover-ssdiaries.jpg?w=1140"
     )
+    fade_tint = st.sidebar.radio("Fade Style", ["Light Fog (Soft Wash)", "Dark Mist (Moody)"])
+    fade_strength = st.sidebar.slider("Background Fade Amount (%)", min_value=50, max_value=95, value=82, step=3)
+    alpha = round(fade_strength / 100, 2)
+
     if img_url:
-        bg_css_rule = f"background-image: linear-gradient(rgba(15, 23, 42, 0.55), rgba(15, 23, 42, 0.55)), url('{img_url}'); background-size: cover; background-position: center; background-attachment: fixed;"
-        text_color = "#f8fafc"
-        card_bg = "rgba(15, 23, 42, 0.85)"
-        border_color = "rgba(255, 255, 255, 0.2)"
+        if fade_tint == "Light Fog (Soft Wash)":
+            overlay = f"rgba(244, 247, 245, {alpha})"
+            text_color = "#1f2937"
+            card_bg = "rgba(255, 255, 255, 0.92)"
+            border_color = "#d1d5db"
+        else:
+            overlay = f"rgba(15, 23, 42, {alpha})"
+            text_color = "#f8fafc"
+            card_bg = "rgba(15, 23, 42, 0.88)"
+            border_color = "rgba(255, 255, 255, 0.2)"
+
+        bg_css_rule = (
+            f"background-image: linear-gradient({overlay}, {overlay}), url('{img_url}'); "
+            "background-size: cover; background-position: center; background-attachment: fixed;"
+        )
 
 # Custom CSS injecting theme rules safely
 custom_css = """
@@ -78,6 +93,7 @@ custom_css = """
         border-color: REPLACE_BORDER !important;
         border-radius: 12px;
         padding: 8px;
+        backdrop-filter: blur(4px);
     }
     .header-box {
         background: linear-gradient(135deg, #0f3d2e, #256149);
@@ -100,7 +116,7 @@ custom_css = """
         margin: 5px;
     }
     .time-tag {
-        color: #f59e0b !important;
+        color: #d97706 !important;
         font-weight: bold;
         font-size: 0.9rem;
         text-transform: uppercase;
@@ -135,51 +151,58 @@ st.markdown(
 
 # Itinerary Data
 stops = [
+
+     {
+        "time": "5:55 AM - 6:15 AM",
+        "title": "1. Arrival - Baguio City Terminal",
+        "desc": "eyyyyyy",
+        "img": "https://www.google.com/imgres?q=baguio%20terminal%20victory%20liner%20interior&imgurl=https%3A%2F%2Flookaside.fbsbx.com%2Flookaside%2Fcrawler%2Fmedia%2F%3Fmedia_id%3D1081422770664743&imgrefurl=https%3A%2F%2Fwww.facebook.com%2F100063910891704%2Fposts%2Flook-the-newly-renovated-victory-liner-baguio-bus-terminal-at-pnr-kalsada-de-bag%2F1081423110664709%2F&docid=84ju9Et8FE9DTM&tbnid=z2UQMfD8neSzTM&vet=12ahUKEwjU6ci535CYAxVPluEIHXSYEK4QnPAOegQINhAA..i&w=2048&h=1536&hcb=2&ved=2ahUKEwjU6ci535CYAxVPluEIHXSYEK4QnPAOegQINhAA"
+    },
     {
-        "time": "5:55 AM – 6:30 AM",
-        "title": "1. Luggage Drop-Off at Benguet Prime Hotel",
+        "time": "6:15 AM – 6:30 AM",
+        "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
         "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave your bags at the front desk so you can explore hands-free.",
         "img": "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=800&auto=format&fit=crop"
     },
     {
         "time": "6:30 AM – 8:30 AM",
-        "title": "2. Breakfast at Good Taste Restaurant",
+        "title": "3. Breakfast at Good Taste Restaurant",
         "desc": "Fuel up with a hearty breakfast and experience getting your food served by their robot crew.",
         "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1"
     },
     {
         "time": "8:30 AM – 9:30 AM",
-        "title": "3. Morning Stroll at Burnham Park",
+        "title": "4. Morning Stroll at Burnham Park",
         "desc": "Enjoy the crisp morning air around Burnham Lagoon before the daytime crowds arrive.",
         "img": "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcRlPzvf2Z6akTze8mMI6vWj0c21cNJKZ7xpk7PzN9jC_oyJhUNmuc76oe3i5cu6MoqfbigGFGGeiK1I0K0"
     },
     {
         "time": "10:00 AM – 1:00 PM",
-        "title": "4. Ili-Likha Artists Village",
+        "title": "5. Ili-Likha Artists Village",
         "desc": "Explore this hidden food and art park filled with woodwork, sculptures, stained glass art, and cozy cafes.",
         "img": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEifmuhRfMXPsmp3WQ_-2q4jqvcgwpRCYHzG3U6Mei9MYlfRsKpv31w8gRxfLEwf-iKO-M9mFZA0dspOC_tjbz123_65sPB0yZNViNNzDH_OLQd7D8aGRcnkXcyieNNdj-2ozuUOTdQulP7dkXHnNRv74eTRBzJV7YtOmkKqEeJ5-I9fE6Z3e67ZTkn-6g/s1600/Ili%20Likhaan-7.jpg"
     },
     {
         "time": "1:30 PM – 2:00 PM",
-        "title": "5. Hotel Check-In & Rest",
+        "title": "6. Hotel Check-In & Rest",
         "desc": "Return to Benguet Prime Hotel to claim your luggage, check into your room, and rest up.",
         "img": "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
     },
     {
         "time": "6:00 PM – 8:30 PM",
-        "title": "6. SM City Baguio & Dinner",
+        "title": "7. SM City Baguio & Dinner",
         "desc": "Enjoy the cool evening breeze and panoramic city views from the open-air terraces of SM Baguio.",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcTHAT_2Dib-tY8AXEX61isbo6_YqdLN-3pk3_1tMiwQMwH_8oeJ3cgaIR5D31iCxD2ZRA9-tz3N2vHkUA0"
     },
     {
         "time": "9:00 PM – 10:00 PM",
-        "title": "7. Baguio Night Market (Harrison Road)",
+        "title": "8. Baguio Night Market (Harrison Road)",
         "desc": "Browse through ukay-ukay thrift stalls and sample hot street food just a short walk from the hotel.",
         "img": "https://encrypted-tbn2.gstatic.com/licensed-image?q=tbn:ANd9GcSSUGdp2eXAtiPGjyYagOPVs7op5MoZMiUqvKkINowAZBdCg9k9qE42XMqgiHi0ETMwEF93ND-hx9geU8I"
     }
 ]
 
-st.subheader("⏰ Day 1 Schedule")
+st.subheader("⏰ Day 1")
 
 for stop in stops:
     with st.container(border=True):
