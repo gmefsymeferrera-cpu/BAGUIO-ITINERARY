@@ -168,14 +168,14 @@ stops = [
     {
         "time": "6:15 AM – 6:30 AM",
         "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
-        "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave your bags at the front desk so you can explore hands-free.",
+        "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave our bags at the front desk so we can explore hands-free.",
         "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232",
         "transit": "🚶‍♂️ Walk ~4 mins (300m) to Carantes St.",
     },
     {
         "time": "6:30 AM – 8:30 AM",
         "title": "3. Breakfast at Good Taste Restaurant",
-        "desc": f"Fuel up with a hearty local breakfast. Experience getting your food served with their famous robot crew.",
+        "desc": f"Fuel up with a hearty local breakfast. Experience getting our food served with their famous robot crew.",
         "img": "https://i0.wp.com/shellwanders.com/wp-content/uploads/2023/11/Good-taste-cafe-and-restaurant-baguio-Food.png?resize=720%2C730&ssl=1",
         "transit": "🚶‍♂️ Walk ~3 mins (200m) across to Burnham Lagoon",
     },
