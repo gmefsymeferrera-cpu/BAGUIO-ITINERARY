@@ -52,56 +52,6 @@ custom_css = f"""
         box-shadow: 0 8px 25px rgba(0,0,0,0.06);
         text-align: center;
     }}
-    /* --- MODERN COUNTDOWN CARD STYLE WITH SECONDS --- */
-    .countdown-card {{
-        background: linear-gradient(135deg, rgba(80, 122, 100, 0.08) 0%, rgba(184, 134, 11, 0.08) 100%);
-        border: 2px solid {border_color} !important;
-        border-radius: 20px;
-        padding: 22px 18px;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-        text-align: center;
-    }}
-    .countdown-title {{
-        font-family: 'Montserrat', sans-serif !important;
-        font-size: 0.95rem;
-        font-weight: 700;
-        color: {accent_color};
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        margin-bottom: 12px;
-    }}
-    .countdown-grid {{
-        display: flex;
-        justify-content: center;
-        gap: 12px;
-        flex-wrap: wrap;
-    }}
-    .countdown-box {{
-        background-color: #ffffff;
-        border: 1.5px solid {border_color};
-        border-radius: 14px;
-        padding: 10px 12px;
-        min-width: 65px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-    }}
-    .countdown-num {{
-        font-family: 'Montserrat', sans-serif !important;
-        font-size: 1.4rem;
-        font-weight: 700;
-        color: {gold_accent};
-        line-height: 1.2;
-    }}
-    .countdown-label {{
-        font-family: 'Montserrat', sans-serif !important;
-        font-size: 0.7rem;
-        font-weight: 600;
-        color: {text_color};
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-top: 2px;
-    }}
-    /* --------------------------------------------- */
     div.stButton > button {{
         width: 100%;
         border-radius: 16px !important;
@@ -198,43 +148,97 @@ banner_html = f"""
 """
 components.html(banner_html, height=banner_height + 30)
 
-# --- COUNTDOWN TIMER LOGIC (WITH SECONDS) ---
-target_date = datetime(2026, 12, 20, 5, 55, 0)
-now = datetime.now()
-time_left = target_date - now
-total_seconds_left = int(time_left.total_seconds())
+# --- LIVE COUNTDOWN COMPONENT (NO REFRESH NEEDED) ---
+countdown_html = f"""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+    .countdown-card {{
+        background: linear-gradient(135deg, rgba(80, 122, 100, 0.08) 0%, rgba(184, 134, 11, 0.08) 100%);
+        border: 2px solid {border_color};
+        border-radius: 20px;
+        padding: 22px 18px;
+        margin-bottom: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        text-align: center;
+        font-family: 'Montserrat', sans-serif;
+    }}
+    .countdown-title {{
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: {accent_color};
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 12px;
+    }}
+    .countdown-grid {{
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        flex-wrap: wrap;
+    }}
+    .countdown-box {{
+        background-color: #ffffff;
+        border: 1.5px solid {border_color};
+        border-radius: 14px;
+        padding: 10px 12px;
+        min-width: 65px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }}
+    .countdown-num {{
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: {gold_accent};
+        line-height: 1.2;
+    }}
+    .countdown-label {{
+        font-size: 0.7rem;
+        font-weight: 600;
+        color: {text_color};
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-top: 2px;
+    }}
+</style>
 
-if total_seconds_left >= 0:
-    days_left = total_seconds_left // 86400
-    hours_left = (total_seconds_left % 86400) // 3600
-    minutes_left = (total_seconds_left % 3600) // 60
-    seconds_left = total_seconds_left % 60
-
-    st.markdown(f"""
-    <div class="countdown-card">
-        <div class="countdown-title">⏳ Countdown hanggang sa Baguio Trip! 🎒🌲</div>
-        <div class="countdown-grid">
-            <div class="countdown-box">
-                <div class="countdown-num">{days_left}</div>
-                <div class="countdown-label">Araw</div>
-            </div>
-            <div class="countdown-box">
-                <div class="countdown-num">{hours_left}</div>
-                <div class="countdown-label">Oras</div>
-            </div>
-            <div class="countdown-box">
-                <div class="countdown-num">{minutes_left}</div>
-                <div class="countdown-label">Minuto</div>
-            </div>
-            <div class="countdown-box">
-                <div class="countdown-num">{seconds_left}</div>
-                <div class="countdown-label">Segundo</div>
-            </div>
-        </div>
+<div class="countdown-card">
+    <div class="countdown-title">⏳ Countdown hanggang sa Baguio Trip! 🎒🌲</div>
+    <div class="countdown-grid" id="countdown">
+        <div class="countdown-box"><div class="countdown-num" id="days">--</div><div class="countdown-label">Araw</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="hours">--</div><div class="countdown-label">Oras</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="minutes">--</div><div class="countdown-label">Minuto</div></div>
+        <div class="countdown-box"><div class="countdown-num" id="seconds">--</div><div class="countdown-label">Segundo</div></div>
     </div>
-    """, unsafe_allow_html=True)
-else:
-    st.success("🎉 Nandito na tayo o nakalipas na ang petsa ng ating Baguio trip! Enjoy!")
+</div>
+
+<script>
+    const targetDate = new Date("December 20, 2026 05:55:00").getTime();
+
+    function updateCountdown() {{
+        const now = new Date().getTime();
+        const distance = targetDate - now;
+
+        if (distance < 0) {{
+            document.getElementById("countdown").innerHTML = "<h3 style='color: #507a64; margin: 0;'>🎉 Nandito na tayo o nakalipas na ang petsa ng ating Baguio trip! Enjoy!</h3>";
+            return;
+        }}
+
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerText = days;
+        document.getElementById("hours").innerText = hours;
+        document.getElementById("minutes").innerText = minutes;
+        document.getElementById("seconds").innerText = seconds;
+    }}
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>
+"""
+
+components.html(countdown_html, height=130)
 
 # Weather Widget
 st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
