@@ -712,4 +712,4 @@ elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
         """, unsafe_allow_html=True)
 
 st.divider()
-st.markdown("<p style='text-align: center; font-size: 0.9rem;'>Enjoy your Baguio Trip! 🍓 </p>", unsafe_allow_html=True)
+st.markdown("<p style='text-align: center; font-size: 0.9rem;'>Enjoy our Baguio Trip, Lab lab ! 🍓 </p>", unsafe_allow_html=True)
