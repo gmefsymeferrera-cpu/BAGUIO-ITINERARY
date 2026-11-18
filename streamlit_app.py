@@ -36,7 +36,7 @@ banner_vertical_pos = st.sidebar.slider(
 )
 
 banner_tint = st.sidebar.slider(
-    "Banner Dark Luxury Gradient (%)", min_value=20, max_value=85, value=45, step=5
+    "Banner Dark Luxury Gradient (%)", min_value=10, max_value=60, value=25, step=5
 )
 banner_alpha = round(banner_tint / 100, 2)
 
@@ -79,14 +79,14 @@ elif page_theme == "Minimalist Pearl White":
 
 if header_img_url:
   header_bg_rule = (
-      f"background-image: linear-gradient(135deg, rgba(30, 40, 35, {banner_alpha}) 0%, rgba(20, 25, 22, {banner_alpha + 0.2}) 100%),"
+      f"background-image: linear-gradient(135deg, rgba(20, 30, 25, {banner_alpha}) 0%, rgba(10, 15, 12, {banner_alpha - 0.05}) 100%),"
       f" url('{header_img_url}'); background-size: cover; background-position:"
       f" center {banner_vertical_pos}%;"
   )
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS with MUCH LARGER CENTERED CALLIGRAPHY TITLE
+# Custom CSS with Brightened, Clean, and Centered Calligraphy Title
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:ital,wght@0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
@@ -172,7 +172,7 @@ custom_css = f"""
         text-align: center;
         min-height: {banner_height}px;
         margin-bottom: 30px;
-        box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
     }}
     .header-content {{
         width: 100%;
@@ -181,13 +181,13 @@ custom_css = f"""
         align-items: center;
     }}
     
-    /* Pinalakihan at ginawang super-laking calligraphy art */
+    /* Maliwanag at Litaw na Calligraphy Title */
     .header-box h1 {{
         font-family: 'Great Vibes', cursive !important;
-        color: {gold_accent} !important;
+        color: #f7e1b5 !important;
         font-size: 7.5rem !important;
         font-weight: 400 !important;
-        text-shadow: 0 5px 25px rgba(0,0,0,0.9), 0 0 50px rgba(194, 155, 97, 0.6);
+        text-shadow: 0 4px 15px rgba(0,0,0,0.7), 0 0 25px rgba(194, 155, 97, 0.4);
         margin: 0px 0px -10px 0px;
         line-height: 0.95;
         letter-spacing: 3px;
@@ -199,8 +199,8 @@ custom_css = f"""
         letter-spacing: 2px;
         margin-top: 10px;
         margin-bottom: 15px;
-        color: rgba(255, 255, 255, 0.95) !important;
-        text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+        color: #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.6);
     }}
 
     .badge-row {{
@@ -212,15 +212,15 @@ custom_css = f"""
     }}
     .badge {{
         display: inline-block;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(255, 255, 255, 0.25);
         backdrop-filter: blur(10px);
-        border: 1px solid rgba(255, 255, 255, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.5);
         padding: 8px 16px;
         border-radius: 30px;
         font-size: 0.95rem;
-        font-weight: 500;
+        font-weight: 600;
         color: #ffffff;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }}
     @media (max-width: 640px) {{
         .header-box h1 {{
