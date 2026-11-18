@@ -144,7 +144,7 @@ stops = [
     {
         "time": "6:15 AM – 6:30 AM",
         "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
-        "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave our bags at the front desk so we can explore hands-free.",
+        "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave your bags at the front desk so you can explore hands-free.",
         "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232"
     },
     {
@@ -199,7 +199,10 @@ for stop in stops:
 
 st.divider()
 
+# --- ENHANCED INTERACTIVE CHECKLIST ---
 st.subheader("🎒 Interactive Packing Checklist")
+st.markdown("Check items off as you pack your bags:")
+
 checklist_items = [
     "Light jacket or sweater (Crucial: Baguio mornings & evenings get chilly!)",
     "Comfortable walking shoes (For parks & uphill walks)",
@@ -209,7 +212,23 @@ checklist_items = [
     "Cash & small bills (For taxis, jeepneys, and Night Market stalls)"
 ]
 
-for item in checklist_items:
-    st.checkbox(item)
+# Track checked states dynamically
+checked_states = []
+for i, item in enumerate(checklist_items):
+    is_checked = st.checkbox(item, key=f"check_{i}")
+    checked_states.append(is_checked)
 
+# Calculate live progress
+total_items = len(checklist_items)
+completed_items = sum(checked_states)
+progress_pct = completed_items / total_items
+
+# Display live progress bar and status counter
+st.progress(progress_pct)
+st.caption(f"✨ Packed: **{completed_items} / {total_items}** items ready")
+
+if completed_items == total_items:
+    st.success("🎉 All set! You're fully packed and ready for Baguio!")
+
+st.divider()
 st.caption("Safe travels to the Summer Capital of the Philippines! 🌲")
