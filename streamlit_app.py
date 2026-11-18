@@ -286,8 +286,7 @@ st.markdown(
 
 # Weather Widget
 st.markdown(
-    "🌲 **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool"
-    " Breeze** (Perfect highland weather)"
+    "🌲 **Baguio Live Weather Forecast:** `18°C` 
 )
 
 st.divider()
