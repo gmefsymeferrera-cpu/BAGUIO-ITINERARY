@@ -162,47 +162,6 @@ custom_css = f"""
         text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }}
 
-    .header-box {{
-        {header_bg_rule}
-        padding: 55px 30px;
-        border-radius: 28px;
-        color: white !important;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        min-height: {banner_height}px;
-        margin-bottom: 30px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-        border: 2px solid rgba(255, 255, 255, 0.4);
-    }}
-    .header-content {{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }}
-    
-    .badge-row {{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-        margin-top: 10px;
-    }}
-    .badge {{
-        display: inline-block;
-        background: rgba(0, 0, 0, 0.45);
-        backdrop-filter: blur(12px);
-        border: 1.5px solid rgba(255, 255, 255, 0.6);
-        padding: 8px 18px;
-        border-radius: 30px;
-        font-size: 0.95rem;
-        font-weight: 600;
-        color: #ffffff !important;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }}
     @media (max-width: 640px) {{
         div.stButton > button p {{
             font-size: 1rem !important;
@@ -231,23 +190,36 @@ custom_css = f"""
 
 st.markdown(custom_css, unsafe_allow_html=True)
 
-# Header Section na may garantisadong White Text para sa "Baguio Itinerary"
-st.markdown(
-    """
-    <div class="header-box">
-        <div class="header-content">
-            <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
-            <p style="color: #FFFFFF !important; font-size: 1.25rem !important; font-weight: 600; letter-spacing: 3px; margin-top: 5px; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
-            <div class="badge-row">
-                <span class="badge">🚌 Arrival: 5:55 AM</span>
-                <span class="badge">🏨 Benguet Prime Hotel</span>
-                <span class="badge">📅 3 Days / 2 Nights</span>
-            </div>
+# 100% PURE HTML BANNER NA MAY GUARANTEED WHITE TEXT
+banner_html = f"""
+<div style="
+    background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%), url('{header_img_url}');
+    background-size: cover;
+    background-position: center {banner_vertical_pos}%;
+    padding: 55px 30px;
+    border-radius: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: {banner_height}px;
+    margin-bottom: 30px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    border: 2px solid rgba(255, 255, 255, 0.4);
+">
+    <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+        <h1 style="font-family: 'Pacifico', cursive !important; color: #FFFFFF !important; font-size: 5.5rem !important; font-weight: 400 !important; text-shadow: 0 4px 25px rgba(0,0,0,0.9), 0 0 50px rgba(255, 255, 255, 0.4); margin: 0px 0px 5px 0px; line-height: 1.1; letter-spacing: 2px;">Baguio Itinerary</h1>
+        <p style="color: #FFFFFF !important; font-size: 1.25rem !important; font-weight: 600; letter-spacing: 3px; margin-top: 5px; margin-bottom: 18px; text-shadow: 0 2px 8px rgba(0,0,0,0.7); text-transform: uppercase;">🌲 3 Days & 2 Nights Highland Escape 🌲</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 10px;">
+            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.6); padding: 8px 18px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">🚌 Arrival: 5:55 AM</span>
+            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.6); padding: 8px 18px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">🏨 Benguet Prime Hotel</span>
+            <span style="display: inline-block; background: rgba(0, 0, 0, 0.45); backdrop-filter: blur(12px); border: 1.5px solid rgba(255, 255, 255, 0.6); padding: 8px 18px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; color: #FFFFFF !important; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">📅 3 Days / 2 Nights</span>
         </div>
     </div>
-    """,
-    unsafe_allow_html=True,
-)
+</div>
+"""
+components.html(banner_html, height=banner_height + 40)
 
 # Weather Widget
 st.markdown(
