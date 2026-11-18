@@ -40,9 +40,9 @@ banner_tint = st.sidebar.slider(
 )
 banner_alpha = round(banner_tint / 100, 2)
 
-# Maliwanag at Preskong Kulay Tokens para sa Light Mode
+# Maliwanag at Preskong Kulay Tokens
 bg_css_rule = "background-color: #ffffff;"
-text_color = "#2b3e34"
+text_color = "#23332a"
 card_bg = "#ffffff"
 border_color = "#d6e0d8"
 accent_color = "#507a64"
@@ -86,25 +86,25 @@ if header_img_url:
 else:
   header_bg_rule = "background: linear-gradient(135deg, #749c86, #9cb8a9);"
 
-# Custom CSS
+# Custom CSS na pinuwersa ang lahat ng text at elements na sumunod sa kulay
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
 
     .stApp {{
         {bg_css_rule}
-        color: {text_color};
+        color: {text_color} !important;
         font-family: 'Montserrat', sans-serif !important;
     }}
     
-    h2, h3, .stApp h2, .stApp h3 {{
+    h1, h2, h3, h4, h5, h6, .stApp h1, .stApp h2, .stApp h3, .stApp h4 {{
         font-family: 'Montserrat', sans-serif !important;
         font-weight: 700;
         letter-spacing: 0.3px;
-        color: {text_color};
+        color: {text_color} !important;
     }}
 
-    p, span, label, div {{
+    p, span, label, div, markdown, .stMarkdown, [data-testid="stMarkdownContainer"] p {{
         font-family: 'Montserrat', sans-serif !important;
         color: {text_color} !important;
     }}
