@@ -532,7 +532,8 @@ elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
         st.markdown("""
         <div class="contact-card">
             <h4>👮‍♂️ Public Safety</h4>
-            <p><b>Baguio City Police Office:</b> (074) 442-1211</p>
+            <p><b>Baguio City Police Office:</b> 
+            (074) 442-1211</p>
             <p><b>Emergency Hotline:</b> 911</p>
         </div>
         """, unsafe_allow_html=True)
@@ -541,7 +542,8 @@ elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
         <div class="contact-card">
             <h4>🏥 Medical & Health</h4>
             <p><b>SLU Hospital of the Sacred Heart:</b> (074) 444-5720</p>
-            <p><b>Baguio General Hospital (BGH):</b> (074) 442-4216</p>
+            <p><b>Baguio General Hospital (BGH):</b> 
+            (074) 442-4216</p>
         </div>
         """, unsafe_allow_html=True)
 
