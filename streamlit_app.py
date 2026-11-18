@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 # Page setup
 st.set_page_config(
     page_title="Baguio Itinerary | December 20-22",
-    page_icon="🌲",
+    page_icon="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQGiP1628PhmIT6TxUhnqw4H7C6qPEAXw1rtOCW_Vr-SVQ0KwvLUA519xdH&s=10",
     layout="centered",
 )
 
