@@ -155,14 +155,14 @@ stops = [
      {
         "time": "5:55 AM - 6:15 AM",
         "title": "1. Arrival - Baguio City Terminal",
-        "desc": "eyyyyyy",
+        "desc": "Touch Down! Welcome to Baguio.",
         "img": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBz7rtObyyo6ISt9Wc8fjp_Y6tISdxKiqjP86i1hFOoftnfQy_u1ds2-zL&s=10"
     },
     {
         "time": "6:15 AM – 6:30 AM",
         "title": "2. Luggage Drop-Off at Benguet Prime Hotel",
         "desc": "Head directly to Benguet Prime Hotel on F. Calderon St. Leave your bags at the front desk so you can explore hands-free.",
-        "img": "https://images.unsplash.com/photo-1590490360182-c33d57733427?q=80&w=800&auto=format&fit=crop"
+        "img": "https://pix10.agoda.net/hotelImages/30155249/0/1ee5b88cd5ae9c397d4baf3e53da783f.jpeg?ce=2&s=414x232"
     },
     {
         "time": "6:30 AM – 8:30 AM",
@@ -172,9 +172,9 @@ stops = [
     },
     {
         "time": "8:30 AM – 9:30 AM",
-        "title": "4. Morning Stroll at Burnham Park",
+        "title": "4. Burnham Park",
         "desc": "Enjoy the crisp morning air around Burnham Lagoon before the daytime crowds arrive.",
-        "img": "https://encrypted-tbn1.gstatic.com/licensed-image?q=tbn:ANd9GcRlPzvf2Z6akTze8mMI6vWj0c21cNJKZ7xpk7PzN9jC_oyJhUNmuc76oe3i5cu6MoqfbigGFGGeiK1I0K0"
+        "img": "https://wanderingsoulscamper.com/2015/03/21/baguio-city-burnham-park/"
     },
     {
         "time": "10:00 AM – 1:00 PM",
@@ -186,7 +186,7 @@ stops = [
         "time": "1:30 PM – 2:00 PM",
         "title": "6. Hotel Check-In & Rest",
         "desc": "Return to Benguet Prime Hotel to claim your luggage, check into your room, and rest up.",
-        "img": "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
+        "img": "https://cf.bstatic.com/xdata/images/hotel/max1024x768/172377839.jpg?k=1d4760bf2cdfd7abf95af2fa677c4fd253e7977b98eb19b3832bfccc6f37be96&o="
     },
     {
         "time": "6:00 PM – 8:30 PM",
