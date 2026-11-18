@@ -1,6 +1,5 @@
-import pandas as pd
-import pydeck as pdk
 import streamlit as st
+import streamlit.components.v1 as components
 
 # Page setup
 st.set_page_config(
@@ -157,94 +156,26 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- INTERACTIVE 3D TERRAIN MAP SECTION ---
-st.subheader("⛰️ Day 1 3D Terrain Map")
-st.markdown(
-    "Real topographic outdoor map showing Baguio's mountain ridges and your 8"
-    " stops:"
-)
+# --- REAL GOOGLE MAP SATELLITE EMBED ---
+st.subheader("🛰️ Live Satellite Map of Baguio Itinerary")
+st.markdown("Real interactive Google Maps **Satellite view** centered around your Day 1 route:")
 
-map_data = pd.DataFrame(
-    {
-        "lat": [
-            16.4112,
-            16.4135,
-            16.4121,
-            16.4132,
-            16.4105,
-            16.4135,
-            16.4126,
-            16.4150,
-        ],
-        "lon": [
-            120.5960,
-            120.5975,
-            120.5945,
-            120.5972,
-            120.5982,
-            120.5975,
-            120.5979,
-            120.5962,
-        ],
-        "name": [
-            "1. Bus Terminal",
-            "2. Benguet Prime Hotel",
-            "3. Good Taste Restaurant",
-            "4. Burnham Park",
-            "5. Ili-Likha Artists Village",
-            "6. Hotel Check-In",
-            "7. SM City Baguio",
-            "8. Baguio Night Market",
-        ],
-    }
-)
-
-st.pydeck_chart(
-    pdk.Deck(
-        map_style="mapbox://styles/mapbox/outdoors-v12",
-        initial_view_state=pdk.ViewState(
-            latitude=16.4120,
-            longitude=120.5970,
-            zoom=14,
-            pitch=45,  # 3D tilt view to show elevation/terrain
-            bearing=15,
-        ),
-        layers=[
-            pdk.Layer(
-                "ScatterplotLayer",
-                data=map_data,
-                get_position="[lon, lat]",
-                get_color="[217, 119, 6, 240]",
-                get_radius=60,
-                pickable=True,
-                auto_highlight=True,
-            ),
-            pdk.Layer(
-                "TextLayer",
-                data=map_data,
-                get_position="[lon, lat]",
-                get_text="name",
-                get_size=15,
-                get_color="[30, 50, 40, 255]",
-                get_alignment_baseline="'bottom'",
-            ),
-        ],
-        tooltip={
-            "html": "<b>Stop:</b> {name}",
-            "style": {
-                "background": "rgba(15, 61, 46, 0.95)",
-                "color": "white",
-                "padding": "8px",
-                "border-radius": "6px",
-            },
-        },
-    )
-)
+# NOTE: `t=k` stands for Satellite view (whereas `t=m` is street map)
+google_map_html = """
+<iframe 
+    src="https://maps.google.com/maps?q=Benguet+Prime+Hotel+Baguio+City&t=k&z=16&output=embed" 
+    width="100%" 
+    height="420" 
+    style="border:0; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);" 
+    allowfullscreen="" 
+    loading="lazy">
+</iframe>
+"""
+components.html(google_map_html, height=430)
 
 st.caption(
-    "⛰️ *3D Topographic Terrain map rendered via Mapbox Outdoors. Notice the"
-    .strip()
-    + " mountain contours and elevation slant!*"
+    "🛰️ *Powered by real Google Maps Satellite imagery. You can explore actual"
+    " rooftops, pine trees, and terrain in high resolution!*"
 )
 
 st.divider()
