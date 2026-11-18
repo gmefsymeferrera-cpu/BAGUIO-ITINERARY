@@ -146,7 +146,7 @@ banner_html = f"""
     </div>
 </div>
 """
-components.html(banner_html, height=banner_height + 30)
+components.html(banner_html, height=banner_height + 100)
 
 # --- MOVED WEATHER WIDGET & LIVE COUNTDOWN TO THE TOP ---
 st.markdown("🌡️ **Baguio Live Weather Forecast:** `18°C` • 🌫️ **Misty Pine & Cool**")
