@@ -9,22 +9,33 @@ st.set_page_config(
     layout="centered",
 )
 
-# --- CONFIG & BANNER CONTROLS ---
-page_theme = "Earthy Sage & Gold (Botanical)"
+# --- THEME STATE INITIALIZATION ---
+if "dark_mode" not in st.session_state:
+    st.session_state.dark_mode = False
+
+# --- COLOR TOKENS (Dynamic batay sa Dark Mode toggle) ---
+if st.session_state.dark_mode:
+    bg_css_rule = "background-color: #121c17;"
+    text_color = "#e2e8e4"
+    card_bg = "#1b2821"
+    border_color = "#2c4035"
+    accent_color = "#75a38a"
+    gold_accent = "#d4af37"
+    banner_alpha = 0.45
+else:
+    bg_css_rule = "background-color: #ffffff;"
+    text_color = "#23332a"
+    card_bg = "#ffffff"
+    border_color = "#d6e0d8"
+    accent_color = "#507a64"
+    gold_accent = "#b8860b"
+    banner_alpha = 0.15
+
 header_img_url = "https://cdn.corner.inc/place-photo/Ab43m-t7jaJzsCTchqAeA-yawcbwHPOITbjj2Mz0uiBiR90VfW5yaFfzVDYvGQXXxEVOnMoFrtBpqoixwUg2SY0oOYFdfhtdJkvgfrjzcHfKTnED0afxFsLEpdne9X-XuyoN3gFpmnf6TUcBl9vogDTjmJZkkZdGCFVSPnF7LunVVaroHAD5KELaHf6Q5QKBXyZxXo0fLGOLKRXrF8khWj7XqD1V_oKA0HdrWomHZqL_mwn39ZXNwSuVFiRBrhqnMNmg9Koxkhn92irpi_h-ETlQ919Srksyc1Q9nfZYpsA2rKf6WQIBZpbQo7FS9pS7fe_BwmRu3iqDi0vb3WuLn3KunmHU51pkcscEDpyZC-51EoSpmcTpZ_BsiuDnTSo72HbSA_FiB0MNu7CrkHguJO0J1UyOGY0irSBNqeVdNvams-ciYzpFZdBPlegCKE_tl1bf.jpeg"
 banner_height = 210
 banner_vertical_pos = 35
-banner_alpha = 0.15
 
-# Color Tokens (Light Mode Only)
-bg_css_rule = "background-color: #ffffff;"
-text_color = "#23332a"
-card_bg = "#ffffff"
-border_color = "#d6e0d8"
-accent_color = "#507a64"
-gold_accent = "#b8860b"
-
-# Custom CSS
+# Custom CSS na gumagamit ng dynamic tokens
 custom_css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Montserrat:wght@400;500;600;700&display=swap');
@@ -85,7 +96,7 @@ custom_css = f"""
         letter-spacing: 1px;
     }}
     .transit-badge {{
-        background-color: rgba(184, 134, 11, 0.1);
+        background-color: rgba(184, 134, 11, 0.15);
         color: {gold_accent};
         padding: 6px 14px;
         border-radius: 10px;
@@ -108,7 +119,7 @@ custom_css = f"""
         box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         transition: transform 0.3s ease;
         border: 2px solid {border_color};
-        background: #fff;
+        background: {card_bg};
         padding: 8px;
     }}
     .collage-item:hover {{
@@ -117,6 +128,14 @@ custom_css = f"""
     </style>
 """
 st.markdown(custom_css, unsafe_allow_html=True)
+
+# --- THEME TOGGLE SWITCH SA ITAAS ---
+col_t1, col_t2 = st.columns([4, 1])
+with col_t2:
+    is_dark = st.toggle("🌙 Dark Mode", value=st.session_state.dark_mode)
+    if is_dark != st.session_state.dark_mode:
+        st.session_state.dark_mode = is_dark
+        st.rerun()
 
 # Compact Banner HTML
 banner_html = f"""
@@ -167,7 +186,6 @@ countdown_html = f"""
 </div>
 
 <script>
-// Itakda ang target date (December 20, 2026, 05:55:00)
 const countDownDate = new Date("Dec 20, 2026 05:55:00").getTime();
 
 const x = setInterval(function() {
