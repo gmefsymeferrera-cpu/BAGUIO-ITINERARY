@@ -20,7 +20,7 @@ banner_alpha = 0.50
 bg_css_rule = "background-color: #ffffff;"
 text_color = "#23332a"
 card_bg = "#FFFFFF"
-border_color = "#d6e0d8"
+border_color = "#e3b6db"
 accent_color = "#23332a"
 gold_accent = "#b8860b"
 
