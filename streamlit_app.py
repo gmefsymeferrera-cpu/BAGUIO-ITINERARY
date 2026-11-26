@@ -1,6 +1,7 @@
+import base64
+import requests
 import streamlit as st
 import streamlit.components.v1 as components
-from datetime import datetime
 
 # Page setup
 st.set_page_config(
@@ -148,7 +149,107 @@ banner_html = f"""
 """
 components.html(banner_html, height=banner_height + 60)
 
-# --- REDESIGNED STYLISH WEATHER WIDGET ---
+
+# --- LIVE WEATHER + DEC 20-22 PREVIEW ---
+@st.cache_data(ttl=600)
+def get_baguio_weather_and_trip_preview():
+    url = (
+        "https://api.open-meteo.com/v1/forecast"
+        "?latitude=16.4023&longitude=120.5960"
+        "&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code"
+        "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+        "&forecast_days=16"
+        "&timezone=Asia%2FManila"
+    )
+    weather_map = {
+        0: ("☀️", "Clear Sky"),
+        1: ("🌤️", "Mainly Clear"),
+        2: ("⛅", "Partly Cloudy"),
+        3: ("☁️", "Overcast"),
+        45: ("🌫️", "Misty Pine & Fog"),
+        48: ("🌫️", "Rime Fog"),
+        51: ("🌦️", "Light Drizzle"),
+        53: ("🌦️", "Moderate Drizzle"),
+        55: ("🌧️", "Dense Drizzle"),
+        61: ("🌧️", "Light Rain"),
+        63: ("🌧️", "Moderate Rain"),
+        65: ("🌧️", "Heavy Rain"),
+        80: ("🌦️", "Rain Showers"),
+        81: ("🌧️", "Moderate Showers"),
+        82: ("⛈️", "Heavy Showers"),
+        95: ("⛈️", "Thunderstorm"),
+    }
+
+    trip_dates = [
+        {"date_str": "2026-12-20", "label": "Dec 20 (Day 1)", "icon": "🌤️", "hi": 22, "lo": 14, "rain": "10%", "is_live_fc": False},
+        {"date_str": "2026-12-21", "label": "Dec 21 (Day 2)", "icon": "⛅", "hi": 22, "lo": 14, "rain": "10%", "is_live_fc": False},
+        {"date_str": "2026-12-22", "label": "Dec 22 (Day 3)", "icon": "☀️", "hi": 21, "lo": 14, "rain": "8%",  "is_live_fc": False},
+    ]
+
+    try:
+        resp = requests.get(url, timeout=6)
+        resp.raise_for_status()
+        payload = resp.json()
+        curr = payload.get("current", {})
+        daily = payload.get("daily", {})
+
+        temp = round(curr.get("temperature_2m", 18))
+        humidity = round(curr.get("relative_humidity_2m", 88))
+        wind = round(curr.get("wind_speed_10m", 12))
+        code = curr.get("weather_code", 45)
+        icon, condition = weather_map.get(code, ("🌫️", "Cool Highland Breeze"))
+
+        api_dates = daily.get("time", [])
+        for idx, d_str in enumerate(api_dates):
+            for trip_day in trip_dates:
+                if d_str == trip_day["date_str"]:
+                    d_code = daily["weather_code"][idx]
+                    d_icon, _ = weather_map.get(d_code, ("🌤️", ""))
+                    trip_day["icon"] = d_icon
+                    trip_day["hi"] = round(daily["temperature_2m_max"][idx])
+                    trip_day["lo"] = round(daily["temperature_2m_min"][idx])
+                    rain_prob = daily.get("precipitation_probability_max", [10])[idx]
+                    trip_day["rain"] = f"{rain_prob if rain_prob is not None else 10}%"
+                    trip_day["is_live_fc"] = True
+
+        current_wx = {
+            "temp": f"{temp}°C",
+            "condition": condition,
+            "humidity": f"{humidity}%",
+            "wind": f"{wind} km/h",
+            "icon": icon,
+            "live": True,
+        }
+        return current_wx, trip_dates
+
+    except Exception:
+        current_wx = {
+            "temp": "18°C",
+            "condition": "Misty Pine & Cool (Offline)",
+            "humidity": "88%",
+            "wind": "12 km/h",
+            "icon": "🌫️",
+            "live": False,
+        }
+        return current_wx, trip_dates
+
+
+wx, trip_forecast = get_baguio_weather_and_trip_preview()
+status_label = "Baguio City Live Weather" if wx["live"] else "Baguio City Weather (Cached)"
+has_live_trip_fc = any(d["is_live_fc"] for d in trip_forecast)
+preview_badge = "LIVE 16-DAY FORECAST" if has_live_trip_fc else "DEC 20–22 CLIMATE OUTLOOK"
+
+trip_cards_html = ""
+for day in trip_forecast:
+    trip_cards_html += f"""
+    <div class="forecast-day-box">
+        <div class="fc-date">{day['label']}</div>
+        <div class="fc-icon">{day['icon']}</div>
+        <div class="fc-temps">{day['hi']}° <span style="opacity: 0.6; font-weight: 500;">/ {day['lo']}°C</span></div>
+        <div class="fc-rain">💧 {day['rain']} rain</div>
+    </div>
+    """
+
 weather_widget_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
@@ -157,14 +258,16 @@ weather_widget_html = f"""
         border: 2px solid {border_color};
         border-radius: 20px;
         padding: 16px 20px;
-        margin-bottom: 15px;
+        margin-bottom: 10px;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+        font-family: 'Montserrat', sans-serif;
+    }}
+    .weather-top {{
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: 15px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.04);
-        font-family: 'Montserrat', sans-serif;
     }}
     .weather-left {{
         display: flex;
@@ -172,15 +275,15 @@ weather_widget_html = f"""
         gap: 14px;
     }}
     .weather-icon {{
-        font-size: 2.5rem;
-        background: #Ffffff;
+        font-size: 2.4rem;
+        background: #ffffff;
         border: 1.5px solid {border_color};
         border-radius: 16px;
         padding: 8px 12px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }}
     .weather-title {{
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         font-weight: 700;
         color: {accent_color};
         text-transform: uppercase;
@@ -194,7 +297,7 @@ weather_widget_html = f"""
     }}
     .weather-right {{
         display: flex;
-        gap: 15px;
+        gap: 12px;
     }}
     .weather-badge {{
         background-color: #F4C2C2;
@@ -217,29 +320,100 @@ weather_widget_html = f"""
         color: {gold_accent};
         margin-top: 2px;
     }}
+    .forecast-divider {{
+        border-top: 1px dashed {border_color};
+        margin: 14px 0 10px 0;
+        padding-top: 10px;
+    }}
+    .forecast-header {{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+    }}
+    .forecast-heading {{
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: {accent_color};
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }}
+    .forecast-pill {{
+        font-size: 0.65rem;
+        font-weight: 700;
+        background: #ffffff;
+        color: {gold_accent};
+        border: 1px solid {border_color};
+        padding: 2px 8px;
+        border-radius: 10px;
+    }}
+    .forecast-grid {{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+    }}
+    .forecast-day-box {{
+        background: #ffffff;
+        border: 1.5px solid {border_color};
+        border-radius: 14px;
+        padding: 8px 10px;
+        text-align: center;
+    }}
+    .fc-date {{
+        font-size: 0.72rem;
+        font-weight: 700;
+        color: {accent_color};
+    }}
+    .fc-icon {{
+        font-size: 1.35rem;
+        margin: 3px 0;
+    }}
+    .fc-temps {{
+        font-size: 0.88rem;
+        font-weight: 700;
+        color: {text_color};
+    }}
+    .fc-rain {{
+        font-size: 0.68rem;
+        font-weight: 600;
+        color: {gold_accent};
+        margin-top: 2px;
+    }}
 </style>
 
 <div class="weather-card">
-    <div class="weather-left">
-        <div class="weather-icon">🌫️</div>
-        <div>
-            <div class="weather-title">Baguio City Live Weather</div>
-            <div class="weather-main">18°C &nbsp;•&nbsp; <span style="font-size: 1rem; font-weight: 600; color: {accent_color};">Misty Pine & Cool</span></div>
+    <div class="weather-top">
+        <div class="weather-left">
+            <div class="weather-icon">{wx["icon"]}</div>
+            <div>
+                <div class="weather-title">{status_label}</div>
+                <div class="weather-main">{wx["temp"]} &nbsp;•&nbsp; <span style="font-size: 1rem; font-weight: 600; color: {accent_color};">{wx["condition"]}</span></div>
+            </div>
+        </div>
+        <div class="weather-right">
+            <div class="weather-badge">
+                <div class="badge-label">Humidity</div>
+                <div class="badge-val">{wx["humidity"]}</div>
+            </div>
+            <div class="weather-badge">
+                <div class="badge-label">Wind</div>
+                <div class="badge-val">{wx["wind"]}</div>
+            </div>
         </div>
     </div>
-    <div class="weather-right">
-        <div class="weather-badge">
-            <div class="badge-label">Humidity</div>
-            <div class="badge-val">88%</div>
+
+    <div class="forecast-divider">
+        <div class="forecast-header">
+            <span class="forecast-heading">🎄 Baguio Trip Window (Dec 20–22)</span>
+            <span class="forecast-pill">{preview_badge}</span>
         </div>
-        <div class="weather-badge">
-            <div class="badge-label">Wind</div>
-            <div class="badge-val">12 km/h</div>
+        <div class="forecast-grid">
+            {trip_cards_html}
         </div>
     </div>
 </div>
 """
-components.html(weather_widget_html, height=115)
+components.html(weather_widget_html, height=235)
 
 # --- LIVE COUNTDOWN ---
 countdown_html = f"""
@@ -339,13 +513,13 @@ st.divider()
 selected_tab = st.selectbox(
     "Choices:",
     [
-        "📅 3-Day Itinerary", 
-        "💰 Expense Calculator", 
-        "🎒 Packing Checklist", 
-        "📝 Travel Journal & Notes", 
+        "📅 3-Day Itinerary",
+        "💰 Expense Calculator",
+        "🎒 Packing Checklist",
+        "📝 Travel Journal & Notes",
         "📸 Photo Gallery",
-        "🗺️ Map & 🚨 Emergency Contacts"
-    ]
+        "🗺️ Map & 🚨 Emergency Contacts",
+    ],
 )
 
 st.divider()
@@ -559,7 +733,7 @@ elif selected_tab == "💰 Expense Calculator":
     st.markdown("---")
     st.subheader("👥 Group Expense Splitter")
     num_persons = st.slider("Ilan kayong maghahati sa gastusin?", min_value=1, max_value=10, value=2)
-    
+
     if num_persons > 0:
         share_per_person = total_est_budget / num_persons
         st.success(f"✨ Bawat isa ay mag-aambag ng: **₱{share_per_person:,.2f}** (para sa {num_persons} katao)")
@@ -603,10 +777,16 @@ elif selected_tab == "📝 Travel Journal & Notes":
     st.markdown("Write Down Our Thoughts:")
 
     if "travel_journal" not in st.session_state:
-        st.session_state.travel_journal = "Day 1 Notes:\n- Natikman namin ang strawberry taho sa Burnham Park.\n- Masarap ang kape sa Ili-Likha!\n\nMga Resibo / Gastos:\n- Taxi going to hotel: ₱150"
+        st.session_state.travel_journal = (
+            "Day 1 Notes:\n"
+            "- Natikman namin ang strawberry taho sa Burnham Park.\n"
+            "- Masarap ang kape sa Ili-Likha!\n\n"
+            "Mga Resibo / Gastos:\n"
+            "- Taxi going to hotel: ₱150"
+        )
 
     journal_text = st.text_area("I-edit ang iyong Journal:", value=st.session_state.travel_journal, height=250)
-    
+
     if st.button("I-save ang Notes"):
         st.session_state.travel_journal = journal_text
         st.success("✅ Journal Notes Already Saved!")
@@ -616,7 +796,7 @@ elif selected_tab == "📝 Travel Journal & Notes":
         label="📥 Download Journal into Text File (.txt)",
         data=st.session_state.travel_journal,
         file_name="baguio_trip_journal.txt",
-        mime="text/plain"
+        mime="text/plain",
     )
 
 # ==========================================
@@ -630,36 +810,38 @@ elif selected_tab == "📸 Photo Gallery":
         st.session_state.uploaded_photos = []
 
     uploaded_files = st.file_uploader(
-        "Attached Here 😘:", 
-        type=["png", "jpg", "jpeg"], 
-        accept_multiple_files=True
+        "Attached Here 😘:",
+        type=["png", "jpg", "jpeg"],
+        accept_multiple_files=True,
     )
 
     if uploaded_files:
+        seen = {(f.name, f.size) for f in st.session_state.uploaded_photos}
         for file in uploaded_files:
-            if file not in st.session_state.uploaded_photos:
+            key = (file.name, file.size)
+            if key not in seen:
                 st.session_state.uploaded_photos.append(file)
+                seen.add(key)
 
     if st.session_state.uploaded_photos:
         st.markdown("### 🖼️ Na-upload na Collage:")
-        
+
         collage_html = '<div class="collage-grid">'
         for idx, photo in enumerate(st.session_state.uploaded_photos):
-            import base64
             bytes_data = photo.getvalue()
             b64_str = base64.b64encode(bytes_data).decode()
-            img_format = photo.type.split('/')[-1]
-            
-            collage_html += f'''
+            img_format = photo.type.split("/")[-1]
+
+            collage_html += f"""
             <div class="collage-item">
                 <img src="data:image/{img_format};base64,{b64_str}" style="width: 100%; height: 160px; object-fit: cover; border-radius: 10px;" />
                 <p style="text-align: center; font-size: 0.75rem; margin: 5px 0 0 0; font-weight: 600;">Memories #{idx+1}</p>
             </div>
-            '''
-        collage_html += '</div>'
-        
+            """
+        collage_html += "</div>"
+
         st.markdown(collage_html, unsafe_allow_html=True)
-        
+
         st.markdown("<br>", unsafe_allow_html=True)
         if st.button("🗑️ Linisin / Alisin lahat ng Larawan"):
             st.session_state.uploaded_photos = []
@@ -675,12 +857,12 @@ elif selected_tab == "🗺️ Map & 🚨 Emergency Contacts":
     st.markdown("Interactive cartography centered around Benguet Prime Hotel:")
 
     map_html = """
-    <iframe 
-        src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed" 
-        width="100%" 
-        height="350" 
-        style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);" 
-        allowfullscreen="" 
+    <iframe
+        src="https://maps.google.com/maps?q=Benguet+Prime+Hotel,+F.+Calderon+St,+Baguio+City&t=m&z=15&output=embed"
+        width="100%"
+        height="350"
+        style="border:0; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.06);"
+        allowfullscreen=""
         loading="lazy">
     </iframe>
     """
