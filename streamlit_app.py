@@ -121,6 +121,9 @@ st.markdown(custom_css, unsafe_allow_html=True)
 
 # Compact Banner HTML
 banner_html = f"""
+<style>
+    body {{ margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }}
+</style>
 <div style="
     background-image: linear-gradient(135deg, rgba(10, 25, 18, {banner_alpha}) 0%, rgba(20, 15, 5, {banner_alpha}) 100%), url('{header_img_url}');
     background-size: cover;
@@ -133,9 +136,9 @@ banner_html = f"""
     justify-content: center;
     text-align: center;
     min-height: {banner_height}px;
-    margin-bottom: 25px;
     box-shadow: 0 15px 35px rgba(0,0,0,0.15);
     border: 2px solid rgba(255, 255, 255, 0.4);
+    box-sizing: border-box;
 ">
     <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
         <h1 style="font-family: 'Ziglets', cursive !important; color: #FFFFFF !important; font-size: 4.2rem !important; font-weight: 400 !important; text-shadow: 0 4px 20px rgba(0,0,0,0.9); margin: 0px 0px 2px 0px; line-height: 1.5;">Baguio Itinerary</h1>
@@ -147,7 +150,7 @@ banner_html = f"""
     </div>
 </div>
 """
-components.html(banner_html, height=banner_height + 60)
+components.html(banner_html, height=banner_height + 30)
 
 
 # --- LIVE WEATHER + DEC 20-22 PREVIEW ---
@@ -253,93 +256,99 @@ for day in trip_forecast:
 weather_widget_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&display=swap');
+    body {{
+        margin: 0;
+        padding: 4px;
+        font-family: 'Montserrat', sans-serif;
+        box-sizing: border-box;
+    }}
     .weather-card {{
         background: linear-gradient(135deg, rgba(80, 122, 100, 0.08) 0%, rgba(184, 134, 11, 0.08) 100%);
         border: 2px solid {border_color};
         border-radius: 20px;
-        padding: 16px 20px;
-        margin-bottom: 10px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.04);
-        font-family: 'Montserrat', sans-serif;
+        padding: 16px 18px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.04);
     }}
     .weather-top {{
         display: flex;
         align-items: center;
         justify-content: space-between;
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 12px;
     }}
     .weather-left {{
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
     }}
     .weather-icon {{
-        font-size: 2.4rem;
+        font-size: 2.2rem;
         background: #ffffff;
         border: 1.5px solid {border_color};
         border-radius: 16px;
-        padding: 8px 12px;
+        padding: 6px 11px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }}
     .weather-title {{
-        font-size: 0.78rem;
+        font-size: 0.75rem;
         font-weight: 700;
         color: {accent_color};
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 1.3px;
         margin-bottom: 2px;
     }}
     .weather-main {{
-        font-size: 1.35rem;
+        font-size: 1.3rem;
         font-weight: 700;
         color: {text_color};
     }}
     .weather-right {{
         display: flex;
-        gap: 12px;
+        gap: 10px;
     }}
     .weather-badge {{
         background-color: #F4C2C2;
         border: 1.5px solid {border_color};
         border-radius: 12px;
-        padding: 8px 12px;
+        padding: 7px 11px;
         text-align: center;
         box-shadow: 0 4px 10px rgba(0,0,0,0.03);
     }}
     .badge-label {{
-        font-size: 0.65rem;
+        font-size: 0.62rem;
         font-weight: 600;
         color: {text_color};
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }}
     .badge-val {{
-        font-size: 0.9rem;
+        font-size: 0.88rem;
         font-weight: 700;
         color: {gold_accent};
         margin-top: 2px;
     }}
     .forecast-divider {{
         border-top: 1px dashed {border_color};
-        margin: 14px 0 10px 0;
+        margin: 12px 0 10px 0;
         padding-top: 10px;
     }}
     .forecast-header {{
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 6px;
         margin-bottom: 8px;
     }}
     .forecast-heading {{
-        font-size: 0.75rem;
+        font-size: 0.73rem;
         font-weight: 700;
         color: {accent_color};
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
     }}
     .forecast-pill {{
-        font-size: 0.65rem;
+        font-size: 0.62rem;
         font-weight: 700;
         background: #ffffff;
         color: {gold_accent};
@@ -350,31 +359,31 @@ weather_widget_html = f"""
     .forecast-grid {{
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 10px;
+        gap: 8px;
     }}
     .forecast-day-box {{
         background: #ffffff;
         border: 1.5px solid {border_color};
         border-radius: 14px;
-        padding: 8px 10px;
+        padding: 8px 6px;
         text-align: center;
     }}
     .fc-date {{
-        font-size: 0.72rem;
+        font-size: 0.7rem;
         font-weight: 700;
         color: {accent_color};
     }}
     .fc-icon {{
-        font-size: 1.35rem;
-        margin: 3px 0;
+        font-size: 1.3rem;
+        margin: 2px 0;
     }}
     .fc-temps {{
-        font-size: 0.88rem;
+        font-size: 0.85rem;
         font-weight: 700;
         color: {text_color};
     }}
     .fc-rain {{
-        font-size: 0.68rem;
+        font-size: 0.66rem;
         font-weight: 600;
         color: {gold_accent};
         margin-top: 2px;
@@ -387,7 +396,7 @@ weather_widget_html = f"""
             <div class="weather-icon">{wx["icon"]}</div>
             <div>
                 <div class="weather-title">{status_label}</div>
-                <div class="weather-main">{wx["temp"]} &nbsp;•&nbsp; <span style="font-size: 1rem; font-weight: 600; color: {accent_color};">{wx["condition"]}</span></div>
+                <div class="weather-main">{wx["temp"]} &nbsp;•&nbsp; <span style="font-size: 0.95rem; font-weight: 600; color: {accent_color};">{wx["condition"]}</span></div>
             </div>
         </div>
         <div class="weather-right">
@@ -413,35 +422,38 @@ weather_widget_html = f"""
     </div>
 </div>
 """
-components.html(weather_widget_html, height=235)
+components.html(weather_widget_html, height=295)
 
 # --- LIVE COUNTDOWN ---
 countdown_html = f"""
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+    body {{
+        margin: 0;
+        padding: 4px;
+        font-family: 'Montserrat', sans-serif;
+        box-sizing: border-box;
+    }}
     .countdown-card {{
         background: linear-gradient(135deg, rgba(80, 122, 100, 0.08) 0%, rgba(184, 134, 11, 0.08) 100%);
         border: 2px solid {border_color};
         border-radius: 20px;
-        padding: 22px 18px;
-        margin-top: 15px;
-        margin-bottom: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        padding: 18px 16px;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.05);
         text-align: center;
-        font-family: 'Montserrat', sans-serif;
     }}
     .countdown-title {{
-        font-size: 0.95rem;
+        font-size: 0.92rem;
         font-weight: 700;
         color: {accent_color};
         text-transform: uppercase;
-        letter-spacing: 1.5px;
+        letter-spacing: 1.3px;
         margin-bottom: 12px;
     }}
     .countdown-grid {{
         display: flex;
         justify-content: center;
-        gap: 12px;
+        gap: 10px;
         flex-wrap: wrap;
     }}
     .countdown-box {{
@@ -449,17 +461,17 @@ countdown_html = f"""
         border: 1.5px solid {border_color};
         border-radius: 14px;
         padding: 10px 12px;
-        min-width: 65px;
+        min-width: 62px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     }}
     .countdown-num {{
-        font-size: 1.4rem;
+        font-size: 1.35rem;
         font-weight: 700;
         color: {gold_accent};
         line-height: 1.2;
     }}
     .countdown-label {{
-        font-size: 0.7rem;
+        font-size: 0.68rem;
         font-weight: 600;
         color: {text_color};
         text-transform: uppercase;
@@ -506,7 +518,7 @@ countdown_html = f"""
 </script>
 """
 
-components.html(countdown_html, height=170)
+components.html(countdown_html, height=190)
 st.divider()
 
 # --- NAVIGATION TABS (MAIN SECTIONS) ---
